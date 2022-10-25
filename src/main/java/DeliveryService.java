@@ -1,13 +1,15 @@
+import java.io.*;
 import java.util.ArrayList;
-
+import java.text.SimpleDateFormat;  
+import java.util.Date;
 
 public class DeliveryService{
 
     private static DeliveryService instance = DeliveryService.getInstance();
-    private static ArrayList<Delivery> = new ArrayList<Delivery>();
+    private static ArrayList<Delivery> deliveryList = new ArrayList<Delivery>();
     private ArrayList<String> deliveryZone = new ArrayList<String>();
     private double deliveryFirstKG_price, deliveryAfterFirstKG_price;
-    private int deliveryID = 1;
+    private int deliveryID = 10001;
 
     public static DeliveryService getInstance() {
         if (instance == null) {
@@ -20,6 +22,11 @@ public class DeliveryService{
             instance = new DeliveryService();
         }
         return instance;
+    }
+
+    public void updateDeliveryPrice(double deliveryFirstKG_price, double deliveryAfterFirstKG_price){
+        this.deliveryFirstKG_price = deliveryFirstKG_price;
+        this.deliveryAfterFirstKG_price = deliveryAfterFirstKG_price;
     }
 
     public void removeDeliveryZone(String zone){
@@ -42,17 +49,27 @@ public class DeliveryService{
     }
 
     public Delivery getDelivery(String deliveryID){
-
-
+        for (Delivery d: deliveryList){
+            if(deliveryID == d.getDeliveryID()){
+                return d;
+            }
+        }
         return null;
     }
 
-    public void updateDelivery(String deliveryID, String zone, String address, double weight){
-
+    public void updateDelivery(String deliveryID, String orderID String zone, String address, double weight){
+        if(getDelivery(deliveryID) != null){
+            getDelivery(deliveryID).setOrderID(orderID);
+            getDelivery(deliveryID).setZone(zone);
+            getDelivery(deliveryID).setAddress(address);
+            getDelivery.setDeliveryFee(calculateDeliveryPrice(weight,zone));
+        }
     }
 
     public void deleteDelivery(String deliveryID){
-        
+        if(getDelivery(deliveryID) != null){
+            deliveryList.remove(getDelivery(deliveryID));
+        }
     }
 
     public double calculateDeliveryPrice(double weight, String zone){
@@ -69,6 +86,14 @@ public class DeliveryService{
             return deliveryFirstKG_price + Math.ceil(weight-1) * deliveryAfterFirstKG_price + 60;
         }
     }
+
+    public void printDeliveryDetails(String deliveryID){
+        System.out.println("Delivery ID   Order ID    Zone                 Address                                  Delivery Fee\n");
+        System.out.printf("%13s %11s %20s %40s %12d",getDelivery(deliveryID).getDeliveryID(),getDelivery(deliveryID).getOrderID(deliveryID),
+        getDelivery(deliveryID).getZone(),getDelivery(deliveryID).getAddress(),getDelivery(deliveryID).getDeliveryFee());
+    }
+
+
 
 
 }
