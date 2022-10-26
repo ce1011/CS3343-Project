@@ -1,24 +1,21 @@
-import java.io.*;
 import java.util.ArrayList;
-import java.text.SimpleDateFormat;  
-import java.util.Date;
+import java.time.format.DateTimeFormatter;
 
 public class DeliveryService{
 
     private static DeliveryService instance = DeliveryService.getInstance();
     private static ArrayList<Delivery> deliveryList = new ArrayList<Delivery>();
     private static ArrayList<String> deliveryZone = new ArrayList<String>();
-    private static double deliveryFirstKG_price, deliveryAfterFirstKG_price;
+    private double deliveryFirstKG_price = 25, deliveryAfterFirstKG_price = 10;
     private int deliveryID = 10001;
+    private static DateTimeFormatter simpleDateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public static DeliveryService getInstance() {
         if (instance == null) {
             deliveryZone.add("Hong Kong");
             deliveryZone.add("Kowloon");
             deliveryZone.add("New Territories");
-            deliveryZone.add("Island District");
-            deliveryFirstKG_price = 25;
-            deliveryAfterFirstKG_price = 10;
+            deliveryZone.add("Islands District");
             instance = new DeliveryService();
         }
         return instance;
@@ -42,6 +39,7 @@ public class DeliveryService{
         for (String dZone: deliveryZone){
             if (dZone == zone){
                 Delivery d = new Delivery(Integer.toString(deliveryID), orderID, zone, address, calculateDeliveryPrice(weight,zone));
+                deliveryList.add(d);
                 deliveryID++;
                 break;
             }
@@ -88,12 +86,11 @@ public class DeliveryService{
     }
 
     public void printDeliveryDetails(String deliveryID){
-        System.out.println("Delivery ID   Order ID    Zone                 Address                                  Delivery Fee\n");
-        System.out.printf("%13s %11s %20s %40s %12d", getDelivery(deliveryID).getDeliveryID(), getDelivery(deliveryID).getOrderID(),
-        getDelivery(deliveryID).getZone(), getDelivery(deliveryID).getAddress(), getDelivery(deliveryID).getDeliveryFee());
+        System.out.println("Delivery ID: "+ getDelivery(deliveryID).getDeliveryID());
+        System.out.println("Order ID: "+ getDelivery(deliveryID).getOrderID());
+        System.out.println("Zone: "+getDelivery(deliveryID).getZone());
+        System.out.println("Address: "+getDelivery(deliveryID).getAddress());
+        System.out.println("Delivery Fee: "+getDelivery(deliveryID).getDeliveryFee());
+        System.out.println("Created Date: "+simpleDateFormat.format(getDelivery(deliveryID).getCreatedDate()));
     }
-
-
-
-
 }

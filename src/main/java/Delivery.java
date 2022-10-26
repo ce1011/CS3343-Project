@@ -1,4 +1,4 @@
-import java.util.Date;
+import java.time.*;
 
 public class Delivery{
 
@@ -7,7 +7,8 @@ public class Delivery{
     private String zone;
     private String address;
     private double deliveryFee;
-    private Date createdDate;
+    private LocalDateTime createdDate;
+    private LocalDateTime estimatedDeliveryDate;
     
     public Delivery(String deliveryID, String orderID, String zone, String address, double deliveryFee){ 
         this.deliveryID = deliveryID;
@@ -15,7 +16,13 @@ public class Delivery{
         this.zone = zone;
         this.address = address;
         this.deliveryFee = deliveryFee;
-        this.createdDate = new Date();
+        this.createdDate = LocalDateTime.now();
+        if(zone=="Hong Kong" || zone=="Kowloon" || zone == "New Territories"){
+            this.estimatedDeliveryDate = LocalDateTime.now().plusDays(2);
+        }
+        else{
+            this.estimatedDeliveryDate = LocalDateTime.now().plusDays(3);
+        }
     }
 
     public String getDeliveryID(){
@@ -38,7 +45,7 @@ public class Delivery{
         return this.deliveryFee;
     }
 
-    public Date getCreatedDate(){
+    public LocalDateTime getCreatedDate(){
         return this.createdDate;
     }
 
