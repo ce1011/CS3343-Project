@@ -7,8 +7,8 @@ public class DeliveryService{
 
     private static DeliveryService instance = DeliveryService.getInstance();
     private static ArrayList<Delivery> deliveryList = new ArrayList<Delivery>();
-    private ArrayList<String> deliveryZone = new ArrayList<String>();
-    private double deliveryFirstKG_price, deliveryAfterFirstKG_price;
+    private static ArrayList<String> deliveryZone = new ArrayList<String>();
+    private static double deliveryFirstKG_price, deliveryAfterFirstKG_price;
     private int deliveryID = 10001;
 
     public static DeliveryService getInstance() {
@@ -39,9 +39,9 @@ public class DeliveryService{
     }
 
     public void createDelivery(String orderID, String zone, String address, double weight){
-        for (String zone: deliveryZone){
-            if (this.zone == zone){
-                Delivery d = new Delivery(deliveryID.toString(), orderID, zone, address, calculateDeliveryPrice(weight,zone));
+        for (String dZone: deliveryZone){
+            if (dZone == zone){
+                Delivery d = new Delivery(Integer.toString(deliveryID), orderID, zone, address, calculateDeliveryPrice(weight,zone));
                 deliveryID++;
                 break;
             }
@@ -57,12 +57,12 @@ public class DeliveryService{
         return null;
     }
 
-    public void updateDelivery(String deliveryID, String orderID String zone, String address, double weight){
+    public void updateDelivery(String deliveryID, String orderID, String zone, String address, double weight){
         if(getDelivery(deliveryID) != null){
             getDelivery(deliveryID).setOrderID(orderID);
             getDelivery(deliveryID).setZone(zone);
             getDelivery(deliveryID).setAddress(address);
-            getDelivery.setDeliveryFee(calculateDeliveryPrice(weight,zone));
+            getDelivery(deliveryID).setDeliveryFee(calculateDeliveryPrice(weight,zone));
         }
     }
 
@@ -89,8 +89,8 @@ public class DeliveryService{
 
     public void printDeliveryDetails(String deliveryID){
         System.out.println("Delivery ID   Order ID    Zone                 Address                                  Delivery Fee\n");
-        System.out.printf("%13s %11s %20s %40s %12d",getDelivery(deliveryID).getDeliveryID(),getDelivery(deliveryID).getOrderID(deliveryID),
-        getDelivery(deliveryID).getZone(),getDelivery(deliveryID).getAddress(),getDelivery(deliveryID).getDeliveryFee());
+        System.out.printf("%13s %11s %20s %40s %12d", getDelivery(deliveryID).getDeliveryID(), getDelivery(deliveryID).getOrderID(),
+        getDelivery(deliveryID).getZone(), getDelivery(deliveryID).getAddress(), getDelivery(deliveryID).getDeliveryFee());
     }
 
 
