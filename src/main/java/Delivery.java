@@ -8,7 +8,7 @@ public class Delivery{
     private String address;
     private double deliveryFee;
     private LocalDateTime createdDate;
-    private LocalDateTime estimatedDeliveryDate;
+    private LocalDateTime estDeliveryDate;
     
     public Delivery(String deliveryID, String orderID, String zone, String address, double deliveryFee){ 
         this.deliveryID = deliveryID;
@@ -17,11 +17,11 @@ public class Delivery{
         this.address = address;
         this.deliveryFee = deliveryFee;
         this.createdDate = LocalDateTime.now();
-        if(zone=="Hong Kong" || zone=="Kowloon" || zone == "New Territories"){
-            this.estimatedDeliveryDate = LocalDateTime.now().plusDays(2);
+        if(zone == "Hong Kong" || zone == "Kowloon" || zone == "New Territories"){
+            this.estDeliveryDate = LocalDateTime.now().plusDays(2);
         }
         else{
-            this.estimatedDeliveryDate = LocalDateTime.now().plusDays(3);
+            this.estDeliveryDate = LocalDateTime.now().plusDays(3);
         }
     }
 
@@ -49,6 +49,10 @@ public class Delivery{
         return this.createdDate;
     }
 
+    public LocalDateTime getEstDeliveryDate(){
+        return this.estDeliveryDate;
+    }
+
     public double deliveryFee(){
         return this.deliveryFee;
     }
@@ -67,6 +71,10 @@ public class Delivery{
 
     public void setDeliveryFee(double deliveryFee){
         this.deliveryFee = deliveryFee;
+    }
+
+    public void setEstDeliveryDate(LocalDateTime newDate){
+        this.estDeliveryDate = newDate;
     }
 
 }

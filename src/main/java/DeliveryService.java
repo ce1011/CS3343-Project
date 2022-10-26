@@ -91,6 +91,19 @@ public class DeliveryService{
         System.out.println("Zone: "+getDelivery(deliveryID).getZone());
         System.out.println("Address: "+getDelivery(deliveryID).getAddress());
         System.out.println("Delivery Fee: "+getDelivery(deliveryID).getDeliveryFee());
-        System.out.println("Created Date: "+simpleDateFormat.format(getDelivery(deliveryID).getCreatedDate()));
+        System.out.println("Estimated Delivery Date: "+getDelivery(deliveryID).getEstDeliveryDate());
+        System.out.println("Created Date: "+simpleDateFormat.format(getDelivery(deliveryID).getCreatedDate())+"%n");
+    }
+
+    public void listAllDelivery(){
+        for (Delivery d: deliveryList){
+            System.out.println("Delivery ID: "+ d.getDeliveryID());
+            System.out.println("Order ID: "+ d.getOrderID());
+            System.out.println("Zone: "+ d.getZone());
+            System.out.println("Address: "+ d.getAddress());
+            System.out.println("Delivery Fee: "+ d.getDeliveryFee());
+            System.out.println("Estimated Delivery Date: "+ d.getEstDeliveryDate());
+            System.out.println("Created Date: "+simpleDateFormat.format(d.getCreatedDate())+"%n");
+        }
     }
 }
