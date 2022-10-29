@@ -2,11 +2,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class DeletedTest {
+class ProductStateDeletedTest {
 
     @Test
     void testToString() {
-        Deleted deleted = new Deleted();
+        ProductState_Deleted deleted = new ProductState_Deleted();
         assertEquals("Deleted", deleted.toString());
     }
 }

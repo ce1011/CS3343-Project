@@ -1,6 +1,6 @@
 import java.util.Date;
 
-public class Product implements Comparable {
+public class Product {
     public String getName() {
         return name;
     }
@@ -37,12 +37,17 @@ public class Product implements Comparable {
         return state;
     }
 
-    public void setState(ProductState state) {
-        if (!getState().equals(new Deleted())) {
-            this.state = state;
-        } else {
-            throw new Error("Product is deleted");
+    public void setState(ProductState state) throws ProductIsDeletedException {
+        try{
+            if (!getState().toString().equals(new ProductState_Deleted().toString())) {
+                this.state = state;
+            } else {
+                throw new ProductIsDeletedException();
+            }
+        } catch (ProductIsDeletedException e){
+            throw new ProductIsDeletedException();
         }
+
     }
 
     public double getWeight() {
@@ -77,8 +82,4 @@ public class Product implements Comparable {
         this.createDate = new Date();
     }
 
-    @Override
-    public int compareTo(Object o) {
-        return 0;
-    }
 }

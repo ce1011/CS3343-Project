@@ -2,11 +2,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class LaunchTest {
+class ProductStateLaunchTest {
 
     @Test
     void testToString() {
-        Launch launch = new Launch();
+        ProductState_Launch launch = new ProductState_Launch();
         assertEquals("Launch", launch.toString());
     }
 }
