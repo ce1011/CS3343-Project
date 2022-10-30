@@ -1,15 +1,18 @@
 package main;
-
 public class Admin implements Role{
+	
 	private static Admin instance = new Admin();
 	public static Admin getInstance() {return instance;}
 	
-	private Admin() {}
+	public Admin() {}
 
 	@Override
-	public String getRole(User user) {
+	public String getRoleName() {
 		// TODO Auto-generated method stub
 		return "Admin";
 	}
+	
+
+
 
 }

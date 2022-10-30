@@ -1,6 +1,7 @@
 package main;
 
-import java.util.ArrayList;
+
+import java.util.*;
 
 public class AuthService {
 	
@@ -12,7 +13,9 @@ public class AuthService {
 			instance = new AuthService();
 		}
 		return instance;
-	}	
+	}
+	
+	
 	public User register(String username, String password, String roleType) throws ExistedUserFoundException{
 		User user = null;
 		if (searchUser(username)!=null) { //found existed user
@@ -20,8 +23,12 @@ public class AuthService {
 		} else {
 		
 			Role r = null;
-			if(roleType.equals("Customer")) r = Customer.getInstance();
-			else if(roleType.equals("Admin")) r = Admin.getInstance();
+			
+			if(roleType.equals("Admin")) {
+				r = Admin.getInstance();
+			} else if(roleType.equals("Customer")) {
+				r = Customer.getInstance();
+			}
 			
 			user = new User(username,password,r);
 			users.add(user);
