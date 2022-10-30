@@ -30,8 +30,7 @@ public class OrderBST {
 		root = insertProcess(root, order);
 		numOfOrder++;
 	}
-	
-	//123
+
 	private OrderBST.Node insertProcess(OrderBST.Node root, Order order) {
 		// tree is empty
 		if (root == null) {
