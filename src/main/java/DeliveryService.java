@@ -28,7 +28,7 @@ public class DeliveryService{
 
     public void removeDeliveryZone(String zone){
         for (int i=0;i<deliveryZone.size();i++){
-            if(deliveryZone.get(i) == zone){
+            if(deliveryZone.get(i).equals(zone)){
                     deliveryZone.remove(i);
                     break;
             }
@@ -37,7 +37,7 @@ public class DeliveryService{
 
     public void createDelivery(String orderID, String zone, String address, double weight){
         for (String dZone: deliveryZone){
-            if (dZone == zone){
+            if (dZone.equals(zone)){
                 Delivery d = new Delivery(Integer.toString(deliveryID), orderID, zone, address, calculateDeliveryPrice(weight,zone));
                 deliveryList.add(d);
                 deliveryID++;
@@ -55,12 +55,13 @@ public class DeliveryService{
         return null;
     }
 
-    public void updateDelivery(String deliveryID, String orderID, String zone, String address, double weight){
+    public void updateDelivery(String deliveryID, String orderID, String zone, String address, double weight, String deliveryState){
         if(getDelivery(deliveryID) != null){
             getDelivery(deliveryID).setOrderID(orderID);
             getDelivery(deliveryID).setZone(zone);
             getDelivery(deliveryID).setAddress(address);
             getDelivery(deliveryID).setDeliveryFee(calculateDeliveryPrice(weight,zone));
+            getDelivery(deliveryID).setDeliveryState(deliveryState);
         }
     }
 
@@ -71,13 +72,13 @@ public class DeliveryService{
     }
 
     public double calculateDeliveryPrice(double weight, String zone){
-        if(zone == "Hong Kong"){
+        if(zone.equals("Hong Kong")){
             return deliveryFirstKG_price + Math.ceil(weight-1) * deliveryAfterFirstKG_price + 10;
         }
-        else if(zone == "Kowloon"){
+        else if(zone.equals("Kowloon")){
             return deliveryFirstKG_price + Math.ceil(weight-1) * deliveryAfterFirstKG_price;
         }
-        else if(zone == "New Territories"){
+        else if(zone.equals("New Territories")){
             return deliveryFirstKG_price + Math.ceil(weight-1) * deliveryAfterFirstKG_price + 30;
         }
         else{
@@ -92,7 +93,8 @@ public class DeliveryService{
         System.out.println("Address: "+getDelivery(deliveryID).getAddress());
         System.out.println("Delivery Fee: "+getDelivery(deliveryID).getDeliveryFee());
         System.out.println("Estimated Delivery Date: "+getDelivery(deliveryID).getEstDeliveryDate());
-        System.out.println("Created Date: "+simpleDateFormat.format(getDelivery(deliveryID).getCreatedDate())+"%n");
+        System.out.println("Created Date: "+simpleDateFormat.format(getDelivery(deliveryID).getCreatedDate()));
+        System.out.println("Delivery Status: "+getDelivery(deliveryID).getDeliveryState()+"%n");
     }
 
     public void listAllDelivery(){
@@ -103,7 +105,8 @@ public class DeliveryService{
             System.out.println("Address: "+ d.getAddress());
             System.out.println("Delivery Fee: "+ d.getDeliveryFee());
             System.out.println("Estimated Delivery Date: "+ d.getEstDeliveryDate());
-            System.out.println("Created Date: "+simpleDateFormat.format(d.getCreatedDate())+"%n");
+            System.out.println("Created Date: "+simpleDateFormat.format(d.getCreatedDate()));
+            System.out.println("Delivery Status: "+d.getDeliveryState()+"%n");
         }
     }
 }

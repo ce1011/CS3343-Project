@@ -9,6 +9,7 @@ public class Delivery{
     private double deliveryFee;
     private LocalDateTime createdDate;
     private LocalDateTime estDeliveryDate;
+    private DeliveryState deliveryState;
     
     public Delivery(String deliveryID, String orderID, String zone, String address, double deliveryFee){ 
         this.deliveryID = deliveryID;
@@ -17,12 +18,32 @@ public class Delivery{
         this.address = address;
         this.deliveryFee = deliveryFee;
         this.createdDate = LocalDateTime.now();
-        if(zone == "Hong Kong" || zone == "Kowloon" || zone == "New Territories"){
+        if(zone.equals("Hong Kong") || zone.equals("Kowloon")|| zone.equals("New Territories")){
             this.estDeliveryDate = LocalDateTime.now().plusDays(2);
         }
         else{
             this.estDeliveryDate = LocalDateTime.now().plusDays(3);
         }
+        this.deliveryState = new DeliveryState_Pending();
+    }
+
+    public void setDeliveryState(String deliveryState){
+        if(deliveryState.equals("Pending")){
+            this.deliveryState = new DeliveryState_Pending();
+        }
+        else if(deliveryState.equals("Processing")){
+            this.deliveryState = new DeliveryState_Processing();
+        }
+        else if(deliveryState.equals("Dispatching")){
+            this.deliveryState = new DeliveryState_Dispatching();
+        }
+        else if(deliveryState.equals("Delivered")){
+            this.deliveryState = new DeliveryState_Delivered();
+        }
+    }
+
+    public DeliveryState getDeliveryState(){
+        return this.deliveryState;
     }
 
     public String getDeliveryID(){
