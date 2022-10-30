@@ -2,11 +2,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class DiscontinuedTest {
+class ProductStateDiscontinuedTest {
 
     @Test
     void testToString() {
-        Discontinued discontinued = new Discontinued();
+        ProductState_Discontinued discontinued = new ProductState_Discontinued();
         assertEquals("Discontinued", discontinued.toString());
     }
 }

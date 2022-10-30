@@ -1,8 +1,4 @@
 public class ProductSortByPriceAsc extends ProductSortType {
-    @Override
-    public String toString() {
-        return "Sort By Price In Ascending Order";
-    }
 
 
     @Override
