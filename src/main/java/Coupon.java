@@ -5,27 +5,33 @@ public class Coupon {
     private String couponName;
     private Date startDate;
     private Date endDate;
-    private boolean useOnce;
+    //private boolean useOnce;
     private int useQuota;
     private double minimumUsagePrice;
     private double discountValue; //can update
     private String type; // fixedPrice, percentage
-    private boolean status; //can update
+    private CouponState status; //can update
 
-    public Coupon(String couponName, Date startDate, Date endDate, boolean useOnce, int useQuota, double discountValue,double minimumUsagePrice, String type, boolean status) {
+    public Coupon(String couponName, Date startDate, Date endDate, String status, int useQuota, double discountValue,double minimumUsagePrice, String type) {
         this.couponName = couponName;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.useOnce = useOnce;
         this.useQuota = useQuota;
+        this.status = createState(status);
         this.discountValue = discountValue;
         this.minimumUsagePrice = minimumUsagePrice;
         this.type = type;
-        this.status = status;
     }
 
-    public boolean getStatus() {
-        return this.status;
+    public CouponState createState(String state){
+        switch(state){
+            case "Available":
+                return new CouponState_Available();
+            case "Finished":
+                return new CouponState_Finished();
+            default:
+                return new CouponState_OnHold();           
+        }
     }
 
     public void setDiscountValue(double discountValue) {
@@ -35,11 +41,6 @@ public class Coupon {
     public double getDiscountValue() {
         return this.discountValue;
     }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
-
 
     public void setCouponName(String couponName) {
         this.couponName = couponName;
@@ -65,12 +66,12 @@ public class Coupon {
         this.endDate = endDate;
     }
 
-    public boolean getUseOnce() {
-        return this.useOnce;
+    public CouponState getStatus() {
+        return this.status;
     }
 
-    public void setUseOnce(boolean useOnce) {
-        this.useOnce = useOnce;
+    public void setStatus(CouponState status) {
+        this.status = status;
     }
 
     public int getUseQuota() {
