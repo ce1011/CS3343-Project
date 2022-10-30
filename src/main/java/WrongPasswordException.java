@@ -1,4 +1,4 @@
-package main;
+
 
 public class WrongPasswordException extends Exception{
 	public WrongPasswordException() {

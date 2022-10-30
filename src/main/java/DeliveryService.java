@@ -26,17 +26,16 @@ public class DeliveryService{
         this.deliveryAfterFirstKG_price = deliveryAfterFirstKG_price;
     }
 
-    public void removeDeliveryZone(String zone) throws DeliveryZoneNotFoundException{
+    public void removeDeliveryZone(String zone){
         for (int i=0;i<deliveryZone.size();i++){
             if(deliveryZone.get(i).equals(zone)){
                     deliveryZone.remove(i);
                     break;
             }
         }
-        throw new DeliveryZoneNotFoundException(zone);
     }
 
-    public void createDelivery(String orderID, String zone, String address, double weight) throws DeliveryZoneNotFoundException{
+    public void createDelivery(String orderID, String zone, String address, double weight){
         for (String dZone: deliveryZone){
             if (dZone.equals(zone)){
                 Delivery d = new Delivery(Integer.toString(deliveryID), orderID, zone, address, calculateDeliveryPrice(weight,zone));
@@ -45,29 +44,18 @@ public class DeliveryService{
                 break;
             }
         }
-        throw new DeliveryZoneNotFoundException(zone);
     }
 
-    public Delivery getDelivery(String deliveryID) throws DeliveryItemNotFoundException{
+    public Delivery getDelivery(String deliveryID){
         for (Delivery d: deliveryList){
             if(deliveryID == d.getDeliveryID()){
                 return d;
             }
         }
-        throw new DeliveryItemNotFoundException(deliveryID);
+        return null;
     }
 
-    public void updateDelivery(String deliveryID, String orderID, String zone, String address, double weight, String deliveryState)
-    throws DeliveryItemNotFoundException, DeliveryStateNotFoundException, DeliveryZoneNotFoundException{
-        boolean zoneExist = false;
-        for(String dZone:deliveryZone){
-            if(dZone.equals(zone)){
-                zoneExist = true;
-            }
-        }
-        if(!zoneExist){
-            throw new DeliveryZoneNotFoundException(zone);
-        }
+    public void updateDelivery(String deliveryID, String orderID, String zone, String address, double weight, String deliveryState){
         if(getDelivery(deliveryID) != null){
             getDelivery(deliveryID).setOrderID(orderID);
             getDelivery(deliveryID).setZone(zone);
@@ -75,17 +63,11 @@ public class DeliveryService{
             getDelivery(deliveryID).setDeliveryFee(calculateDeliveryPrice(weight,zone));
             getDelivery(deliveryID).setDeliveryState(deliveryState);
         }
-        else{
-            throw new DeliveryItemNotFoundException(deliveryID);
-        }
     }
 
-    public void deleteDelivery(String deliveryID) throws DeliveryItemNotFoundException{
+    public void deleteDelivery(String deliveryID){
         if(getDelivery(deliveryID) != null){
             deliveryList.remove(getDelivery(deliveryID));
-        }
-        else{
-            throw new DeliveryItemNotFoundException(deliveryID);
         }
     }
 
@@ -105,7 +87,6 @@ public class DeliveryService{
     }
 
     public void printDeliveryDetails(String deliveryID){
-        try{
         System.out.println("Delivery ID: "+ getDelivery(deliveryID).getDeliveryID());
         System.out.println("Order ID: "+ getDelivery(deliveryID).getOrderID());
         System.out.println("Zone: "+getDelivery(deliveryID).getZone());
@@ -114,10 +95,6 @@ public class DeliveryService{
         System.out.println("Estimated Delivery Date: "+getDelivery(deliveryID).getEstDeliveryDate());
         System.out.println("Created Date: "+simpleDateFormat.format(getDelivery(deliveryID).getCreatedDate()));
         System.out.println("Delivery Status: "+getDelivery(deliveryID).getDeliveryState()+"%n");
-        }
-        catch(Exception DeliveryItemNotFoundException){
-            System.out.println("Delivery Item: "+ deliveryID +" is not found.");
-        }
     }
 
     public void listAllDelivery(){

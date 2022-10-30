@@ -1,4 +1,3 @@
-package main;
 public class Customer implements Role{
 	
 	private static Customer instance = new Customer();

@@ -1,4 +1,3 @@
-package main;
 public class Admin implements Role{
 	
 	private static Admin instance = new Admin();
