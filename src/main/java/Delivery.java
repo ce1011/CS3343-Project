@@ -27,7 +27,7 @@ public class Delivery{
         this.deliveryState = new DeliveryState_Pending();
     }
 
-    public void setDeliveryState(String deliveryState){
+    public void setDeliveryState(String deliveryState) throws DeliveryStateNotFoundException{
         if(deliveryState.equals("Pending")){
             this.deliveryState = new DeliveryState_Pending();
         }
@@ -39,6 +39,9 @@ public class Delivery{
         }
         else if(deliveryState.equals("Delivered")){
             this.deliveryState = new DeliveryState_Delivered();
+        }
+        else{
+            throw new DeliveryStateNotFoundException();
         }
     }
 
