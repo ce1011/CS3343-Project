@@ -44,7 +44,7 @@ public class DeliveryService{
                 deliveryID++;
                 break;
             }
-        }
+        } 
         throw new DeliveryZoneNotFoundException(zone);
     }
 
@@ -59,15 +59,21 @@ public class DeliveryService{
 
     public void updateDelivery(String deliveryID, String orderID, String zone, String address, double weight, String deliveryState)
     throws DeliveryItemNotFoundException, DeliveryStateNotFoundException, DeliveryZoneNotFoundException{
-        boolean zoneExist = false;
+        boolean zoneExist = false, stateExist = false;
         for(String dZone:deliveryZone){
             if(dZone.equals(zone)){
                 zoneExist = true;
             }
         }
+        
         if(!zoneExist){
             throw new DeliveryZoneNotFoundException(zone);
         }
+        
+        if(!deliveryState.equals("Pending")||!deliveryState.equals("Processing")||!deliveryState.equals("Dispatching")||!deliveryState.equals("Delivered")) {
+        	throw new DeliveryStateNotFoundException();
+        }
+        
         if(getDelivery(deliveryID) != null){
             getDelivery(deliveryID).setOrderID(orderID);
             getDelivery(deliveryID).setZone(zone);
