@@ -1,22 +1,19 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.time.format.DateTimeFormatter;
-//
+
 public class DeliveryService{
 
     private static DeliveryService instance = DeliveryService.getInstance();
-    private static ArrayList<Delivery> deliveryList = new ArrayList<Delivery>();
-    private static ArrayList<String> deliveryZone = new ArrayList<String>();
+    private ArrayList<Delivery> deliveryList = new ArrayList<Delivery>();
+    private ArrayList<String> deliveryZone = new ArrayList<String>(List.of("Hong Kong", "Kowloon","New Territories","Islands District"));
     private double deliveryFirstKG_price = 25, deliveryAfterFirstKG_price = 10;
     private int deliveryID = 10001;
     private static DateTimeFormatter simpleDateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public static DeliveryService getInstance() {
         if (instance == null) {
-            deliveryZone.add("Hong Kong");
-            deliveryZone.add("Kowloon");
-            deliveryZone.add("New Territories");
-            deliveryZone.add("Islands District");
-            instance = new DeliveryService();
+        	instance = new DeliveryService();
         }
         return instance;
     }
