@@ -4,6 +4,7 @@ public class AuthService {
 	
 	private ArrayList<User> users = new ArrayList<User>();
 	private static AuthService instance = AuthService.getInstance();
+
 	
 	public static AuthService getInstance() {
 		if(instance == null) {
@@ -11,7 +12,11 @@ public class AuthService {
 		}
 		return instance;
 	}
-	
+
+	public void tempData(){
+		users.add(new User("admin", "admin", new Admin()));
+		users.add(new User("customer", "customer", new Customer()));
+	}
 	
 	public User register(String username, String password, String roleType) throws ExistedUserFoundException{
 		User user = null;
@@ -50,6 +55,7 @@ public class AuthService {
 			if(user!=null) { //username exists
 				if(user.getPassword().equals(password)) {//username matches password
 					loginState = true;
+					//
 				} else {//wrong password
 					throw new WrongPasswordException();
 				}
@@ -57,7 +63,8 @@ public class AuthService {
 				throw new UserNotFoundException(username);
 			}
 		return loginState;
-		
 	}
+
+
 	
 }
