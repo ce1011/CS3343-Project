@@ -27,7 +27,7 @@ public class Delivery{
         this.deliveryState = new DeliveryState_Pending();
     }
 
-    public void setDeliveryState(String deliveryState) throws DeliveryStateNotFoundException{
+    public void setDeliveryState(String deliveryState){
         if(deliveryState.equals("Pending")){
             this.deliveryState = new DeliveryState_Pending();
         }
@@ -39,9 +39,6 @@ public class Delivery{
         }
         else if(deliveryState.equals("Delivered")){
             this.deliveryState = new DeliveryState_Delivered();
-        }
-        else{
-            throw new DeliveryStateNotFoundException();
         }
     }
 
@@ -77,14 +74,10 @@ public class Delivery{
         return this.estDeliveryDate;
     }
 
-    public double deliveryFee(){
-        return this.deliveryFee;
-    }
-
     public void setOrderID(String orderID){
         this.orderID = orderID;
     }
-
+ 
     public void setZone(String zone){
         this.zone = zone;
     }
