@@ -22,24 +22,40 @@ public class DeliveryService{
         this.deliveryFirstKG_price = deliveryFirstKG_price;
         this.deliveryAfterFirstKG_price = deliveryAfterFirstKG_price;
     }
+    
+    public double getDeliveryFirstKG_price() {
+    	return deliveryFirstKG_price;
+    }
+    
+    public double getDeliveryAfterFirstKG_price() {
+    	return deliveryAfterFirstKG_price;
+    }
+    
+    public ArrayList<String> getDeliveryZoneList(){
+    	return deliveryZone;
+    }
 
     public void removeDeliveryZone(String zone) throws DeliveryZoneNotFoundException{
+    	boolean zoneFound = false;
         for (int i=0;i<deliveryZone.size();i++){
             if(deliveryZone.get(i).equals(zone)){
                     deliveryZone.remove(i);
+                    zoneFound = true;
                     break;
             }
         }
-        throw new DeliveryZoneNotFoundException(zone);
+        if(!zoneFound) {
+            throw new DeliveryZoneNotFoundException(zone);
+        }
     }
 
-    public void createDelivery(String orderID, String zone, String address, double weight) throws DeliveryZoneNotFoundException{
+    public Delivery createDelivery(String orderID, String zone, String address, double weight) throws DeliveryZoneNotFoundException{
         for (String dZone: deliveryZone){
             if (dZone.equals(zone)){
-                Delivery d = new Delivery(Integer.toString(deliveryID), orderID, zone, address, calculateDeliveryPrice(weight,zone));
+                Delivery d = new Delivery(Integer.toString(this.deliveryID), orderID, zone, address, calculateDeliveryPrice(weight,zone));
                 deliveryList.add(d);
-                deliveryID++;
-                break;
+                this.deliveryID++;
+                return d;
             }
         } 
         throw new DeliveryZoneNotFoundException(zone);
@@ -47,7 +63,7 @@ public class DeliveryService{
 
     public Delivery getDelivery(String deliveryID) throws DeliveryItemNotFoundException{
         for (Delivery d: deliveryList){
-            if(deliveryID == d.getDeliveryID()){
+            if(deliveryID.equals(d.getDeliveryID())){
                 return d;
             }
         }
@@ -67,7 +83,7 @@ public class DeliveryService{
             throw new DeliveryZoneNotFoundException(zone);
         }
         
-        if(!deliveryState.equals("Pending")||!deliveryState.equals("Processing")||!deliveryState.equals("Dispatching")||!deliveryState.equals("Delivered")) {
+        if(!(deliveryState.equals("Pending")||deliveryState.equals("Processing")||deliveryState.equals("Dispatching")||deliveryState.equals("Delivered"))) {
         	throw new DeliveryStateNotFoundException();
         }
         
@@ -78,18 +94,10 @@ public class DeliveryService{
             getDelivery(deliveryID).setDeliveryFee(calculateDeliveryPrice(weight,zone));
             getDelivery(deliveryID).setDeliveryState(deliveryState);
         }
-        else{
-            throw new DeliveryItemNotFoundException(deliveryID);
-        }
     }
 
     public void deleteDelivery(String deliveryID) throws DeliveryItemNotFoundException{
-        if(getDelivery(deliveryID) != null){
             deliveryList.remove(getDelivery(deliveryID));
-        }
-        else{
-            throw new DeliveryItemNotFoundException(deliveryID);
-        }
     }
 
     public double calculateDeliveryPrice(double weight, String zone){
@@ -107,7 +115,9 @@ public class DeliveryService{
         }
     }
 
-    public void printDeliveryDetails(String deliveryID){
+    
+//Pending to move to AdminView/OrderView @Ken @Stephen
+/*    public void printDeliveryDetails(String deliveryID){
         try{
         System.out.println("Delivery ID: "+ getDelivery(deliveryID).getDeliveryID());
         System.out.println("Order ID: "+ getDelivery(deliveryID).getOrderID());
@@ -134,5 +144,5 @@ public class DeliveryService{
             System.out.println("Created Date: "+simpleDateFormat.format(d.getCreatedDate()));
             System.out.println("Delivery Status: "+d.getDeliveryState()+"%n");
         }
-    }
+    }*/
 }
