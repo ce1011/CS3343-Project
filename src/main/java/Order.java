@@ -7,9 +7,10 @@ public class Order {
 	private Coupon couponUsed;
 	private Delivery deliveryDetails;
 	private double totalPrice;
-	private OrderStatus status;
+	private Delivery status;
 	private String remarks;
 	private String orderDate;
+	private ArrayList<Order> orderList;
 
 	Order(Customer customerInfo, ArrayList<Product> productList, Coupon couponUsed, Delivery deliveryDetails,
 			double totalPrice, String remarks) {
@@ -22,7 +23,8 @@ public class Order {
 		this.setStatus(new OrderStatus());
 		this.setRemarks(remarks);
 		this.setOrderDate(OrderService.getCurrentTimestamp());
-		
+		orderList = new ArrayList<Order>();
+		orderList.add(this);
 	}
 
 	//getter and setter
@@ -96,5 +98,13 @@ public class Order {
 
 	public void setOrderDate(String orderDate) {
 		this.orderDate = orderDate;
+	}
+	
+	public void displayOrder(ArrayList<Order> o, int index) {
+		for(int i = 0; i < o.size(); i++) {
+			System.out.println(o.get(i));
+			System.out.println("----------------------------------------------------------------------------------------------");  
+		}
+		
 	}
 }
