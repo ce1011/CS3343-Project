@@ -53,17 +53,7 @@ public class DeliveryServiceTest {
     	   });
     	assertEquals("Delivery Item: 12345 is not found.",e.getMessage());
     }
-    
-    @Test
-    public void testUpdateDelivery1() throws DeliveryItemNotFoundException, DeliveryStateNotFoundException, DeliveryZoneNotFoundException{
-    	DeliveryService.getInstance().createDelivery("9999", "New Territories", "#19 G/F Yau Kom Tau Village, Kowloon,Hongkong", 3.4);
-    	DeliveryService.getInstance().updateDelivery("10001", "9999", "Hong Kong", "Cheung's Ancestral Hall, Tai Om Road", 6.9, "Processing");
-    	assertEquals("9999",DeliveryService.getInstance().getDelivery("10001").getOrderID());
-    	assertEquals("Hong Kong",DeliveryService.getInstance().getDelivery("10001").getZone());
-    	assertEquals("Cheung's Ancestral Hall, Tai Om Road",DeliveryService.getInstance().getDelivery("10001").getAddress());
-    	assertEquals("Processing",DeliveryService.getInstance().getDelivery("10001").getDeliveryState().toString());
 
-    }
     
     @Test
     public void testUpdateDelivery2() throws DeliveryZoneNotFoundException{
