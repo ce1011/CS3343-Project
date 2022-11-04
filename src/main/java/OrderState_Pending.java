@@ -1,4 +1,4 @@
-public class DeliveryState_Pending extends DeliveryState {
+public class OrderState_Pending extends OrderState {
     @Override
     public String toString(){
         return "Pending";

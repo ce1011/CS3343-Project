@@ -7,7 +7,7 @@ public class Order {
 	private Coupon couponUsed;
 	private Delivery deliveryDetails;
 	private double totalPrice;
-	private Delivery status;
+	private OrderState status;
 	private String remarks;
 	private String orderDate;
 	private ArrayList<Order> orderList;
@@ -20,7 +20,7 @@ public class Order {
 		this.setCouponUsed(couponUsed);
 		this.setDeliveryDetails(deliveryDetails);
 		this.setTotalPrice(totalPrice);
-		this.setStatus(new OrderStatus());
+		this.setStatus(new OrderState_Pending());
 		this.setRemarks(remarks);
 		this.setOrderDate(OrderService.getCurrentTimestamp());
 		orderList = new ArrayList<Order>();
@@ -76,11 +76,11 @@ public class Order {
 		this.totalPrice = totalPrice;
 	}
 
-	public OrderStatus getStatus() {
+	public OrderState getStatus() {
 		return status;
 	}
 
-	public void setStatus(OrderStatus status) {
+	public void setStatus(OrderState status) {
 		this.status = status;
 	}
 

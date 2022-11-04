@@ -126,15 +126,15 @@ public class DeliveryServiceTest {
     }
     
     @Test void testDeliveryState1() {
-    	assertEquals("Pending", new DeliveryState_Pending().toString());
+    	assertEquals("Pending", new OrderState_Pending().toString());
     }
     
     @Test void testDeliveryState2() {
-    	assertEquals("Delivered", new DeliveryState_Delivered().toString());
+    	assertEquals("Delivered", new OrderState_Delivered().toString());
     }
     
     @Test void testDeliveryState3() {
-    	assertEquals("Dispatching", new DeliveryState_Dispatching().toString());
+    	assertEquals("Dispatching", new OrderState_Dispatching().toString());
     }
  
 }

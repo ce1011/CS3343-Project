@@ -1,4 +1,4 @@
-public class DeliveryState_Dispatching extends DeliveryState {
+public class OrderState_Dispatching extends OrderState {
     @Override
     public String toString(){
         return "Dispatching";
