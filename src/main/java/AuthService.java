@@ -1,8 +1,9 @@
+package main;
 import java.util.*;
 
 public class AuthService {
 	
-	private ArrayList<User> users = new ArrayList<User>();
+	private static ArrayList<User> users = new ArrayList<User>();
 	private static AuthService instance = AuthService.getInstance();
 
 	
@@ -63,6 +64,10 @@ public class AuthService {
 				throw new UserNotFoundException(username);
 			}
 		return loginState;
+	}
+	
+	public void resetAuthService() {
+		users = new ArrayList<User>();
 	}
 
 
