@@ -2,7 +2,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;    
+import java.time.LocalDateTime;
+import java.time.Instant;  
 
 public class CouponService {
     private static CouponService instance = CouponService.getInstance();
@@ -16,37 +17,55 @@ public class CouponService {
         return instance;
     }
 
-    public void createCoupon(Coupon c) throws CouponAlreadyExistException{
+    public void createCoupon(Coupon c) throws CouponAlreadyExistException, CouponDateEarlyException, CouponDateLateException{
         try{
+            Date now = new Date();
             for(Coupon coupon : couponList) {
                 if(coupon.getCouponName() == c.getCouponName()){
                     throw new CouponAlreadyExistException();
                 }
             }
+            /* 
+            if(now.compareTo(c.getStartDate()) < 0){
+                throw new CouponDateEarlyException();
+            }else if(now.compareTo(c.getEndDate()) > 0){
+                throw new CouponDateLateException();
+            }else{
+            */
             couponList.add(c);
+            System.out.println("Coupon Successfully Created.");
+            
         }catch(CouponAlreadyExistException e){
             throw new CouponAlreadyExistException();
         }
-        
+       
     }
 
     public void updateCoupon(Coupon c,int option,String value) throws ParseException, CouponDateModifyException{ //Not tested
         switch(option){
             case 1:
                 couponList.get(couponList.indexOf(c)).setUseQuota(Integer.parseInt(value)); //changes quota
+                System.out.println("Changes Complete.");
+                break;
             case 2:
                 couponList.get(couponList.indexOf(c)).setStatus(c.createState(value)); //changes status
+                System.out.println("Changes Complete.");
+                break;
             case 3:
-                LocalDateTime now = LocalDateTime.now();
-                Date d2 = sdformat.parse(sdformat.format(now));
+                Date date = new Date();
                 Date d1 = sdformat.parse(value);
                 if(d1.compareTo(c.getStartDate()) < 0){
                     throw new CouponDateModifyException();
-                }else if(d1.compareTo(d2) < 0){
+                }else if(d1.compareTo(date) < 0){
                     throw new CouponDateModifyException();
                 }else{
-                    couponList.get(couponList.indexOf(c)).setEndDate(d1); //changes Enddate
+                    couponList.get(couponList.indexOf(c)).setEndDate(sdformat.parse(value)); //changes Enddate
+                    System.out.println("Changes Complete.");
                 }
+                break;
+            default:
+                System.out.println("Option not included.");
+                
         }
     }
 
@@ -64,8 +83,7 @@ public class CouponService {
     }
 
     public boolean validateCoupon (double totalPrice, Coupon c) throws CouponTotalPriceInvalidException, CouponNotStartedException, ParseException, CouponNotAvailableException, CouponExhaustedException, CouponExpiredException{
-        LocalDateTime now = LocalDateTime.now();
-        Date d1 = sdformat.parse(sdformat.format(now));
+        Date d1 = new Date();
         if(totalPrice < c.getMinimumUsagePrice()){
             throw new CouponTotalPriceInvalidException(totalPrice);
         }else if(d1.compareTo(c.getStartDate()) < 0){
@@ -90,6 +108,10 @@ public class CouponService {
             }
         }
         return totalPrice;
+    }
+
+    public static void resetCouponService(){
+        couponList = new ArrayList<Coupon>();
     }
 
 }
