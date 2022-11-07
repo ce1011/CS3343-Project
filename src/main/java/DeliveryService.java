@@ -92,7 +92,7 @@ public class DeliveryService{
             getDelivery(deliveryID).setZone(zone);
             getDelivery(deliveryID).setAddress(address);
             getDelivery(deliveryID).setDeliveryFee(calculateDeliveryPrice(weight,zone));
-            getDelivery(deliveryID).setDeliveryState(deliveryState);
+            //getDelivery(deliveryID).setDeliveryState(deliveryState);
         }
     }
 

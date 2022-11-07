@@ -31,8 +31,8 @@ public class OrderService {
 	}
 	
 	public ArrayList<Order> searchOrder(Customer customer){
-		
-		return centralOrderList.searchOrderByCustomerID(customer.getCustomerID());
+		return new ArrayList<Order>();
+		//return centralOrderList.searchOrderByCustomerID(customer.getCustomerID());
 	}
 	
 	/*
