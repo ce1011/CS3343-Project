@@ -1,9 +1,11 @@
 public class AuthController {
     private AuthView view;
+    private HomeController homeController;
     private AuthService model;
     public AuthController(){
         view = new AuthView(this);
         model = new AuthService();
+        homeController = new HomeController();
         model.tempData();
     }
 
@@ -17,7 +19,9 @@ public class AuthController {
 
     public void login(String username, String password){
         try{
-            model.login(username, password);
+            if(model.login(username, password)){
+                homeController.showCustomerHome();
+            }
         } catch (WrongPasswordException e){
             view.wrongPassword();
         } catch (UserNotFoundException e){

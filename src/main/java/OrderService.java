@@ -16,8 +16,6 @@ public class OrderService {
 		return orderService;
 	}
 
-
-	
 	//order list related method
 	
 	//need modify with validation
