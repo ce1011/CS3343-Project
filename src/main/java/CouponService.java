@@ -82,6 +82,11 @@ public class CouponService {
         throw new CouponNotFoundException(name);
     }
 
+    public void deleteCoupon(Coupon c){
+        couponList.get(couponList.indexOf(c)).setUseQuota(0);
+        couponList.get(couponList.indexOf(c)).setStatus(c.createState("Finished"));     
+    }
+
     public boolean validateCoupon (double totalPrice, Coupon c) throws CouponTotalPriceInvalidException, CouponNotStartedException, ParseException, CouponNotAvailableException, CouponExhaustedException, CouponExpiredException{
         Date d1 = new Date();
         if(totalPrice < c.getMinimumUsagePrice()){
