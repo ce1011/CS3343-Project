@@ -95,7 +95,7 @@ public class DeliveryService{
             //getDelivery(deliveryID).setDeliveryState(deliveryState);
         }
     }
-
+    //😂😂😂😂😂😂🥲🥲🫠🖕🏿
     public void deleteDelivery(String deliveryID) throws DeliveryItemNotFoundException{
             deliveryList.remove(getDelivery(deliveryID));
     }
