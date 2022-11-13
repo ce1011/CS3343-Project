@@ -2,8 +2,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.Instant;  
 
 public class CouponService {
     private static CouponService instance = CouponService.getInstance();
