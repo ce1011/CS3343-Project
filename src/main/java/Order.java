@@ -7,7 +7,8 @@ public class Order {
 	private Coupon couponUsed;
 	private Delivery deliveryDetails;
 	private double totalPrice;
-	private OrderState status;
+
+	private OrderState state;
 	private String remarks;
 	private String orderDate;
 	private ArrayList<Order> orderList;
@@ -20,7 +21,7 @@ public class Order {
 		this.setCouponUsed(couponUsed);
 		this.setDeliveryDetails(deliveryDetails);
 		this.setTotalPrice(totalPrice);
-		this.setStatus(new OrderState_Pending());
+		this.setState(new OrderState_Pending());
 		this.setRemarks(remarks);
 		this.setOrderDate(OrderService.getCurrentTimestamp());
 		orderList = new ArrayList<Order>();
@@ -76,12 +77,12 @@ public class Order {
 		this.totalPrice = totalPrice;
 	}
 
-	public OrderState getStatus() {
-		return status;
+	public OrderState getState() {
+		return state;
 	}
 
-	public void setStatus(OrderState status) {
-		this.status = status;
+	public void setState(OrderState state) {
+		this.state = state;
 	}
 
 	public String getRemarks() {
@@ -100,11 +101,11 @@ public class Order {
 		this.orderDate = orderDate;
 	}
 	
-	public void displayOrder(ArrayList<Order> o, int index) {
-		for(int i = 0; i < o.size(); i++) {
-			System.out.println(o.get(i));
-			System.out.println("----------------------------------------------------------------------------------------------");  
-		}
-		
-	}
+//	public void displayOrder(ArrayList<Order> o, int index) {
+//		for(int i = 0; i < o.size(); i++) {
+//			System.out.println(o.get(i));
+//			System.out.println("----------------------------------------------------------------------------------------------");
+//		}
+//
+//	}
 }
