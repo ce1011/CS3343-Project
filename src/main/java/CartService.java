@@ -1,4 +1,4 @@
-package main;
+
 
 import java.util.ArrayList;
 
@@ -17,7 +17,7 @@ public class CartService {
 	
 	public void addProduct(String name, int qty) throws ProductNotFoundException, OutOfStockException {
 		Product selected = productService.getProductByName(name);
-		CartItem existItem = searchItem(name);
+		CartItem existItem = searchCartItem(name);
 		
 		if(existItem!=null) { //item exists in cart
 			
@@ -33,6 +33,24 @@ public class CartService {
 			
 		}
 
+	}
+
+	public void setCartItemQty(String name, int qty) throws ProductNotFoundException, OutOfStockException, CartItemNotFoundException{
+		Product selected = productService.getProductByName(name);
+		CartItem existItem = searchCartItem(name);
+
+		if(existItem!=null) { //item exists in cart
+			
+			checkStock(name,qty,selected.getInStockQuantity());
+			existItem.setQuantity(qty);
+			
+		} else throw new CartItemNotFoundException(name);
+
+	}
+		
+	
+	public ArrayList<CartItem> getCartItems(){
+		return items;
 	}
 	
 	public int getCartSize() {
@@ -54,20 +72,30 @@ public class CartService {
 	public void removeProductFromCart(int index) {
 		items.remove(index);
 	}
+
+	public void removeProductFromCartByName(String name) throws CartItemNotFoundException {
+		CartItem search = searchCartItem(name);
+		if (search == null){
+			throw new CartItemNotFoundException(name);
+		} else {
+			items.remove(search);
+		}
+	}
 	
 	public void checkStock(String name, int qty,int stock) throws OutOfStockException{
 		if(qty>stock) {
 			throw new OutOfStockException(name);
 		}
 	}
-	
-	public CartItem searchItem(String name) {
+
+	public CartItem searchCartItem(String name){
 		CartItem found = null;
 		for (CartItem item : items) {
 			if(item.getProduct().getName().equals(name)) {
 				found = item;
 			}
 		}
+		
 		return found;
 	}
 	
