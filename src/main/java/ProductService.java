@@ -6,6 +6,7 @@ public class ProductService {
     private static ArrayList<Product> products = new ArrayList<Product>();
 
     private ProductService() {
+
     }
 
     public static ProductService getInstance() {
@@ -13,6 +14,14 @@ public class ProductService {
             instance = new ProductService();
         }
         return instance;
+    }
+
+
+    public void addTempProduct()  {
+        for(int i = 0; i< 100; i++) {
+            Product product = new Product("Product " + Integer.toString(i),i , "Description " + i, 1000, new ProductState_Launch(), 1000);
+            products.add(product);
+        }
     }
 
     public void createProduct(Product product) throws ExistingProductWithSameNameFoundException {
