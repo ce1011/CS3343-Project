@@ -2,8 +2,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.Instant;  
 
 public class CouponService {
     private static CouponService instance = CouponService.getInstance();
@@ -80,6 +78,11 @@ public class CouponService {
             }
         }
         throw new CouponNotFoundException(name);
+    }
+
+    public void deleteCoupon(Coupon c){
+        couponList.get(couponList.indexOf(c)).setUseQuota(0);
+        couponList.get(couponList.indexOf(c)).setStatus(c.createState("Finished"));     
     }
 
     public boolean validateCoupon (double totalPrice, Coupon c) throws CouponTotalPriceInvalidException, CouponNotStartedException, ParseException, CouponNotAvailableException, CouponExhaustedException, CouponExpiredException{

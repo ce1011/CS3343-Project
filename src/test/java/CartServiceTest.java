@@ -1,19 +1,9 @@
-package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import main.CartItem;
-import main.CartService;
-import main.ExistingProductWithSameNameFoundException;
-import main.OutOfStockException;
-import main.Product;
-import main.ProductNotFoundException;
-import main.ProductService;
-import main.ProductState_Launch;
 
 class CartServiceTest {
 	

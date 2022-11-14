@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.time.format.DateTimeFormatter;
+//import java.time.format.DateTimeFormatter;
 
 public class DeliveryService{
 
@@ -9,7 +9,7 @@ public class DeliveryService{
     private ArrayList<String> deliveryZone = new ArrayList<String>(List.of("Hong Kong", "Kowloon","New Territories","Islands District"));
     private double deliveryFirstKG_price = 25, deliveryAfterFirstKG_price = 10;
     private int deliveryID = 10001;
-    private static DateTimeFormatter simpleDateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    //private static DateTimeFormatter simpleDateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public static DeliveryService getInstance() {
         if (instance == null) {
@@ -72,7 +72,7 @@ public class DeliveryService{
 
     public void updateDelivery(String deliveryID, String orderID, String zone, String address, double weight, String deliveryState)
     throws DeliveryItemNotFoundException, DeliveryStateNotFoundException, DeliveryZoneNotFoundException{
-        boolean zoneExist = false, stateExist = false;
+        boolean zoneExist = false;
         for(String dZone:deliveryZone){
             if(dZone.equals(zone)){
                 zoneExist = true;
@@ -95,7 +95,7 @@ public class DeliveryService{
             //getDelivery(deliveryID).setDeliveryState(deliveryState);
         }
     }
-
+    //😂😂😂😂😂😂🥲🥲🫠🖕🏿
     public void deleteDelivery(String deliveryID) throws DeliveryItemNotFoundException{
             deliveryList.remove(getDelivery(deliveryID));
     }
@@ -115,34 +115,12 @@ public class DeliveryService{
         }
     }
 
-    
-//Pending to move to AdminView/OrderView @Ken @Stephen
-/*    public void printDeliveryDetails(String deliveryID){
-        try{
-        System.out.println("Delivery ID: "+ getDelivery(deliveryID).getDeliveryID());
-        System.out.println("Order ID: "+ getDelivery(deliveryID).getOrderID());
-        System.out.println("Zone: "+getDelivery(deliveryID).getZone());
-        System.out.println("Address: "+getDelivery(deliveryID).getAddress());
-        System.out.println("Delivery Fee: "+getDelivery(deliveryID).getDeliveryFee());
-        System.out.println("Estimated Delivery Date: "+getDelivery(deliveryID).getEstDeliveryDate());
-        System.out.println("Created Date: "+simpleDateFormat.format(getDelivery(deliveryID).getCreatedDate()));
-        System.out.println("Delivery Status: "+getDelivery(deliveryID).getDeliveryState()+"%n");
-        }
-        catch(Exception DeliveryItemNotFoundException){
-            System.out.println("Delivery Item: "+ deliveryID +" is not found.");
-        }
+    public ArrayList<Delivery> getDeliveryList(){
+        return this.deliveryList;
     }
 
-    public void listAllDelivery(){
-        for (Delivery d: deliveryList){
-            System.out.println("Delivery ID: "+ d.getDeliveryID());
-            System.out.println("Order ID: "+ d.getOrderID());
-            System.out.println("Zone: "+ d.getZone());
-            System.out.println("Address: "+ d.getAddress());
-            System.out.println("Delivery Fee: "+ d.getDeliveryFee());
-            System.out.println("Estimated Delivery Date: "+ d.getEstDeliveryDate());
-            System.out.println("Created Date: "+simpleDateFormat.format(d.getCreatedDate()));
-            System.out.println("Delivery Status: "+d.getDeliveryState()+"%n");
-        }
-    }*/
+    public void addDeliveryZone(String zone){
+        this.deliveryZone.add(zone);
+    }
+
 }
