@@ -33,6 +33,10 @@ public class Order {
 		return transactionID;
 	}
 
+	public int getTransactionID_numerical(){
+		return Integer.parseInt(transactionID);
+	}
+
 	public void setTransactionID(String transactionID) {
 		this.transactionID = transactionID;
 	}
@@ -100,12 +104,4 @@ public class Order {
 	public void setOrderDate(String orderDate) {
 		this.orderDate = orderDate;
 	}
-	
-//	public void displayOrder(ArrayList<Order> o, int index) {
-//		for(int i = 0; i < o.size(); i++) {
-//			System.out.println(o.get(i));
-//			System.out.println("----------------------------------------------------------------------------------------------");
-//		}
-//
-//	}
 }
