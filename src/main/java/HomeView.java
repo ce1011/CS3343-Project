@@ -2,9 +2,11 @@ import java.util.Scanner;
 
 public class HomeView {
     private ProductController productController;
+    private OrderController orderController;
 
     public HomeView() {
         this.productController = new ProductController();
+        this.orderController = new OrderController();
     }
 
     public void customerHome(){
@@ -23,9 +25,9 @@ public class HomeView {
 //            case 2:
 //                showCartView();
 //                break;
-//            case 3:
-//                showOrderView();
-//                break;
+            case 3:
+                orderController.entry();
+                break;
 //            case 4:
 //                logout();
 //                break;

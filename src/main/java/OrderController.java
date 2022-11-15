@@ -4,12 +4,20 @@ public class OrderController {
 
     private OrderView view;
 
-    private OrderService orderService;
+    private OrderService model;
 
     public OrderController(){
         this.view = new OrderView(this);
-        this.orderService = OrderService.getOrderServiceInstance();
+        this.model = OrderService.getOrderServiceInstance();
 
+    }
+
+    public void entry() {
+        view.entryView();
+    }
+
+    public void displayOrder(int choice, int sortIn){
+//        int currentPage = ()
     }
 
 //    public void displayOrder(String transactionID, int skip, int limit, OrderSortType sort){
