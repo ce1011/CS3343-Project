@@ -20,17 +20,17 @@ public class OrderController {
 //        int currentPage = ()
     }
 
-//    public void displayOrder(String transactionID, int skip, int limit, OrderSortType sort){
-//        int currentPage = (skip/limit) + 1;
-//        int itemPerPage = limit;
-//        try{
-//            //ArrayList<Order> orderList = orderService.searchOrder(transactionID, 0, 99999999, sort);
-//            ArrayList<Order> allOrderMatchCriteria = orderService.searchOrder(transactionID, 0, 99999999, sort);
-//            int totalPage = (allOrderMatchCriteria.size()/limit)+1;
-//
-//            view.displayOrderList(orderList, currentPage, totalPage, itemPerPage, transactionID, sort);
-//        }catch (IndexOutOfBoundsException e){
-//
-//        }
-//    }
+    public void displayOrder(User user, int skip, int limit, OrderSortType sort){
+        int currentPage = (skip/limit) + 1;
+        int itemPerPage = limit;
+        try{
+            ArrayList<Order> orderList = model.searchOrder(user, 0, 99999999, sort);
+            ArrayList<Order> allOrderMatchCriteria = model.searchOrder(user, 0, 99999999, sort);
+            int totalPage = (allOrderMatchCriteria.size()/limit)+1;
+
+            view.displayOrderList(orderList, currentPage, totalPage, itemPerPage, sort);
+        }catch (IndexOutOfBoundsException e){
+
+        }
+    }
 }

@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 public class OrderService {
 	private ArrayList<Order> centralOrderList;
@@ -28,10 +29,7 @@ public class OrderService {
 //		order.setOrderState(new OrderState_Deleted());
 //	}
 
-	public ArrayList<Order> searchOrder(Customer customer){
-		return new ArrayList<Order>();
-		//return centralOrderList.searchOrderByCustomerID(customer.getCustomerID());
-	}
+
 
 	//TransactionID is 6 digit start from 1XXXXX
 	public String assignTransactionID() {
@@ -50,4 +48,20 @@ public class OrderService {
 
 	}
 
+	public ArrayList<Order> searchOrder(User user, int skip, int limit, OrderSortType sort) {
+		ArrayList<Order> result = new ArrayList<Order>();
+
+		for(Order o: centralOrderList){
+			if(user.getRole() instanceof Customer){
+				if(true){ //TO-DO need modify
+					result.add(o);
+				}
+			}
+		}
+
+		result.sort(sort);
+
+		List<Order> skippedOrderList = result.stream().skip(skip).limit(limit).toList();
+		return new ArrayList<Order>(skippedOrderList);
+	}
 }

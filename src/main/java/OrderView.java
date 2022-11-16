@@ -9,7 +9,7 @@ public class OrderView {
         this.controller = controller;
     }
 
-    public void displayOrderList(ArrayList<Order> orderList){
+    public void displayOrderList(ArrayList<Order> orderList, int currentPage, int totalPage, int itemPerPage, OrderSortType sort){
 
 
     }
@@ -33,4 +33,6 @@ public class OrderView {
         controller.displayOrder(choice, sortIn);
 
     }
+
+
 }
