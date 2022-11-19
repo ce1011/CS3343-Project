@@ -1,10 +1,18 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class HomeView {
     private ProductController productController;
+    private HomeController controller;
+    private User currentUser;
 
-    public HomeView() {
+    public HomeView(HomeController controller) {
         this.productController = new ProductController();
+        this.controller = controller;
+    }
+
+    public void currentUser(User user){
+        this.currentUser = user;
     }
 
     public void customerHome(){
@@ -35,6 +43,78 @@ public class HomeView {
             default:
                 System.out.println("Invalid choice!");
                 this.customerHome();
+        }
+    }
+
+
+    public void adminHome(){
+        System.out.println("Welcome to Admin page");
+		System.out.println("1. Coupon Management");
+		System.out.println("2. Product Management");
+		System.out.println("3. Order List");
+		System.out.println("4. Delivery Management");
+		System.out.println("5. Report");
+		System.out.println("6. Exit");
+		System.out.print("Please enter your choice: ");
+		Scanner scanner = new Scanner(System.in);
+		int choice = -1;
+		try{
+			choice = scanner.nextInt();
+		} catch(InputMismatchException e){
+			invalidInput();
+		}
+
+        switch(choice) {
+			case 1: //coupon
+				controller.showCouponView();
+				break;
+			case 2: //product
+                controller.showProductView();
+				break;
+			case 3: //order
+                controller.showOrderView();
+				break;
+			case 4: //delivery
+                controller.showDeliveryView();
+				break;
+			case 5: //report
+                controller.showReportView();
+				break;
+			case 6: //exit
+				System.exit(0);
+				break;
+			default:
+				System.out.println("Invalid choice!");
+				finishLine();
+                adminHome();
+		}
+		scanner.close();
+    }
+
+    public void resultLine(){
+		String line = new String(new char[48]).replace('\0', '-');
+		System.out.println(line);
+		System.out.println("Result:");
+	}
+
+	public void finishLine(){
+		String line = new String(new char[48]).replace('\0', '-');
+		System.out.println(line);
+	}
+
+
+    public void invalidInput() {
+		resultLine();
+		System.out.println("Please input a valid input");
+		finishLine();
+        backToEntry();
+	}
+
+    public void backToEntry(){
+        if (currentUser.getRole().getRoleName() == "Customer"){
+            customerHome();
+        } else {
+            adminHome();
         }
     }
 }

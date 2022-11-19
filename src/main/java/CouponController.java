@@ -12,6 +12,10 @@ public class CouponController {
         this.cService = CouponService.getInstance();
     }
 
+    public void entryCouponView(){
+        cView.entryView();
+    }
+    
     public void deleteCoupon(String name){
         try {
             Coupon c = cService.searchCoupon(name);
