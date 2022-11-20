@@ -1,6 +1,7 @@
 import java.text.ParseException;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 public class CouponController {
     private CouponView cView;
@@ -12,6 +13,10 @@ public class CouponController {
         this.cService = CouponService.getInstance();
     }
 
+    public void entryCouponView(){
+        cView.entryView();
+    }
+    
     public void deleteCoupon(String name){
         try {
             Coupon c = cService.searchCoupon(name);
@@ -52,6 +57,10 @@ public class CouponController {
         }catch (CouponDateLateException e) {
             System.out.println(e.toString());
         }
+    }
+
+    public ArrayList<Coupon> getCouponList(){
+        return cService.getCouponList();
     }
 
 

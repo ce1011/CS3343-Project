@@ -29,6 +29,7 @@ public class AuthView {
                 System.out.println("Invalid choice!");
                 entryView();
         }
+        scanner.close();
     }
     public void loginView(){
         String username, password;
@@ -41,10 +42,11 @@ public class AuthView {
         password = sc.nextLine();
 
         controller.login(username, password);
+        sc.close();
     }
 
     public void registerView(){
-        String username, password, role;
+        String username, password;
         System.out.println("Register To Shop");
         System.out.println("Username: ");
 
@@ -54,6 +56,7 @@ public class AuthView {
         password = sc.nextLine();
 
         controller.register(username, password);
+        sc.close();
     }
 
     public void wrongPassword(){

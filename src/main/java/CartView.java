@@ -55,6 +55,7 @@ public class CartView {
 			default:
 				System.out.println("Invalid choice!");
 				finishLine();
+				shoppingView();
 		}
 		scanner.close();
 	}
@@ -102,10 +103,12 @@ public class CartView {
 				controller.clearCart();
 			case 2:
 				finishLine();
+				shoppingView();
 			default:
 				resultLine();
 				System.out.println("Invalid choice!");
 				finishLine();
+				shoppingView();
 		}
 		sc.close();
 	}
@@ -128,9 +131,11 @@ public class CartView {
 				//unfinished: Move to order view
 			case 2:
 				finishLine();
+				shoppingView();
 			default:
 				System.out.println("Invalid choice!");
 				finishLine();
+				shoppingView();
 		}
 		sc.close();
 	}
@@ -156,6 +161,7 @@ public class CartView {
 			System.out.println("Your cart is empty!");
 		}
 		finishLine();
+		shoppingView();
 	}
 	
 	public void addToCartView() {
@@ -182,25 +188,28 @@ public class CartView {
 	public void finishLine(){
 		String line = new String(new char[48]).replace('\0', '-');
 		System.out.println(line);
-		shoppingView();
+		
 	}
 
 	public void success(){
 		resultLine();
 		System.out.println("Success!");
 		finishLine();
+		shoppingView();
 	}
 
 	public void itemNotFound(){
 		resultLine();
 		System.out.println("Cannot find this product in your cart");
 		finishLine();
+		shoppingView();
 	}
 	
 	public void invalidInput() {
 		resultLine();
 		System.out.println("Please input a valid input");
 		finishLine();
+		shoppingView();
 	}
 
 	
@@ -209,12 +218,14 @@ public class CartView {
 		resultLine();
 		System.out.println("This product is out of stock!");
 		finishLine();
+		shoppingView();
 	}
 	
 	public void productNotFound() {
 		resultLine();
 		System.out.println("Cannot find this product!");
 		finishLine();
+		shoppingView();
 	}
 	
 	

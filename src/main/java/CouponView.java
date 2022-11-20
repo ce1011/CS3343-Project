@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class CouponView {
@@ -82,8 +83,12 @@ public class CouponView {
     }
 
     public void displayCouponList(){
-        
+        ArrayList<Coupon> cList = cCon.getCouponList();
+        System.out.format("%20s|%11s|%11s|%15s|%3d|%5f|%5f|%15s\n", "CouponName", "StartDate", "EndDate", "Status", "UseQuota", "DiscountValue", "MinimumUsagePrice", "Type");
+        for(Coupon c: cList){
+            System.out.format("%20s %11s %11s %15s %3d %5f %5f %15s\n", c.getCouponName(), c.getStartDate(), c.getEndDate(), c.getStatus(), c.getUseQuota(), c.getDiscountValue(), c.getMinimumUsagePrice(), c.getType());
+        }
+        this.entryView();
     }
-
 
 }

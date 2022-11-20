@@ -9,6 +9,10 @@ public class DeliveryController {
         view = new DeliveryView(this);
     }
 
+    public void entryDeliveryView(){
+        view.entryView();
+    }
+
     public void editDeliveryInfo(String deliveryID, String orderID, String zone, String address, double weight, String deliveryState){
         try{
             model.updateDelivery(deliveryID, orderID, zone, address, weight, deliveryState);

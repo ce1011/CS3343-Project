@@ -50,12 +50,11 @@ public class AuthService {
 		return searching;
 	}
 	
-	public boolean login(String username, String password) throws WrongPasswordException, UserNotFoundException{
-		boolean loginState = false;
+	public User login(String username, String password) throws WrongPasswordException, UserNotFoundException{
 		User user = searchUser(username);
 			if(user!=null) { //username exists
 				if(user.getPassword().equals(password)) {//username matches password
-					loginState = true;
+					return user;
 					//
 				} else {//wrong password
 					throw new WrongPasswordException();
@@ -63,7 +62,6 @@ public class AuthService {
 			} else {// user not found
 				throw new UserNotFoundException(username);
 			}
-		return loginState;
 	}
 	
 	public void resetAuthService() {
