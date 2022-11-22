@@ -1,4 +1,4 @@
-
+import java.util.Scanner;
 
 public class HomeController {
     private ProductController productController;
@@ -17,7 +17,7 @@ public class HomeController {
         homeView.customerHome();
     }
 
-    public void showAdminHome(User user){
+    public void showAdminHome(User user) {
         homeView.currentUser(user);
         homeView.adminHome();
     }
@@ -27,8 +27,9 @@ public class HomeController {
         couponController.entryCouponView();
     }
 
-    public void showProductView(){
-        //go to product view
+    public void showProductView() {
+    productController.filterView();
+
     }
 
     public void showOrderView(){
