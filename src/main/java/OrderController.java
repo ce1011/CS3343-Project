@@ -1,19 +1,37 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class OrderController {
 
     private OrderView view;
 
-    private OrderService model;
+    private OrderService orderService;
 
     public OrderController(){
         this.view = new OrderView(this);
-        this.model = OrderService.getOrderServiceInstance();
+        this.orderService = OrderService.getOrderServiceInstance();
+
+    }
+    public void displayCustomerOrderList(OrderSortType sort){
+        ArrayList<Order> allOrderMatchCriteria = orderService.searchOrder(sort);
+        view.displayCustomerOrderList(allOrderMatchCriteria, sort);
+    }
+    public void displayAdminOrderList(OrderSortType sort){
 
     }
 
-    public void entry() {
-        view.entryView();
+
+
+    public void placeOrder(){
+
+    }
+
+    public void updateOrder(){
+
+    }
+
+    public void customerFilterView() {
+        view.customerFilter();
     }
 
     public void displayOrder(int choice, int sortIn){

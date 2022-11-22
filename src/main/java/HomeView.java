@@ -4,6 +4,8 @@ import java.util.Scanner;
 public class HomeView {
     private ProductController productController;
     private HomeController controller;
+
+    private OrderController orderController;
     private User currentUser;
 
     public HomeView(HomeController controller) {
@@ -30,9 +32,8 @@ public class HomeView {
 //            case 2:
 //                showCartView();
 //                break;
-//            case 3:
-//                showOrderView();
-//                break;
+            case 3:
+                this.orderController.customerFilterView();;
 //            case 4:
 //                logout();
 //                break;
@@ -50,7 +51,7 @@ public class HomeView {
         System.out.println("Welcome to Admin page");
 		System.out.println("1. Coupon Management");
 		System.out.println("2. Product Management");
-		System.out.println("3. Order List");
+		System.out.println("3. Order Management");
 		System.out.println("4. Delivery Management");
 		System.out.println("5. Report");
 		System.out.println("6. Exit");

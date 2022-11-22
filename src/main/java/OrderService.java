@@ -1,60 +1,44 @@
 import java.util.ArrayList;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 public class OrderService {
-	private OrderBST centralOrderList;
+	private ArrayList<Order> centralOrderList;
 	private static Date serviceTimeStamp;
 	private static OrderService orderService = new OrderService();
 	
 	
 	private OrderService(){
-		centralOrderList = new OrderBST();
+		centralOrderList = new ArrayList<Order>();
 	}
 	
 	public static OrderService getOrderServiceInstance() {
 		return orderService;
 	}
 
-	//order list related method
-	
-	//need modify with validation
 	public boolean placeOrder(Order order) { 
-		centralOrderList.insertOrder(order);
+		centralOrderList.add(order);
 		return false;
 	}
-	
-	public Order searchOrder(String ID) {
-		return centralOrderList.searchOrderByTransactionID(ID);
+
+	public ArrayList<Order> searchOrder(OrderSortType sort){
+		ArrayList<Order> result = (ArrayList<Order>) centralOrderList.clone();
+
+		result.sort(sort);
+
+		List<Order> skippedOrderList = result.stream().toList();
+		return new ArrayList<Order>(skippedOrderList);
 	}
-	
-	public ArrayList<Order> searchOrder(Customer customer){
-		return new ArrayList<Order>();
-		//return centralOrderList.searchOrderByCustomerID(customer.getCustomerID());
-	}
-	
-	/*
-	 * public ArrayList<Order> retrieveCustomerOrderList(Customer customer) {
-	 * ArrayList<Order> tempOrderList = new ArrayList<Order>();
-	 * 
-	 * for (Order order: centralOrderList) {
-	 * if(order.getCustomerInfo().getCustomerID().equals(customer.getCustomerID()))
-	 * { tempOrderList.add(order); } }
-	 * 
-	 * return tempOrderList; }
-	 */
-	
-	
 	//TransactionID is 6 digit start from 1XXXXX
 	public String assignTransactionID() {
 		return String.valueOf(orderService.getOrderListNumber()+100000+1) ;
 	}
 	
 	public int getOrderListNumber() {
-		return centralOrderList.getOrderBSTSize();	
+		return centralOrderList.size();
 	}
-	
-	
+
 	//order service date and time method
 	public static String getCurrentTimestamp() {
 		serviceTimeStamp = new Date();
@@ -62,13 +46,4 @@ public class OrderService {
 		return ft.format(serviceTimeStamp);
 		
 	}
-	
-	/*
-	 * public Order searchOrder(String transactionID) {
-	 * 
-	 * for(Order order: centralOrderList) {
-	 * if(order.getTransactionID().equals(transactionID)) {
-	 * 
-	 * } } return null; }
-	 */
 }
