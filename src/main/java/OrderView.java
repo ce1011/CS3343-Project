@@ -10,7 +10,6 @@ public class OrderView {
     }
 
     public void customerOrderView(User user) {
-        String transactionID;
         OrderSortType sort = null;
         Scanner scanner = new Scanner(System.in);
         System.out.println("Welcome to Order list panel");
@@ -71,6 +70,85 @@ public class OrderView {
     }
 
     public void adminOrderView() {
-        
+        OrderSortType sort;
+        String transactionID;
+        int choice;
+        System.out.println("Welcome to Admin Order Management panel");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Please select function");
+        System.out.println("1. View order list");
+        System.out.println("2. Update order status");
+        System.out.println("3. Delete order");
+        choice = scanner.nextInt();
+
+        switch(choice){
+            case 1:
+                System.out.println("Sort order list by: ");
+                System.out.println("1. Sort by create date in ascending");
+                System.out.println("2. Sort by create date in descending");
+                System.out.println("3. Sort by price in ascending");
+                System.out.println("4. Sort by price in descending");
+                System.out.println("5. Sort by TransactionID in ascending");
+                System.out.println("6. Sort by TransactionID in descending");
+                int sortBy = scanner.nextInt();
+                switch(sortBy){
+                    case 1:
+                        sort = new OrderSortByCreateDate_ASC();
+                        break;
+                    case 2:
+                        sort = new OrderSortByCreateDate_DESC();
+                        break;
+                    case 3:
+                        sort = new OrderSortByPrice_ASC();
+                        break;
+                    case 4:
+                        sort = new OrderSortByPrice_DESC();
+                        break;
+                    case 5:
+                        sort = new OrderSortByTransactionID_ASC();
+                        break;
+                    case 6:
+                        sort = new OrderSortByTransaction_DESC();
+                        break;
+                    default:
+                        sort = new OrderSortByCreateDate_ASC();
+                        break;
+                }
+                controller.displayAdminOrderList(sort);
+                break;
+            case 2:
+                System.out.println("Which order do you want to update?");
+                System.out.println("Please enter transactionID: ");
+                transactionID = scanner.nextLine().trim();
+                controller.updateOrderStatus(transactionID);
+            case 3:
+                System.out.println("Which order do you want to delete?");
+                System.out.println("Please enter transactionID: ");
+                transactionID = scanner.nextLine().trim();
+                controller.deleteOrder(transactionID);
+        }
+
+
+    }
+
+    public void displayAdminProductList(ArrayList<Order> orderList, OrderSortType sort) {
+        System.out.format("%4s|%6s|%25s|%20s|%8s|%12s\n", "No.", "TransactionID", "Product", "Order Date", "Total Price", "Order status");
+        int i=1;
+        for(Order order : orderList) {
+            System.out.format("%6s|%25s|%20s|%12s|%8s|%12s\n", i, order.getTransactionID(), order.retrieveProductName(), order.getOrderDate(), order.getTotalPrice(), order.getStatus());
+            i++;
+        }
+
+        System.out.println("(b) Back");
+        System.out.println("Please enter your choice: ");
+        Scanner scanner = new Scanner(System.in);
+        String choice = scanner.nextLine().trim();
+
+        switch(choice) {
+            case "b":
+                break; //need modify
+            default:
+                System.out.println("Invalid choice");
+        }
     }
 }

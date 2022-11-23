@@ -16,22 +16,25 @@ public class OrderController {
         view.displayCustomerOrderList(allOrderMatchCriteria, user, sort);
     }
     public void displayAdminOrderList(OrderSortType sort){
+        ArrayList<Order> allOrderMatchCriteria = orderService.searchOrder(sort);
 
+        view.displayAdminProductList(allOrderMatchCriteria, sort);
     }
 
     public void placeOrder(){
 
     }
-
-    public void updateOrder(){
-
-    }
-
     public void customerOrderView(User user) {
         view.customerOrderView(user);
     }
 
     public void adminOrderView() {
         view.adminOrderView();
+    }
+
+    public void updateOrderStatus(String transactionID) {
+    }
+
+    public void deleteOrder(String transactionID) {
     }
 }

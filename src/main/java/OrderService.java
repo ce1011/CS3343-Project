@@ -36,6 +36,18 @@ public class OrderService {
 		List<Order> skippedOrderList = result.stream().toList();
 		return new ArrayList<Order>(skippedOrderList);
 	}
+
+	public ArrayList<Order> searchOrder(OrderSortType sort){
+		ArrayList<Order> result = new ArrayList<Order>();
+
+		for(Order o: centralOrderList){
+			result.add(o);
+;		}
+
+		result.sort(sort);
+
+		return result;
+	}
 	//TransactionID is 6 digit start from 1XXXXX
 	public String assignTransactionID() {
 		return String.valueOf(orderService.getOrderListNumber()+100000+1) ;
