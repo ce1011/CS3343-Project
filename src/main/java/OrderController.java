@@ -32,9 +32,28 @@ public class OrderController {
         view.adminOrderView();
     }
 
-    public void updateOrderStatus(String transactionID) {
+    public void updateOrderStatus(Order targetOrder, String newStatus) {
+        OrderState orderState = null;
+        switch (newStatus){
+            case "Pending":
+                orderState = new OrderState_Pending();
+            case "Processing":
+                orderState = new OrderState_Processing();
+            case "Dispatching":
+                orderState = new OrderState_Dispatching();
+            case "Delivered":
+                orderState = new OrderState_Delivered();
+        }
+        orderService.updateOrderStatus(targetOrder, orderState);
     }
 
-    public void deleteOrder(String transactionID) {
+    public Order searchOrder(String transactionID) {
+        return orderService.searchOrderByTransactionID(transactionID);
+    }
+
+    public boolean deleteOrder(Order result) {
+        boolean deleted;
+        deleted = orderService.deleteOrder(result);
+        return deleted;
     }
 }

@@ -64,4 +64,27 @@ public class OrderService {
 		return ft.format(serviceTimeStamp);
 		
 	}
+
+	public Order searchOrderByTransactionID(String transactionID) {
+		Order result = null;
+		for (Order o: centralOrderList){
+			if(o.getTransactionID().equals(transactionID)){
+				result = o;
+			}
+		}
+		return result;
+	}
+
+	public boolean deleteOrder(Order result) {
+		centralOrderList.remove(result);
+		if(!centralOrderList.contains(result)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	public void updateOrderStatus(Order targetOrder, OrderState orderState) {
+		targetOrder.setStatus(orderState);
+	}
 }

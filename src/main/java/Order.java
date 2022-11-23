@@ -101,6 +101,10 @@ public class Order {
 	}
 
 	public String retrieveProductName() {
-		return null;
+		StringBuilder productName = new StringBuilder();
+		for(Product p: productList){
+			productName.append(" ").append(p.getName());
+		}
+		return productName.toString();
 	}
 }
