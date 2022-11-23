@@ -9,7 +9,7 @@ public class OrderView {
         this.controller = controller;
     }
 
-    public void customerFilter() {
+    public void customerOrderView(User user) {
         String transactionID;
         OrderSortType sort = null;
         Scanner scanner = new Scanner(System.in);
@@ -46,10 +46,31 @@ public class OrderView {
                     default -> new OrderSortByTransactionID_ASC();
                 };
         }
-        controller.displayCustomerOrderList(sort);
+        controller.displayCustomerOrderList(user, sort);
     }
 
-    public void displayCustomerOrderList(ArrayList<Order> orderList, OrderSortType sort){
+    public void displayCustomerOrderList(ArrayList<Order> orderList, User user, OrderSortType sort){
+        System.out.format("%4s|%6s|%25s|%20s|%8s|%12s\n", "No.", "TransactionID", "Product", "Order Date", "Total Price", "Order status");
+        int i=1;
+        for(Order order : orderList) {
+            System.out.format("%6s|%25s|%20s|%12s|%8s|%12s\n", i, order.getTransactionID(), order.retrieveProductName(), order.getOrderDate(), order.getTotalPrice(), order.getStatus());
+            i++;
+        }
 
+        System.out.println("(b) Back");
+        System.out.println("Please enter your choice: ");
+        Scanner scanner = new Scanner(System.in);
+        String choice = scanner.nextLine().trim();
+
+        switch(choice) {
+            case "b":
+                break; //need modify
+            default:
+                System.out.println("Invalid choice");
+        }
+    }
+
+    public void adminOrderView() {
+        
     }
 }

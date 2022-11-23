@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class OrderController {
@@ -12,15 +11,13 @@ public class OrderController {
         this.orderService = OrderService.getOrderServiceInstance();
 
     }
-    public void displayCustomerOrderList(OrderSortType sort){
-        ArrayList<Order> allOrderMatchCriteria = orderService.searchOrder(sort);
-        view.displayCustomerOrderList(allOrderMatchCriteria, sort);
+    public void displayCustomerOrderList(User user, OrderSortType sort){
+        ArrayList<Order> allOrderMatchCriteria = orderService.searchOrder(user, sort);
+        view.displayCustomerOrderList(allOrderMatchCriteria, user, sort);
     }
     public void displayAdminOrderList(OrderSortType sort){
 
     }
-
-
 
     public void placeOrder(){
 
@@ -30,25 +27,11 @@ public class OrderController {
 
     }
 
-    public void customerFilterView() {
-        view.customerFilter();
+    public void customerOrderView(User user) {
+        view.customerOrderView(user);
     }
 
-    public void displayOrder(int choice, int sortIn){
-//        int currentPage = ()
-    }
-
-    public void displayOrder(User user, int skip, int limit, OrderSortType sort){
-        int currentPage = (skip/limit) + 1;
-        int itemPerPage = limit;
-        try{
-//            ArrayList<Order> orderList = model.searchOrder("user", 0, 99999999, sort);
-//            ArrayList<Order> allOrderMatchCriteria = model.searchOrder(user, 0, 99999999, sort);
-//            int totalPage = (allOrderMatchCriteria.size()/limit)+1;
-
-            //view.displayOrderList(null, currentPage, totalPage, itemPerPage, sort);
-        }catch (IndexOutOfBoundsException e){
-
-        }
+    public void adminOrderView() {
+        view.adminOrderView();
     }
 }

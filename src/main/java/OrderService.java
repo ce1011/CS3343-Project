@@ -22,8 +22,14 @@ public class OrderService {
 		return false;
 	}
 
-	public ArrayList<Order> searchOrder(OrderSortType sort){
-		ArrayList<Order> result = (ArrayList<Order>) centralOrderList.clone();
+	public ArrayList<Order> searchOrder(User user, OrderSortType sort){
+		ArrayList<Order> result = new ArrayList<Order>();
+
+		for(Order o: centralOrderList){
+			if(o.getUser().getUsername().equals(user.getUsername())){
+				result.add(o);
+			}
+		}
 
 		result.sort(sort);
 

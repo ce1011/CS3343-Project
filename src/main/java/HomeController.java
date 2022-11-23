@@ -30,12 +30,13 @@ public class HomeController {
     }
 
     public void showProductView() {
-    productController.filterView();
+        productController.filterView();
 
     }
 
     public void showOrderView(){
         //go to order view
+        orderController.adminOrderView();
     }
 
     public void showDeliveryView(){

@@ -10,6 +10,7 @@ public class HomeView {
 
     public HomeView(HomeController controller) {
         this.productController = new ProductController();
+        this.orderController = new OrderController();
         this.controller = controller;
     }
 
@@ -33,7 +34,7 @@ public class HomeView {
 //                showCartView();
 //                break;
             case 3:
-                this.orderController.customerFilterView();;
+                this.orderController.customerOrderView(currentUser);;
 //            case 4:
 //                logout();
 //                break;
