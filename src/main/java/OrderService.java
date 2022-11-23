@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class OrderService {
+
+	private int nextTransactionID;
 	private ArrayList<Order> centralOrderList;
 	private static Date serviceTimeStamp;
 	private static OrderService orderService = new OrderService();
@@ -11,6 +13,7 @@ public class OrderService {
 	
 	private OrderService(){
 		centralOrderList = new ArrayList<Order>();
+		nextTransactionID = 100000;
 	}
 	
 	public static OrderService getOrderServiceInstance() {
@@ -50,11 +53,9 @@ public class OrderService {
 	}
 	//TransactionID is 6 digit start from 1XXXXX
 	public String assignTransactionID() {
-		return String.valueOf(orderService.getOrderListNumber()+100000+1) ;
-	}
-	
-	public int getOrderListNumber() {
-		return centralOrderList.size();
+		String assignedID =  String.valueOf(nextTransactionID+1);
+		nextTransactionID++;
+		return assignedID;
 	}
 
 	//order service date and time method
