@@ -80,8 +80,10 @@ public class HomeView {
                     controller.showDeliveryView();
             case 5 -> //report
                     controller.showReportView();
-            case 6 -> //exit
-                    System.exit(0);
+            case 6 ->{
+                return;
+            } //exit
+
             default -> {
                 System.out.println("Invalid choice!");
                 finishLine();

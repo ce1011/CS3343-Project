@@ -24,11 +24,15 @@ public class AuthController {
             switch (user.getRole().getRoleName()){
                 case "Customer":
                     homeController.showCustomerHome();
+                    break;
                 case "Admin":
                     homeController.showAdminHome(user);
+                    break;
                 default:
                     homeController.showCustomerHome();
             }
+
+            entry();
 
         } catch (WrongPasswordException e){
             view.wrongPassword();
