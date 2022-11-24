@@ -1,4 +1,4 @@
-public class OrderSortByTransaction_DESC extends OrderSortType {
+public class OrderSortByTransactionID_DESC extends OrderSortType {
 
     @Override
     public int compare(Order o1, Order o2){

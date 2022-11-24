@@ -30,6 +30,7 @@ public class HomeView {
         switch (choice){
             case 1:
                 this.productController.customerFilterView();
+                customerHome();
 //            case 2:
 //                showCartView();
 //                break;

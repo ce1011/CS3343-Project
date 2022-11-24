@@ -20,9 +20,8 @@ public class OrderService {
 		return orderService;
 	}
 
-	public boolean placeOrder(Order order) { 
+	public void placeOrder(Order order) {
 		centralOrderList.add(order);
-		return false;
 	}
 
 	public ArrayList<Order> searchOrder(User user, OrderSortType sort){

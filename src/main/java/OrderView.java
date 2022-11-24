@@ -14,38 +14,40 @@ public class OrderView {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Welcome to Order list panel");
         System.out.println("Sort order list by");
-        System.out.println("1. By create date");
-        System.out.println("2. By Price");
-        System.out.println("3. By TransactionID");
+        System.out.println("1. By create date in Ascending order");
+        System.out.println("2. By create date in Descending order");
+        System.out.println("3. By Price in Ascending order");
+        System.out.println("4. By Price in Descending order");
+        System.out.println("5. By TransactionID in Ascending order");
+        System.out.println("6. By TransactionID in Descending order");
         System.out.println("Sort by: ");
         int sortBy = scanner.nextInt();
-        System.out.println("Sort in Ascending or Descending order");
-        System.out.println("1. Ascending");
-        System.out.println("2. Descending");
-        System.out.println("Sort in: ");
-        int sortIn = scanner.nextInt();
 
         switch(sortBy){
             case 1:
-                sort = switch (sortIn) {
-                    case 1 -> new OrderSortByCreateDate_ASC();
-                    case 2 -> new OrderSortByCreateDate_DESC();
-                    default -> new OrderSortByCreateDate_ASC();
-                };
+                sort = new OrderSortByCreateDate_ASC();
+                break;
             case 2:
-                sort = switch (sortIn) {
-                    case 1 -> new OrderSortByPrice_ASC();
-                    case 2 -> new OrderSortByPrice_DESC();
-                    default -> new OrderSortByPrice_ASC();
-                };
+                sort = new OrderSortByCreateDate_DESC();
+                break;
             case 3:
-                sort = switch (sortIn) {
-                    case 1 -> new OrderSortByTransactionID_ASC();
-                    case 2 -> new OrderSortByTransaction_DESC();
-                    default -> new OrderSortByTransactionID_ASC();
-                };
+                sort = new OrderSortByPrice_ASC();
+                break;
+            case 4:
+                sort = new OrderSortByPrice_DESC();
+                break;
+            case 5:
+                sort = new OrderSortByTransactionID_ASC();
+                break;
+            case 6:
+                sort = new OrderSortByTransactionID_DESC();
+                break;
+            default:
+                System.out.println("Invalid choice!");
+                customerOrderView(user);
         }
         controller.displayCustomerOrderList(user, sort);
+
     }
 
     public void displayCustomerOrderList(ArrayList<Order> orderList, User user, OrderSortType sort){
@@ -109,7 +111,7 @@ public class OrderView {
                         sort = new OrderSortByTransactionID_ASC();
                         break;
                     case 6:
-                        sort = new OrderSortByTransaction_DESC();
+                        sort = new OrderSortByTransactionID_DESC();
                         break;
                     default:
                         sort = new OrderSortByCreateDate_ASC();
