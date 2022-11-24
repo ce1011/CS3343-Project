@@ -78,10 +78,10 @@ public class OrderView {
         Order result = null;
         System.out.println("Welcome to Admin Order Management panel");
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Please select function");
         System.out.println("1. View order list");
         System.out.println("2. Update order status");
         System.out.println("3. Delete order");
+        System.out.println("Please select function: ");
         choice = scanner.nextInt();
 
         switch(choice){
