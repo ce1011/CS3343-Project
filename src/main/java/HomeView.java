@@ -35,10 +35,10 @@ public class HomeView {
 //                showCartView();
 //                break;
             case 3:
-                this.orderController.customerOrderView(currentUser);;
-//            case 4:
-//                logout();
-//                break;
+                this.orderController.customerOrderView(currentUser);
+                this.customerHome();
+            case 4:
+                return;
             case 9:
                 this.productController.addTempProduct();
                 this.customerHome();
@@ -67,19 +67,26 @@ public class HomeView {
 		}
 
         switch (choice) {
-            case 1 -> //coupon
-                    controller.showCouponView();
+            case 1 -> {//coupon
+                controller.showCouponView();
+                adminHome();
+            }
             case 2 ->{
                 controller.showProductView();
                 adminHome();
             }
-
-            case 3 -> //order
-                    controller.showOrderView();
-            case 4 -> //delivery
-                    controller.showDeliveryView();
-            case 5 -> //report
-                    controller.showReportView();
+            case 3 ->{//order
+                controller.showOrderView();
+                adminHome();
+            } //order
+            case 4 -> { //delivery
+                controller.showDeliveryView();
+                adminHome();
+            }
+            case 5 -> {//report
+                controller.showReportView();
+                adminHome();
+            }
             case 6 ->{
                 return;
             } //exit

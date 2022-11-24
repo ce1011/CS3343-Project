@@ -29,7 +29,6 @@ public class AuthView {
                 System.out.println("Invalid choice!");
                 entryView();
         }
-        scanner.close();
     }
     public void loginView(){
         String username, password;
