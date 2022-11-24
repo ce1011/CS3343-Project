@@ -4,6 +4,7 @@ public class HomeController {
     private ProductController productController;
     private CouponController couponController;
     private DeliveryController deliveryController;
+    private OrderController orderController;
     
     private HomeView homeView;
 
@@ -11,6 +12,7 @@ public class HomeController {
         this.productController = new ProductController();
         this.couponController = new CouponController();
         this.deliveryController = new DeliveryController();
+        this.orderController = new OrderController();
         this.homeView = new HomeView(this);
     }
     public void showCustomerHome() {
@@ -32,12 +34,13 @@ public class HomeController {
     }
 
     public void showProductView() {
-    productController.filterView();
+        productController.filterView();
 
     }
 
     public void showOrderView(){
         //go to order view
+        orderController.adminOrderView();
     }
 
     public void showDeliveryView(){
