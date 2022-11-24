@@ -41,7 +41,7 @@ public class AuthView {
         password = sc.nextLine();
 
         controller.login(username, password);
-        sc.close();
+        //sc.close();
     }
 
     public void registerView(){
@@ -55,7 +55,7 @@ public class AuthView {
         password = sc.nextLine();
 
         controller.register(username, password);
-        sc.close();
+        //sc.close();
     }
 
     public void wrongPassword(){

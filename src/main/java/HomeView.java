@@ -97,7 +97,7 @@ public class HomeView {
                 adminHome();
             }
         }
-		scanner.close();
+		//scanner.close();
 
     }
 

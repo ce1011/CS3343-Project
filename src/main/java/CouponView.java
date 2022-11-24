@@ -17,7 +17,6 @@ public class CouponView {
         System.out.println("4. Delete a Coupon");
         System.out.println("Please input the number in front for your action:");
         int input = scan.nextInt();
-        scan.close();
         switch (input){
             case 1:
                 displayCouponList();
@@ -41,7 +40,7 @@ public class CouponView {
     private void deleteCouponView() {
         System.out.println("Please input the name of coupon to delete:");
         String couponName = scan.nextLine();
-        scan.close();
+        //scan.close();
         cCon.deleteCoupon(couponName);
         this.entryView();
     }
@@ -56,7 +55,7 @@ public class CouponView {
         int choice = scan.nextInt();
         System.out.println("Please input the value to change");
         String value = scan.next();
-        scan.close();
+        //scan.close();
         cCon.editCoupon(couponName, choice, value);
         this.entryView();  
     }

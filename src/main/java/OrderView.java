@@ -132,6 +132,7 @@ public class OrderView {
                 System.out.println("Please enter you choice in full form: ");
                 String newStatus = scanner.nextLine().trim();
                 controller.updateOrderStatus(result, newStatus);
+                break;
             case 3:
                 System.out.println("Which order do you want to delete?");
                 System.out.println("Please enter transactionID: ");
@@ -153,6 +154,7 @@ public class OrderView {
                 }else{
                     adminOrderView();
                 }
+                break;
             default:
                 System.out.println("---Please choose again---");
                 adminOrderView();

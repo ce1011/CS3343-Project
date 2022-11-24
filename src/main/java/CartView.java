@@ -50,14 +50,13 @@ public class CartView {
 				placeOrderView();
 				break;
 			case 7: //exit
-				System.exit(0);
-				break;
+				return;
 			default:
 				System.out.println("Invalid choice!");
 				finishLine();
 				shoppingView();
 		}
-		scanner.close();
+		//scanner.close();
 	}
 
 
@@ -73,7 +72,7 @@ public class CartView {
 		} catch(InputMismatchException e) {
 			invalidInput();
 		}
-		sc.close();
+		//sc.close();
 	}
 
 	public void deleteProductView(){
@@ -82,7 +81,7 @@ public class CartView {
 		System.out.println("Please Enter the product name to delete from cart: ");
 		String name = sc.next();
 		controller.removeProductFromCart(name);
-		sc.close();
+		//sc.close();
 	}
 
 	public void clearCartView(){
@@ -101,16 +100,18 @@ public class CartView {
 		switch(choice){
 			case 1:
 				controller.clearCart();
+				break;
 			case 2:
 				finishLine();
 				shoppingView();
+				break;
 			default:
 				resultLine();
 				System.out.println("Invalid choice!");
 				finishLine();
 				shoppingView();
 		}
-		sc.close();
+		//sc.close();
 	}
 
 	public void placeOrderView(){
@@ -132,12 +133,13 @@ public class CartView {
 			case 2:
 				finishLine();
 				shoppingView();
+				break;
 			default:
 				System.out.println("Invalid choice!");
 				finishLine();
 				shoppingView();
 		}
-		sc.close();
+		//sc.close();
 	}
 	
 	public void showCartView() {
@@ -176,7 +178,7 @@ public class CartView {
 		} catch(InputMismatchException e) {
 			invalidInput();
 		}
-		sc.close();
+		//sc.close();
 	}
 
 	public void resultLine(){
