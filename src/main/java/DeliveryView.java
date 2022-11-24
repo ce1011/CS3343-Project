@@ -6,6 +6,7 @@ public class DeliveryView {
 
     public DeliveryView(DeliveryController controller){
         this.controller = controller;
+        
     }
 
     public void entryView(){
@@ -21,7 +22,7 @@ public class DeliveryView {
         System.out.print("Please enter your choice: ");
         Scanner scanner = new Scanner(System.in);
         int choice = scanner.nextInt();
-        scanner.close();
+        //scanner.close();
         switch (choice){
             case 1:
                 modifyDeliveryInfoView();
@@ -45,7 +46,8 @@ public class DeliveryView {
                 removeDeliveryZoneView();
             break;
             case 8:
-                //Pending
+                HomeController hc = new HomeController();
+                hc.showAdminHome();
                 break;
             default:
                 System.out.println("Invalid choice!");
@@ -66,7 +68,7 @@ public class DeliveryView {
         String address = scanner.next();
         System.out.println("Please input new Weight of Delivery Item: ");
         double weight = scanner.nextDouble();
-        scanner.close();
+        //scanner.close();
         controller.editDeliveryInfo(deliveryID, orderID, zone, address, weight, deliveryID);
         this.entryView();
     }
@@ -75,8 +77,8 @@ public class DeliveryView {
         System.out.println("Please input Delivery ID: ");
         Scanner scanner = new Scanner(System.in);
         String deliveryID = scanner.next();
-        scanner.close();
-        System.out.format("%10s|%10s|%20s|%50s|%6d\n", "Delivery ID", "Order ID", "Zone", "Address", "Delivery Fee");
+        //scanner.close();
+        System.out.format("%10s|%10s|%20s|%50s|%6s\n", "Delivery ID", "Order ID", "Zone", "Address", "Delivery Fee");
         if(controller.findDelivery(deliveryID) != null){
             System.out.format("%10s %10s %20s %50s %6d\n", controller.findDelivery(deliveryID).getOrderID(), controller.findDelivery(deliveryID).getOrderID(), 
             controller.findDelivery(deliveryID).getZone(), controller.findDelivery(deliveryID).getAddress(), controller.findDelivery(deliveryID).getDeliveryFee());
@@ -90,7 +92,7 @@ public class DeliveryView {
         double deliveryFirstKG_price = scanner.nextDouble();
         System.out.println("Please input Delivery Price after First KG: ");
         double deliveryAfterFirstKG_price = scanner.nextDouble();
-        scanner.close();
+        //scanner.close();
         controller.editDeliverySystemPrice(deliveryFirstKG_price, deliveryAfterFirstKG_price);
         this.entryView();
     }
@@ -100,13 +102,13 @@ public class DeliveryView {
         Scanner scanner = new Scanner(System.in);
         String deliveryID = scanner.next();
         controller.deleteDelivery(deliveryID);
-        scanner.close();
+        //scanner.close();
         this.entryView();
     }
     //5
     public void viewAllDeliveryView(){
         ArrayList<Delivery> dList = controller.getDeliveryList();
-        System.out.format("%10s|%10s|%20s|%50s|%6d\n", "Delivery ID", "Order ID", "Zone", "Address", "Delivery Fee");
+        System.out.format("%10s|%10s|%20s|%50s|%6s\n", "Delivery ID", "Order ID", "Zone", "Address", "Delivery Fee");
         for(Delivery d:dList){
             System.out.format("%10s %10s %20s %50s %6d\n", d.getOrderID(), d.getOrderID(), d.getZone(), d.getAddress(), d.getDeliveryFee());
         }
@@ -118,7 +120,7 @@ public class DeliveryView {
         Scanner scanner = new Scanner(System.in);
         String zone = scanner.next();
         controller.addDeliveryZone(zone);
-        scanner.close();
+        //scanner.close();
         this.entryView();
     }
     //7
@@ -127,7 +129,7 @@ public class DeliveryView {
         Scanner scanner = new Scanner(System.in);
         String zone = scanner.next();
         controller.deleteDeliveryZone(zone);
-        scanner.close();
+        //scanner.close();
         this.entryView();
     }
 

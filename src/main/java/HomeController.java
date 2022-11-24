@@ -17,6 +17,10 @@ public class HomeController {
         homeView.customerHome();
     }
 
+    public void showAdminHome(){
+        homeView.adminHome();
+    }
+
     public void showAdminHome(User user) {
         homeView.currentUser(user);
         homeView.adminHome();
