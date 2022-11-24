@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Order {
 	private String transactionID;
-	private Customer customerInfo;
+	private User user;
 	private ArrayList<Product> productList;
 	private Coupon couponUsed;
 	private Delivery deliveryDetails;
@@ -12,10 +12,10 @@ public class Order {
 	private String orderDate;
 	private ArrayList<Order> orderList;
 
-	Order(Customer customerInfo, ArrayList<Product> productList, Coupon couponUsed, Delivery deliveryDetails,
-			double totalPrice, String remarks) {
+	Order(User user, ArrayList<Product> productList, Coupon couponUsed, Delivery deliveryDetails,
+		  double totalPrice, String remarks, String username1) {
+		this.setUser(user);
 		this.setTransactionID(OrderService.getOrderServiceInstance().assignTransactionID());
-		this.setCustomerInfo(customerInfo);
 		this.setProductList(productList);
 		this.setCouponUsed(couponUsed);
 		this.setDeliveryDetails(deliveryDetails);
@@ -36,12 +36,12 @@ public class Order {
 		this.transactionID = transactionID;
 	}
 
-	public Customer getCustomerInfo() {
-		return customerInfo;
+	public void setUser(User user){
+		this.user = user;
 	}
 
-	public void setCustomerInfo(Customer customerInfo) {
-		this.customerInfo = customerInfo;
+	public User getUser(){
+		return user;
 	}
 
 	public ArrayList<Product> getProductList() {
@@ -68,8 +68,8 @@ public class Order {
 		this.deliveryDetails = deliveryDetails;
 	}
 
-	public double getTotalPrice() {
-		return totalPrice;
+	public String getTotalPrice() {
+		return Double.toString(totalPrice);
 	}
 
 	public void setTotalPrice(double totalPrice) {
@@ -99,12 +99,12 @@ public class Order {
 	public void setOrderDate(String orderDate) {
 		this.orderDate = orderDate;
 	}
-	
-	public void displayOrder(ArrayList<Order> o, int index) {
-		for(int i = 0; i < o.size(); i++) {
-			System.out.println(o.get(i));
-			System.out.println("----------------------------------------------------------------------------------------------");  
+
+	public String retrieveProductName() {
+		StringBuilder productName = new StringBuilder();
+		for(Product p: productList){
+			productName.append(" ").append(p.getName());
 		}
-		
+		return productName.toString();
 	}
 }

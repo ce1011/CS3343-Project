@@ -4,10 +4,13 @@ import java.util.Scanner;
 public class HomeView {
     private ProductController productController;
     private HomeController controller;
+
+    private OrderController orderController;
     private User currentUser;
 
     public HomeView(HomeController controller) {
         this.productController = new ProductController();
+        this.orderController = new OrderController();
         this.controller = controller;
     }
 
@@ -26,17 +29,16 @@ public class HomeView {
         int choice = scanner.nextInt();
         switch (choice){
             case 1:
-                this.productController.displayProduct("", 0, 999999,0,5,new ProductSortByCreateDateAsc());
-                break;
+                this.productController.customerFilterView();
+                customerHome();
 //            case 2:
 //                showCartView();
 //                break;
-//            case 3:
-//                showOrderView();
-//                break;
-//            case 4:
-//                logout();
-//                break;
+            case 3:
+                this.orderController.customerOrderView(currentUser);
+                this.customerHome();
+            case 4:
+                return;
             case 9:
                 this.productController.addTempProduct();
                 this.customerHome();
@@ -47,11 +49,11 @@ public class HomeView {
     }
 
 
-    public void adminHome(){
+    public void adminHome() {
         System.out.println("Welcome to Admin page");
 		System.out.println("1. Coupon Management");
 		System.out.println("2. Product Management");
-		System.out.println("3. Order List");
+		System.out.println("3. Order Management");
 		System.out.println("4. Delivery Management");
 		System.out.println("5. Report");
 		System.out.println("6. Exit");
@@ -64,31 +66,39 @@ public class HomeView {
 			invalidInput();
 		}
 
-        switch(choice) {
-			case 1: //coupon
-				controller.showCouponView();
-				break;
-			case 2: //product
-                controller.showProductView();
-				break;
-			case 3: //order
-                controller.showOrderView();
-				break;
-			case 4: //delivery
-                controller.showDeliveryView();
-				break;
-			case 5: //report
-                controller.showReportView();
-				break;
-			case 6: //exit
-				System.exit(0);
-				break;
-			default:
-				System.out.println("Invalid choice!");
-				finishLine();
+        switch (choice) {
+            case 1 -> {//coupon
+                controller.showCouponView();
                 adminHome();
-		}
+            }
+            case 2 ->{
+                controller.showProductView();
+                adminHome();
+            }
+            case 3 ->{//order
+                controller.showOrderView();
+                adminHome();
+            } //order
+            case 4 -> { //delivery
+                controller.showDeliveryView();
+                adminHome();
+            }
+            case 5 -> {//report
+                controller.showReportView();
+                adminHome();
+            }
+            case 6 ->{
+                return;
+            } //exit
+
+            default -> {
+                System.out.println("Invalid choice!");
+                finishLine();
+                adminHome();
+            }
+        }
 		scanner.close();
+
     }
 
     public void resultLine(){

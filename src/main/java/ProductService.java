@@ -68,10 +68,10 @@ public class ProductService {
         return products;
     }
 
-    public ArrayList<Product> searchProduct(String name, double minPrice, double maxPrice, int skip, int limit, ProductSortType sort) {
+    public ArrayList<Product> searchProduct(String name, double minPrice, double maxPrice, ProductSortType sort) {
         ArrayList<Product> result = new ArrayList<Product>();
         products.forEach((p) -> {
-            if (p.getName().contains(name) && p.getPrice() >= minPrice && p.getPrice() <= maxPrice && p.getState() instanceof ProductState_Launch) {
+            if (p.getName().contains(name) && p.getPrice() >= minPrice && p.getPrice() <= maxPrice) {
                 result.add(p);
             }
         });
@@ -79,8 +79,23 @@ public class ProductService {
         result.sort(sort);
 
 
-        List<Product> skippedProductList = result.stream().skip(skip).limit(limit).toList();
+        List<Product> skippedProductList = result.stream().toList();
         return new ArrayList<Product>(skippedProductList);
+    }
+
+    public void updateProduct(int index,Product product) throws ProductNotFoundException, ProductIsDeletedException {
+        Product productToUpdate = this.getProduct(index);
+        if(product.getState() instanceof ProductState_Deleted){
+            throw new ProductIsDeletedException();
+        }else{
+            productToUpdate.setName(product.getName());
+            productToUpdate.setPrice(product.getPrice());
+            productToUpdate.setDescription(product.getDescription());
+            productToUpdate.setInStockQuantity(product.getInStockQuantity());
+            productToUpdate.setWeight(product.getWeight());
+            productToUpdate.setState(product.getState());
+        }
+
     }
 
     public int getProductsSize(){
