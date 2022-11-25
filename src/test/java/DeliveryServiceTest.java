@@ -83,6 +83,16 @@ public class DeliveryServiceTest {
     }
     
     @Test
+    public void testUpdateDelivery5() throws DeliveryZoneNotFoundException, DeliveryItemNotFoundException{
+    	DeliveryService.getInstance().createDelivery("9999", "New Territories", "#19 G/F Yau Kom Tau Village, Kowloon,Hongkong", 3.4);
+    	Exception e = assertThrows(DeliveryItemNotFoundException.class,() -> {
+        	DeliveryService.getInstance().updateDelivery("10001", "99999", "New Territories", "Cheung's Ancestral Hall, Tai Om Road", 6.9, "Processing");
+    	   });
+    	assertNotNull(DeliveryService.getInstance().getDelivery("10001"));
+    }
+    
+    
+    @Test
     public void testDeleteDelivery1() throws DeliveryItemNotFoundException, DeliveryZoneNotFoundException{
     	DeliveryService.getInstance().createDelivery("9999", "New Territories", "#19 G/F Yau Kom Tau Village, Kowloon,Hongkong", 3.4);
     	DeliveryService.getInstance().createDelivery("9999", "New Territories", "#19 G/F Yau Kom Tau Village, Kowloon,Hongkong", 3.4);
@@ -114,6 +124,11 @@ public class DeliveryServiceTest {
     	DeliveryService.getInstance().updateDeliveryPrice(25, 10);
     	assertEquals(85, DeliveryService.getInstance().calculateDeliveryPrice(6.9, "Kowloon"));
     }
+    @Test
+    public void testCalculateDeliveryPrice3() {
+    	DeliveryService.getInstance().updateDeliveryPrice(25, 10);
+    	assertEquals(85, DeliveryService.getInstance().calculateDeliveryPrice(6.9, "Hong Kong"));
+    }
     
     @Test void testDeliveryState1() {
     	assertEquals("Pending", new OrderState_Pending().toString());
@@ -125,6 +140,18 @@ public class DeliveryServiceTest {
     
     @Test void testDeliveryState3() {
     	assertEquals("Dispatching", new OrderState_Dispatching().toString());
+    }
+    
+    @Test
+    public void testGetDeliveryList() throws DeliveryZoneNotFoundException {
+    	DeliveryService.getInstance().createDelivery("9999", "New Territories", "#19 G/F Yau Kom Tau Village, Kowloon,Hongkong", 3.4);
+    	assertNotNull(DeliveryService.getInstance().getDeliveryList());
+    }
+    
+    @Test
+    public void testAddDeliveryZone() {
+    	DeliveryService.getInstance().addDeliveryZone("Lok Ma Chau");
+    	assertNotNull(DeliveryService.getInstance().getDeliveryZoneList());
     }
  
 }
