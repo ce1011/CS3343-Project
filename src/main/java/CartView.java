@@ -144,7 +144,12 @@ public class CartView {
 	}
 
 	private void processToOrderView() {
-		controller.placeOrder();
+		try{
+			controller.placeOrder();
+		}catch (Exception e){
+			System.out.println("Place order fail");
+		}
+
 	}
 
 	public void showCartView() {

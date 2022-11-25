@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Scanner;
 
 public class OrderController {
 
@@ -22,13 +24,13 @@ public class OrderController {
         view.displayAdminProductList(allOrderMatchCriteria, sort);
     }
 
-    public void placeOrder(){
+    public void placeOrder() throws CouponNotFoundException {
         ArrayList<CartItem> cartItem = CartService.getInstance().getCartItems();
 
-        System.out.format("%20s|%5s", "Product Name", "Price");
+        System.out.format("%20s|%5s\n", "Product Name", "Price");
         double total = 0;
         for(CartItem item : cartItem){
-            System.out.format("%20s|%5f", item.getProduct().getName(), item.getSubtotal());
+            System.out.format("%20s|%5f\n", item.getProduct().getName(), item.getSubtotal());
             total += item.getSubtotal();
 
             if(item.getProduct().getInStockQuantity() < item.getQuantity()){
@@ -39,7 +41,43 @@ public class OrderController {
 
         }
 
-        System.out.format("Total: $%6f", total);
+        System.out.format("Total: $%6f\n", total);
+
+        System.out.println("Please enter coupon name if not apply coupon type NA\n");
+
+        Scanner scanner = new Scanner(System.in);
+
+        String name = scanner.next();
+
+        Coupon coupon;
+
+        double finalPrice =  0;
+
+        if(!name.equals("N/A")){
+            coupon = CouponService.getInstance().searchCoupon(name);
+            try{
+                 finalPrice =  CouponService.getInstance().calculatePrice(total, coupon);
+                System.out.format("Final Price: $%7f\n", finalPrice);
+            }catch (Exception e){
+                System.out.println("Coupon not available");
+                        }
+
+        }else{
+            coupon = new Coupon("N/A", new Date(), new Date(), "N/A", 999999, 0,0,"N/A");
+            finalPrice = total;
+        }
+
+        Order order = new Order(cartItem, coupon, finalPrice, "No");
+
+        OrderService.getOrderServiceInstance().placeOrder(order);
+
+        System.out.println("Place order successfully!");
+
+
+
+
+
+
 
 
 
