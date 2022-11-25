@@ -199,7 +199,7 @@ public class OrderView {
         }
     }
     public void displaySummaryReport(Map<String, DoubleSummaryStatistics> data){
-        System.out.format("%15s|%10f\n","Date","Sum");
+        System.out.format("%15s|%10s\n","Date","Sum");
         for (Map.Entry<String, DoubleSummaryStatistics> entry : data.entrySet()) {
             System.out.format("%15s|%10f\n",entry.getKey(),entry.getValue().getSum());
         }
