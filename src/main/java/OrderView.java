@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.DoubleSummaryStatistics;
+import java.util.Map;
 import java.util.Scanner;
 
 public class OrderView {
@@ -196,5 +198,13 @@ public class OrderView {
                 System.out.println("Invalid choice");
         }
     }
+    public void displaySummaryReport(Map<String, DoubleSummaryStatistics> data){
+        System.out.format("%15s|%10f\n","Date","Sum");
+        for (Map.Entry<String, DoubleSummaryStatistics> entry : data.entrySet()) {
+            System.out.format("%15s|%10f\n",entry.getKey(),entry.getValue().getSum());
+        }
+    }
+
+
 }
 

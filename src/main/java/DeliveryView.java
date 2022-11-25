@@ -110,7 +110,7 @@ public class DeliveryView {
         ArrayList<Delivery> dList = controller.getDeliveryList();
         System.out.format("%10s|%10s|%20s|%50s|%6s\n", "Delivery ID", "Order ID", "Zone", "Address", "Delivery Fee");
         for(Delivery d:dList){
-            System.out.format("%10s %10s %20s %50s %6d\n", d.getOrderID(), d.getOrderID(), d.getZone(), d.getAddress(), d.getDeliveryFee());
+            System.out.format("%10s %10s %20s %50s %f\n", d.getOrderID(), d.getOrderID(), d.getZone(), d.getAddress(), d.getDeliveryFee());
         }
         this.entryView();
     }
