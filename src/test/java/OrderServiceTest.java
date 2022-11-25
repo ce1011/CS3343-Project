@@ -13,20 +13,7 @@ public class OrderServiceTest {
         assertNotNull(DeliveryService.getInstance());
     }
     
-    @Test
-    public void testSearchOrder() {
-    	Order order = new Order(null, null, 0.0, null);
-    	OrderService.getOrderServiceInstance().placeOrder(order);
-    	//OrderService.getOrderServiceInstance().searchOrder(Store.getInstance().getCurrentUser(),null);
-        assertNull(OrderService.getOrderServiceInstance().searchOrder(null,null));
-    }
-    
-    @Test
-    public void testSearchOrder1() {
-    	Order order = new Order(null, null, 0.0, null);
-    	OrderService.getOrderServiceInstance().searchOrder(null);
-        assertNull(OrderService.getOrderServiceInstance().searchOrder(null));
-    }
+
     
     @Test
     public void testSearchOrderByTransactionID() {
@@ -45,14 +32,29 @@ public class OrderServiceTest {
     public void testDeleteOrder1() {
     	Order order = new Order(null, null, 0.0, "abc");
     	OrderService.getOrderServiceInstance().placeOrder(order);
-    	assertFalse(OrderService.getOrderServiceInstance().deleteOrder(order));
+    	assertTrue(OrderService.getOrderServiceInstance().deleteOrder(order));
     }
     
     @Test 
     public void testUpdateOrderStatus() {
-    	Order order = new Order(null, null, 0.0, "abc");
-    	Order order1 = new Order(null, null, 0.0, "abc1");
-    	OrderService.getOrderServiceInstance().updateOrderStatus(order,new OrderState_Delivered())
-    	assertEquals(order,order1);
+        	Order order = new Order(null, null, 0.0, null);
+        	OrderService.getOrderServiceInstance().placeOrder(order);
+        	OrderService.getOrderServiceInstance().updateOrderStatus(order, new OrderState_Delivered());
+        	assertEquals("Delivered", order.getStatus().toString());
+    }
+
+    @Test
+    public void testUpdateOrderStatus1() {
+            	Order order = new Order(null, null, 0.0, null);
+            	OrderService.getOrderServiceInstance().placeOrder(order);
+            	OrderService.getOrderServiceInstance().updateOrderStatus(order, new OrderState_Delivered());
+            	assertEquals("Delivered", order.getStatus().toString());
+    }
+
+    @Test
+    public void searchOrderByTransactionID(){
+        Order order = new Order(null, null, 0.0, "abc");
+        OrderService.getOrderServiceInstance().placeOrder(order);
+        assertNull(OrderService.getOrderServiceInstance().searchOrderByTransactionID("abc"));
     }
 }

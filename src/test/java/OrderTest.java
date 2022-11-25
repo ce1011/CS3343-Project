@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class OrderTest {
     @Test
     void getTransactionID() {
         ArrayList<CartItem> productList = new ArrayList<CartItem>();
         Order order = new Order(productList, null, 0, null);
-        assertEquals("100005", order.getTransactionID());
+        assertNotNull(order.getTransactionID());
     }
 
     @Test
