@@ -55,10 +55,10 @@ public class OrderView {
     }
 
     public void displayCustomerOrderList(ArrayList<Order> orderList, User user, OrderSortType sort){
-        System.out.format("%4s|%6s|%25s|%20s|%8s|%12s\n", "No.", "TransactionID", "Product", "Order Date", "Total Price", "Order status");
+        System.out.format("%4s|%15s|%50s|%25s|%8s|%12s\n", "No.", "TransactionID", "Product", "Order Date", "Total Price", "Order status");
         int i=1;
         for(Order order : orderList) {
-            System.out.format("%6s|%25s|%20s|%12s|%8s|%12s\n", i, order.getTransactionID(), order.retrieveProductName(), order.getOrderDate(), order.getTotalPrice(), order.getStatus());
+            System.out.format("%4s|%15s|%50s|%25s|%8s|%12s\n", i, order.getTransactionID(), order.retrieveProductName(), order.getOrderDate(), order.getTotalPrice(), order.getStatus());
             i++;
         }
 
@@ -178,10 +178,10 @@ public class OrderView {
     }
 
     public void displayAdminProductList(ArrayList<Order> orderList, OrderSortType sort) {
-        System.out.format("%4s|%6s|%25s|%20s|%8s|%12s\n", "No.", "TransactionID", "Product", "Order Date", "Total Price", "Order status");
+        System.out.format("%4s|%15s|%50s|%25s|%8s|%12s\n", "No.", "TransactionID", "Product", "Order Date", "Total Price", "Order status");
         int i=1;
         for(Order order : orderList) {
-            System.out.format("%6s|%25s|%20s|%12s|%8s|%12s\n", i, order.getTransactionID(), order.retrieveProductName(), order.getOrderDate(), order.getTotalPrice(), order.getStatus());
+            System.out.format("%4s|%15s|%50s|%25s|%8s|%12s\n", i, order.getTransactionID(), order.retrieveProductName(), order.getOrderDate(), order.getTotalPrice(), order.getStatus());
             i++;
         }
 
