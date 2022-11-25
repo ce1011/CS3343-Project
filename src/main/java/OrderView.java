@@ -20,7 +20,8 @@ public class OrderView {
         System.out.println("4. By Price in Descending order");
         System.out.println("5. By TransactionID in Ascending order");
         System.out.println("6. By TransactionID in Descending order");
-        System.out.println("Sort by: ");
+        System.out.println("7. Return");
+        System.out.println("Your choice: ");
         int sortBy = scanner.nextInt();
 
         switch(sortBy){
@@ -42,6 +43,8 @@ public class OrderView {
             case 6:
                 sort = new OrderSortByTransactionID_DESC();
                 break;
+            case 7:
+                return;
             default:
                 System.out.println("Invalid choice!");
                 customerOrderView(user);
@@ -82,18 +85,20 @@ public class OrderView {
         System.out.println("1. View order list");
         System.out.println("2. Update order status");
         System.out.println("3. Delete order");
+        System.out.println("4. Return");
         System.out.println("Please select function: ");
         choice = scanner.nextInt();
 
         switch(choice){
             case 1:
-                System.out.println("Sort order list by: ");
                 System.out.println("1. Sort by create date in ascending");
                 System.out.println("2. Sort by create date in descending");
                 System.out.println("3. Sort by price in ascending");
                 System.out.println("4. Sort by price in descending");
                 System.out.println("5. Sort by TransactionID in ascending");
                 System.out.println("6. Sort by TransactionID in descending");
+                System.out.println("7. Return");
+                System.out.println("Your choice: ");
                 int sortBy = scanner.nextInt();
                 switch(sortBy){
                     case 1:
@@ -114,6 +119,8 @@ public class OrderView {
                     case 6:
                         sort = new OrderSortByTransactionID_DESC();
                         break;
+                    case 7:
+                        adminOrderView();
                     default:
                         sort = new OrderSortByCreateDate_ASC();
                         break;
@@ -123,9 +130,14 @@ public class OrderView {
             case 2:
                 System.out.println("Which order do you want to update?");
                 System.out.println("Please enter transactionID: ");
-                transactionID = scanner.nextLine().trim();
+                transactionID = scanner.nextLine();
                 result = null;
                 result = controller.searchOrder(transactionID);
+                if(result==null){
+                    System.out.println("No order found.");
+                    System.out.println("Proceed back to admin home...");
+                    adminOrderView();
+                }
                 System.out.format("%6s|%25s|%20s|%8s|%12s\n", "TransactionID", "Product", "Order Date", "Total Price", "Order status");
                 System.out.format("%25s|%20s|%12s|%8s|%12s\n", result.getTransactionID(), result.retrieveProductName(), result.getOrderDate(), result.getTotalPrice(), result.getStatus());
                 System.out.println("What order status do you want to change to?");
@@ -156,10 +168,13 @@ public class OrderView {
                     adminOrderView();
                 }
                 break;
+            case 4:
+                return;
             default:
                 System.out.println("---Please choose again---");
                 adminOrderView();
         }
+        adminOrderView();
     }
 
     public void displayAdminProductList(ArrayList<Order> orderList, OrderSortType sort) {
