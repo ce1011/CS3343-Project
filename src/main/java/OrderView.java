@@ -20,6 +20,7 @@ public class OrderView {
         System.out.println("4. By Price in Descending order");
         System.out.println("5. By TransactionID in Ascending order");
         System.out.println("6. By TransactionID in Descending order");
+        System.out.println("7. Return");
         System.out.println("Sort by: ");
         int sortBy = scanner.nextInt();
 
@@ -42,6 +43,8 @@ public class OrderView {
             case 6:
                 sort = new OrderSortByTransactionID_DESC();
                 break;
+            case 7:
+                return;
             default:
                 System.out.println("Invalid choice!");
                 customerOrderView(user);
