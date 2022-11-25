@@ -12,9 +12,9 @@ public class Order {
 	private String orderDate;
 	private ArrayList<Order> orderList;
 
-	Order(User user, ArrayList<Product> productList, Coupon couponUsed, Delivery deliveryDetails,
-		  double totalPrice, String remarks, String username1) {
-		this.setUser(user);
+	Order(ArrayList<Product> productList, Coupon couponUsed, Delivery deliveryDetails,
+		  double totalPrice, String remarks) {
+		this.setUser(Store.getInstance().getCurrentUser());
 		this.setTransactionID(OrderService.getOrderServiceInstance().assignTransactionID());
 		this.setProductList(productList);
 		this.setCouponUsed(couponUsed);

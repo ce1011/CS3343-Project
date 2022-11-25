@@ -63,7 +63,14 @@ public class CartController {
 
 	public void placeOrder(){
 		ArrayList<CartItem> cartItem = cartModel.getCartItems();
+		ArrayList<Product> productList = new ArrayList<Product>();
 
+
+		for(CartItem item: cartItem){
+			productList.add(item.getProduct());
+		}
+
+		//orderController.placeOrder(productList, cartItem.getS);
 	}
 	
 	

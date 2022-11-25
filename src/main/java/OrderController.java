@@ -21,7 +21,8 @@ public class OrderController {
         view.displayAdminProductList(allOrderMatchCriteria, sort);
     }
 
-    public void placeOrder(){
+    public void placeOrder(ArrayList<Product> list, ){
+
 
     }
     public void customerOrderView(User user) {
