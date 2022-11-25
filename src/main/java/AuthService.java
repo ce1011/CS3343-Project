@@ -54,6 +54,7 @@ public class AuthService {
 		User user = searchUser(username);
 			if(user!=null) { //username exists
 				if(user.getPassword().equals(password)) {//username matches password
+					Store.getInstance().setCurrentUser(user);
 					return user;
 					//
 				} else {//wrong password
