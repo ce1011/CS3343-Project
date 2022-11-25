@@ -6,6 +6,7 @@ public class OrderController {
 
     private OrderService orderService;
 
+
     public OrderController(){
         this.view = new OrderView(this);
         this.orderService = OrderService.getOrderServiceInstance();
@@ -21,7 +22,27 @@ public class OrderController {
         view.displayAdminProductList(allOrderMatchCriteria, sort);
     }
 
-    public void placeOrder(ArrayList<Product> list, ){
+    public void placeOrder(){
+        ArrayList<CartItem> cartItem = CartService.getInstance().getCartItems();
+
+        System.out.format("%20s|%5s", "Product Name", "Price");
+        double total = 0;
+        for(CartItem item : cartItem){
+            System.out.format("%20s|%5f", item.getProduct().getName(), item.getSubtotal());
+            total += item.getSubtotal();
+
+            if(item.getProduct().getInStockQuantity() < item.getQuantity()){
+                System.out.println("Not enough inventory");
+                return;
+            }
+
+
+        }
+
+        System.out.format("Total: $%6f", total);
+
+
+
 
 
     }
