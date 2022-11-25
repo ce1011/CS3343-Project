@@ -109,4 +109,8 @@ public class OrderController {
         deleted = orderService.deleteOrder(result);
         return deleted;
     }
+
+    public void reportView(){
+        view.displaySummaryReport(orderService.getCentralOrderList());
+    }
 }

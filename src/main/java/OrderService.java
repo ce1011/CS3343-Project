@@ -1,7 +1,6 @@
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.*;
 import java.text.SimpleDateFormat;
-import java.util.List;
+import java.util.stream.Collectors;
 
 public class OrderService {
 
@@ -88,5 +87,9 @@ public class OrderService {
 
     public void updateOrderStatus(Order targetOrder, OrderState orderState) {
         targetOrder.setStatus(orderState);
+    }
+
+    public Map<String, DoubleSummaryStatistics> getCentralOrderList(){
+        return centralOrderList.stream().collect(Collectors.groupingBy(Order::getOrderDateYYYYMMDD, Collectors.summarizingDouble(Order::getTotalPriceDouble)));
     }
 }
