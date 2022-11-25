@@ -129,7 +129,8 @@ public class CartView {
 		}
 		switch(choice){
 			case 1:
-				//unfinished: Move to order view
+				processToOrderView();
+				break;
 			case 2:
 				finishLine();
 				shoppingView();
@@ -141,7 +142,11 @@ public class CartView {
 		}
 		//sc.close();
 	}
-	
+
+	private void processToOrderView() {
+		controller.placeOrder();
+	}
+
 	public void showCartView() {
 		ArrayList<CartItem> items = new ArrayList<CartItem>();
 		items = controller.getCart();

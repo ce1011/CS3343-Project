@@ -5,12 +5,13 @@ import java.util.ArrayList;
 public class CartController {
 	private CartView view;
 	private CartService cartModel;
-	
-	
-	
+
+	private OrderController orderController;
+
 	public CartController() {
 		view = new CartView(this);
 		cartModel = CartService.getInstance();
+		orderController = new OrderController();
 	}
 	
 	
@@ -61,6 +62,7 @@ public class CartController {
 	}
 
 	public void placeOrder(){
+		ArrayList<CartItem> cartItem = cartModel.getCartItems();
 
 	}
 	
