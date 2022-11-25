@@ -162,4 +162,14 @@ class ProductServiceTest {
             fail("Should not throw exception");
         }
     }
+
+    @Test
+    void updateDeletedProduct() throws ExistingProductWithSameNameFoundException, ProductNotFoundException, ProductIsDeletedException {
+        ProductService productService = ProductService.getInstance();
+        Product product = new Product("productD", 14.9, "description", 10, new ProductState_Launch(), 1.2);
+
+        productService.createProduct(product);
+        productService.removeProduct("productD");
+        assertThrows(ProductIsDeletedException.class, () -> productService.updateProduct(1,product));
+    }
 }
