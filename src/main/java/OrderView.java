@@ -47,6 +47,7 @@ public class OrderView {
                 customerOrderView(user);
         }
         controller.displayCustomerOrderList(user, sort);
+        customerOrderView(user);
 
     }
 
