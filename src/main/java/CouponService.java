@@ -73,7 +73,7 @@ public class CouponService {
 
     public Coupon searchCoupon(String name) throws CouponNotFoundException{
         for(Coupon coupon : couponList) {
-            if(coupon.getCouponName() == name){
+            if(coupon.getCouponName().equals(name)){
                 return coupon;
             }
         }
