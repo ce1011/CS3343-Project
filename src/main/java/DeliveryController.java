@@ -5,7 +5,7 @@ public class DeliveryController {
     private DeliveryService model;
 
     public DeliveryController(){
-        model = new DeliveryService();
+        model = DeliveryService.getInstance();
         view = new DeliveryView(this);
     }
 

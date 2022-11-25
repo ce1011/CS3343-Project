@@ -66,9 +66,32 @@ public class OrderController {
             coupon = new Coupon("N/A", new Date(), new Date(), "N/A", 999999, 0,0,"N/A");
             finalPrice = total;
         }
+        
+        
 
         Order order = new Order(cartItem, coupon, finalPrice, "No");
 
+
+        DeliveryService deliveryService = DeliveryService.getInstance();
+        System.out.println("Please enter your address");
+        scanner.next();
+        String address = scanner.nextLine();
+        System.out.println("Please enter delivery zone");
+        String zone = scanner.nextLine();
+        Double totalWeight = 0.0;
+        
+        for(CartItem item: cartItem){
+            totalWeight += item.getProduct().getWeight();
+        }
+        Delivery delivery = null;
+        try{
+            delivery = deliveryService.createDelivery(order.getTransactionID(), zone, address, totalWeight);
+        }catch (DeliveryZoneNotFoundException e){
+            e.toString();
+        }
+        
+        order.setTotalPrice(finalPrice+delivery.getDeliveryFee());
+        
         OrderService.getOrderServiceInstance().placeOrder(order);
 
         System.out.println("Place order successfully!");
