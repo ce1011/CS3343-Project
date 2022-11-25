@@ -102,12 +102,20 @@ public class Order {
 		return remarks;
 	}
 
+	public double getTotalPriceDouble(){
+		return totalPrice;
+	}
+
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
 
 	public String getOrderDate() {
 		return orderDate;
+	}
+
+	public String getOrderDateYYYYMMDD(){
+		return orderDate.substring(0,10);
 	}
 
 	public void setOrderDate(String orderDate) {
