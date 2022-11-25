@@ -41,7 +41,7 @@ class AuthServiceTest {
 	@Test
 	void test_LoginSuccess() throws ExistedUserFoundException, WrongPasswordException, UserNotFoundException{
 		User result = AuthService.getInstance().login("customer", "customer");
-		assertEquals(true,result.getRole().toString());
+		assertEquals("Customer",result.getRole().getRoleName());
 	}
 	
 	@Test
