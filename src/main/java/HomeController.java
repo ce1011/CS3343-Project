@@ -48,7 +48,7 @@ public class HomeController {
     }
 
     public void showReportView(){
-        //report view
+     orderController.reportView();
     }
 
 

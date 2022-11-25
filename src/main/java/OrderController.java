@@ -25,7 +25,7 @@ public class OrderController {
     }
 
     public void placeOrder() throws CouponNotFoundException {
-        ArrayList<CartItem> cartItem = CartService.getInstance().getCartItems();
+        ArrayList<CartItem> cartItem = (ArrayList) CartService.getInstance().getCartItems().clone();
 
         System.out.format("%20s|%5s\n", "Product Name", "Price");
         double total = 0;
