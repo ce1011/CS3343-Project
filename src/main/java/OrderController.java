@@ -74,12 +74,13 @@ public class OrderController {
 
         DeliveryService deliveryService = DeliveryService.getInstance();
         System.out.println("Please enter your address");
-        scanner.next();
+        scanner.nextLine();
         String address = scanner.nextLine();
         System.out.println("Please enter delivery zone");
         String zone = scanner.nextLine();
         Double totalWeight = 0.0;
-        
+
+        //System.out.println(address);
         for(CartItem item: cartItem){
             totalWeight += item.getProduct().getWeight();
         }
