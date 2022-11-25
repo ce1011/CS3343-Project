@@ -31,17 +31,20 @@ public class HomeView {
             case 1:
                 this.productController.customerFilterView();
                 customerHome();
+                break;
 //            case 2:
 //                showCartView();
 //                break;
             case 3:
                 this.orderController.customerOrderView(currentUser);
                 this.customerHome();
+                break;
             case 4:
                 return;
             case 9:
                 this.productController.addTempProduct();
                 this.customerHome();
+                break;
             default:
                 System.out.println("Invalid choice!");
                 this.customerHome();

@@ -76,13 +76,6 @@ public class OrderController {
 
 
 
-
-
-
-
-
-
-
     }
     public void customerOrderView(User user) {
         view.customerOrderView(user);
