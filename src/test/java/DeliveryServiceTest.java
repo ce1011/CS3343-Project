@@ -65,15 +65,6 @@ public class DeliveryServiceTest {
     }
     
     @Test
-    public void testUpdateDelivery3() throws DeliveryZoneNotFoundException{
-    	DeliveryService.getInstance().createDelivery("9999", "New Territories", "#19 G/F Yau Kom Tau Village, Kowloon,Hongkong", 3.4);
-    	Exception e = assertThrows(DeliveryStateNotFoundException.class,() -> {
-        	DeliveryService.getInstance().updateDelivery("10001", "9999", "New Territories", "Cheung's Ancestral Hall, Tai Om Road", 6.9, "Exploded");
-    	   });
-    	assertEquals("Delivery State is not valid.",e.getMessage());
-    }
-    
-    @Test
     public void testUpdateDelivery4() throws DeliveryZoneNotFoundException{
     	DeliveryService.getInstance().createDelivery("9999", "New Territories", "#19 G/F Yau Kom Tau Village, Kowloon,Hongkong", 3.4);
     	Exception e = assertThrows(DeliveryItemNotFoundException.class,() -> {

@@ -21,9 +21,6 @@ public class DeliveryController {
         catch(DeliveryItemNotFoundException e){
             System.out.println(e.toString());
         }
-        catch(DeliveryStateNotFoundException e){
-            System.out.println(e.toString());
-        }
         catch(DeliveryZoneNotFoundException e){
             System.out.println(e.toString());
         }
