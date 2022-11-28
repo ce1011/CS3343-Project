@@ -1,3 +1,3 @@
-public abstract class OrderState {
-    public abstract String toString();
+public interface OrderState {
+    String toString();
 }

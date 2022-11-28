@@ -1,3 +1,3 @@
-public abstract class ProductState {
+public interface ProductState {
     public abstract String toString();
 }

@@ -1,4 +1,4 @@
-public class OrderState_Dispatching extends OrderState {
+public class OrderState_Dispatching implements OrderState {
     @Override
     public String toString(){
         return "Dispatching";
