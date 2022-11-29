@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class DeliveryView {
     private DeliveryController controller;
-
+    Scanner scanner = new Scanner(System.in);
     public DeliveryView(DeliveryController controller){
         this.controller = controller;
         
@@ -20,7 +20,7 @@ public class DeliveryView {
         System.out.println("7. Remove Existing Delivery Zone");
         System.out.println("8. Return");
         System.out.print("Please enter your choice: ");
-        Scanner scanner = new Scanner(System.in);
+        
         int choice = scanner.nextInt();
         //scanner.close();
         switch (choice){
@@ -88,7 +88,7 @@ public class DeliveryView {
     //3
     public void editDeliverySystemPriceView(){
         System.out.println("Please input Delivery Price of First KG: ");
-        Scanner scanner = new Scanner(System.in);
+        //Scanner scanner = new Scanner(System.in);
         double deliveryFirstKG_price = scanner.nextDouble();
         System.out.println("Please input Delivery Price after First KG: ");
         double deliveryAfterFirstKG_price = scanner.nextDouble();
