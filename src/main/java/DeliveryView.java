@@ -22,7 +22,6 @@ public class DeliveryView {
         System.out.print("Please enter your choice: ");
         
         int choice = scanner.nextInt();
-        //scanner.close();
         switch (choice){
             case 1:
                 modifyDeliveryInfoView();
@@ -58,7 +57,6 @@ public class DeliveryView {
     //1
     public void modifyDeliveryInfoView(){
         System.out.println("Please input Delivery ID: ");
-        Scanner scanner = new Scanner(System.in);
         String deliveryID = scanner.next();
         System.out.println("Please input new Order ID of Delivery Item: ");
         String orderID = scanner.next();
@@ -68,19 +66,16 @@ public class DeliveryView {
         String address = scanner.next();
         System.out.println("Please input new Weight of Delivery Item: ");
         double weight = scanner.nextDouble();
-        //scanner.close();
         controller.editDeliveryInfo(deliveryID, orderID, zone, address, weight, deliveryID);
         this.entryView();
     }
     //2
     public void displayDeliveryInfoView(){
         System.out.println("Please input Delivery ID: ");
-        Scanner scanner = new Scanner(System.in);
         String deliveryID = scanner.next();
-        //scanner.close();
         System.out.format("%10s|%10s|%20s|%50s|%6s\n", "Delivery ID", "Order ID", "Zone", "Address", "Delivery Fee");
         if(controller.findDelivery(deliveryID) != null){
-            System.out.format("%10s %10s %20s %50s %6d\n", controller.findDelivery(deliveryID).getOrderID(), controller.findDelivery(deliveryID).getOrderID(), 
+            System.out.format("%10s %10s %20s %50s %f\n", controller.findDelivery(deliveryID).getOrderID(), controller.findDelivery(deliveryID).getOrderID(), 
             controller.findDelivery(deliveryID).getZone(), controller.findDelivery(deliveryID).getAddress(), controller.findDelivery(deliveryID).getDeliveryFee());
         }
         this.entryView();
@@ -88,21 +83,17 @@ public class DeliveryView {
     //3
     public void editDeliverySystemPriceView(){
         System.out.println("Please input Delivery Price of First KG: ");
-        //Scanner scanner = new Scanner(System.in);
         double deliveryFirstKG_price = scanner.nextDouble();
         System.out.println("Please input Delivery Price after First KG: ");
         double deliveryAfterFirstKG_price = scanner.nextDouble();
-        //scanner.close();
         controller.editDeliverySystemPrice(deliveryFirstKG_price, deliveryAfterFirstKG_price);
         this.entryView();
     }
     //4
     public void deleteDeliveryView(){
         System.out.println("Please input Delivery ID of the item that you want to delete: ");
-        Scanner scanner = new Scanner(System.in);
         String deliveryID = scanner.next();
         controller.deleteDelivery(deliveryID);
-        //scanner.close();
         this.entryView();
     }
     //5
@@ -117,28 +108,24 @@ public class DeliveryView {
     //6
     public void addDeliveryZoneView(){
         System.out.println("Please input the new delivery zone that you want to add: ");
-        Scanner scanner = new Scanner(System.in);
         String zone = scanner.next();
         controller.addDeliveryZone(zone);
-        //scanner.close();
         this.entryView();
     }
     //7
     public void removeDeliveryZoneView(){
         System.out.println("Please input the new delivery zone that you want to remove: ");
-        Scanner scanner = new Scanner(System.in);
         String zone = scanner.next();
         controller.deleteDeliveryZone(zone);
-        //scanner.close();
         this.entryView();
     }
 
     public void printSuccess(){
-        System.out.println("Success !");
+        System.out.print("Success !"+"\n");
     }
 
     public void printTypeMismatch(){
-        System.out.println("Type Mismatched !");
+        System.out.print("Type Mismatched !"+"\n");
     }
 
 }

@@ -70,7 +70,7 @@ public class DeliveryService{
         throw new DeliveryItemNotFoundException(deliveryID);
     }
 
-    public void updateDelivery(String deliveryID, String orderID, String zone, String address, double weight, String deliveryState)
+    public void updateDelivery(String deliveryID, String orderID, String zone, String address, double weight)
     throws DeliveryItemNotFoundException, DeliveryZoneNotFoundException{
         boolean zoneExist = false;
         for(String dZone:deliveryZone){

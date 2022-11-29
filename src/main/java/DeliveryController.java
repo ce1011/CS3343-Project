@@ -13,27 +13,22 @@ public class DeliveryController {
         view.entryView();
     }
 
-    public void editDeliveryInfo(String deliveryID, String orderID, String zone, String address, double weight, String deliveryState){
+    public void editDeliveryInfo(String deliveryID, String orderID, String zone, String address, double weight){
         try{
-            model.updateDelivery(deliveryID, orderID, zone, address, weight, deliveryState);
+            model.updateDelivery(deliveryID, orderID, zone, address, weight);
             view.printSuccess();
         }
         catch(DeliveryItemNotFoundException e){
-            System.out.println(e.toString());
+            System.out.print(e.toString()+"\n");
         }
         catch(DeliveryZoneNotFoundException e){
-            System.out.println(e.toString());
+            System.out.print(e.toString()+"\n");
         }
     }
 
     public void editDeliverySystemPrice(double deliveryFirstKG_price, double deliveryAfterFirstKG_price){
-        try{
-            model.updateDeliveryPrice(deliveryFirstKG_price, deliveryAfterFirstKG_price);
-            view.printSuccess();
-        }
-        catch(Exception e){
-            view.printTypeMismatch();
-        }
+        model.updateDeliveryPrice(deliveryFirstKG_price, deliveryAfterFirstKG_price);
+        view.printSuccess();
     }
 
     public Delivery findDelivery(String deliveryID){
@@ -52,18 +47,13 @@ public class DeliveryController {
             view.printSuccess();
         }
         catch(DeliveryZoneNotFoundException e){
-            System.out.println(e.toString());
+            System.out.print(e.toString()+"\n");
         }
     }
 
     public void addDeliveryZone(String zone){
-        try{
-            model.addDeliveryZone(zone);
-            view.printSuccess();
-        }
-        catch(Exception e){
-            view.printTypeMismatch();
-        }
+    	model.addDeliveryZone(zone);
+        view.printSuccess();
     }
 
     public void deleteDeliveryZone(String zone){
@@ -72,7 +62,7 @@ public class DeliveryController {
             view.printSuccess();
         }
         catch(DeliveryZoneNotFoundException e){
-            System.out.println(e.toString());
+            System.out.print(e.toString()+"\n");
         }
     }
 
@@ -82,7 +72,7 @@ public class DeliveryController {
             view.printSuccess();
         }
         catch(DeliveryItemNotFoundException e){
-            System.out.println(e.toString());
+            System.out.print(e.toString()+"\n");
         }
     }
 
