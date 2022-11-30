@@ -19,7 +19,7 @@ public class ProductService {
 
     public void addTempProduct()  {
         for(int i = 0; i< 100; i++) {
-            Product product = new Product("Product " + Integer.toString(i),i , "Description " + i, 1000, new ProductState_Launch(), i);
+            Product product = new Product("Product " + Integer.toString(i),i , "Description " + i, 1000, new ProductState_Deleted(), i);
             products.add(product);
         }
     }

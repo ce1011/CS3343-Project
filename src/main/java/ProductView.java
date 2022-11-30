@@ -61,7 +61,10 @@ public class ProductView {
         System.out.format("%4s|%15s|%8s|%40s|%10s\n", "No.", "Name", "Price", "Description", "Status");
         int i = 1;
         for (Product product : productList) {
-            System.out.format("%4s|%15s|%8s|%40s|%10s\n", i, product.getName(), product.getPrice(), product.getDescription(), product.getState().toString());
+            if(!(product.getState() instanceof ProductState_Deleted)){
+                System.out.format("%4s|%15s|%8s|%40s|%10s\n", i, product.getName(), product.getPrice(), product.getDescription(), product.getState().toString());
+
+            }
             i++;
         }
 
@@ -151,7 +154,10 @@ public class ProductView {
         System.out.format("%4s|%15s|%8s|%40s|%10s\n", "No.", "Name", "Price", "Description", "Status");
         int i = 1;
         for (Product product : productList) {
-            System.out.format("%4s|%15s|%8s|%40s|%10s\n", i, product.getName(), product.getPrice(), product.getDescription(), product.getState().toString());
+            if(!(product.getState() instanceof ProductState_Deleted)){
+                System.out.format("%4s|%15s|%8s|%40s|%10s\n", i, product.getName(), product.getPrice(), product.getDescription(), product.getState().toString());
+
+            }
             i++;
         }
 

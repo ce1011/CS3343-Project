@@ -207,7 +207,6 @@ public class CartView {
 		resultLine();
 		System.out.println("Success!");
 		finishLine();
-		shoppingView();
 	}
 
 	public void itemNotFound(){
@@ -230,14 +229,12 @@ public class CartView {
 		resultLine();
 		System.out.println("This product is out of stock!");
 		finishLine();
-		shoppingView();
 	}
 	
 	public void productNotFound() {
 		resultLine();
 		System.out.println("Cannot find this product!");
 		finishLine();
-		shoppingView();
 	}
 	
 	
