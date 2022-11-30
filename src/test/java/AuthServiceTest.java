@@ -1,4 +1,7 @@
+
+
 import static org.junit.jupiter.api.Assertions.*;
+
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -37,8 +40,8 @@ class AuthServiceTest {
 	
 	@Test
 	void test_LoginSuccess() throws ExistedUserFoundException, WrongPasswordException, UserNotFoundException{
-		boolean result = AuthService.getInstance().login("customer", "customer");
-		assertEquals(true,result);
+		User result = AuthService.getInstance().login("customer", "customer");
+		assertEquals("Customer",result.getRole().getRoleName());
 	}
 	
 	@Test

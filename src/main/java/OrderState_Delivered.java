@@ -1,4 +1,4 @@
-public class OrderState_Delivered extends OrderState {
+public class OrderState_Delivered implements OrderState {
     @Override
     public String toString(){
         return "Delivered";

@@ -1,3 +1,3 @@
-public abstract class CouponState {
-    public abstract String toString();
+public interface CouponState {
+    String toString();
 }

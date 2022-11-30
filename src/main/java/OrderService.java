@@ -1,74 +1,91 @@
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.*;
 import java.text.SimpleDateFormat;
+import java.util.stream.Collectors;
 
 public class OrderService {
-	private OrderBST centralOrderList;
-	private static Date serviceTimeStamp;
-	private static OrderService orderService = new OrderService();
-	
-	
-	private OrderService(){
-		centralOrderList = new OrderBST();
-	}
-	
-	public static OrderService getOrderServiceInstance() {
-		return orderService;
-	}
 
-	//order list related method
-	
-	//need modify with validation
-	public boolean placeOrder(Order order) { 
-		centralOrderList.insertOrder(order);
-		return false;
-	}
-	
-	public Order searchOrder(String ID) {
-		return centralOrderList.searchOrderByTransactionID(ID);
-	}
-	
-	public ArrayList<Order> searchOrder(Customer customer){
-		return new ArrayList<Order>();
-		//return centralOrderList.searchOrderByCustomerID(customer.getCustomerID());
-	}
-	
-	/*
-	 * public ArrayList<Order> retrieveCustomerOrderList(Customer customer) {
-	 * ArrayList<Order> tempOrderList = new ArrayList<Order>();
-	 * 
-	 * for (Order order: centralOrderList) {
-	 * if(order.getCustomerInfo().getCustomerID().equals(customer.getCustomerID()))
-	 * { tempOrderList.add(order); } }
-	 * 
-	 * return tempOrderList; }
-	 */
-	
-	
-	//TransactionID is 6 digit start from 1XXXXX
-	public String assignTransactionID() {
-		return String.valueOf(orderService.getOrderListNumber()+100000+1) ;
-	}
-	
-	public int getOrderListNumber() {
-		return centralOrderList.getOrderBSTSize();	
-	}
-	
-	
-	//order service date and time method
-	public static String getCurrentTimestamp() {
-		serviceTimeStamp = new Date();
-		SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd hh:mm:ss");
-		return ft.format(serviceTimeStamp);
-		
-	}
-	
-	/*
-	 * public Order searchOrder(String transactionID) {
-	 * 
-	 * for(Order order: centralOrderList) {
-	 * if(order.getTransactionID().equals(transactionID)) {
-	 * 
-	 * } } return null; }
-	 */
+    private int nextTransactionID;
+    private ArrayList<Order> centralOrderList;
+    private static Date serviceTimeStamp;
+    private static OrderService orderService = new OrderService();
+
+
+    private OrderService() {
+        centralOrderList = new ArrayList<Order>();
+        nextTransactionID = 100000;
+    }
+
+    public static OrderService getOrderServiceInstance() {
+        return orderService;
+    }
+
+    public void placeOrder(Order order) {
+        centralOrderList.add(order);
+    }
+
+    public ArrayList<Order> searchOrder(User user, OrderSortType sort) {
+        ArrayList<Order> result = new ArrayList<Order>();
+
+        for (Order o : centralOrderList) {
+            if (o.getUser().getUsername().equals(Store.getInstance().getCurrentUser().getUsername())) {
+                result.add(o);
+            }
+        }
+
+        result.sort(sort);
+
+        List<Order> skippedOrderList = result.stream().toList();
+        return new ArrayList<Order>(skippedOrderList);
+    }
+
+    public ArrayList<Order> searchOrder(OrderSortType sort) {
+        ArrayList<Order> result = new ArrayList<Order>();
+
+        for (Order o : centralOrderList) {
+            result.add(o);
+            ;
+        }
+
+        result.sort(sort);
+
+        return result;
+    }
+
+    //TransactionID is 6 digit start from 1XXXXX
+    public String assignTransactionID() {
+        String assignedID = String.valueOf(nextTransactionID + 1);
+        nextTransactionID++;
+        return assignedID;
+    }
+
+    //order service date and time method
+    public static String getCurrentTimestamp() {
+        serviceTimeStamp = new Date();
+        SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        return ft.format(serviceTimeStamp);
+
+    }
+
+    public Order searchOrderByTransactionID(String transactionID) {
+        Order result = null;
+        for (Order o : centralOrderList) {
+            if (o.getTransactionID().equals(transactionID)) {
+                return o;
+            }
+        }
+        return result;
+    }
+
+    public boolean deleteOrder(Order result) {
+        centralOrderList.remove(result);
+        return true;
+    }
+
+    public void updateOrderStatus(Order targetOrder, OrderState orderState) {
+        targetOrder.setStatus(orderState);
+    }
+
+    public Map<String, DoubleSummaryStatistics> getCentralOrderList(){
+        return centralOrderList.stream().collect(Collectors.groupingBy(Order::getOrderDateYYYYMMDD, Collectors.summarizingDouble(Order::getTotalPriceDouble)));
+    }
 }

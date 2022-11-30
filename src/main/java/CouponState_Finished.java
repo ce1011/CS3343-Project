@@ -1,4 +1,4 @@
-public class CouponState_Finished extends CouponState {
+public class CouponState_Finished implements CouponState {
     @Override
     public String toString() {
         return "Finished";

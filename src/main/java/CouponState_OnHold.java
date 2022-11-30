@@ -1,4 +1,4 @@
-public class CouponState_OnHold extends CouponState {
+public class CouponState_OnHold implements CouponState {
     @Override
     public String toString() {
         return "OnHold";

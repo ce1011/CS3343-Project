@@ -118,29 +118,58 @@ class ProductServiceTest {
     @Test
     void searchProduct() {
         ProductService productService = ProductService.getInstance();
-        ArrayList<Product> products = productService.searchProduct("product",0,999,0,10,new ProductSortByNameDesc());
-        assertEquals("productC", products.get(0).getName());
-        assertEquals("productB", products.get(1).getName());
-        assertEquals("productA", products.get(2).getName());
+        ArrayList<Product> products = productService.searchProduct("product",0,999,new ProductSortByNameDesc());
+        assertEquals("productDelete", products.get(0).getName());
+        assertEquals("productC", products.get(1).getName());
+        assertEquals("productB", products.get(2).getName());
     }
 
     @Test
     void searchProductWithOneResultExpected() {
         ProductService productService = ProductService.getInstance();
-        ArrayList<Product> products = productService.searchProduct("A",0,999,0,10,new ProductSortByNameDesc());
+        ArrayList<Product> products = productService.searchProduct("A",0,999,new ProductSortByNameDesc());
         assertEquals(1, products.size());
     }
 
     @Test
-    void searchProductWithLimitTwoResultExpected() {
+    void searchProductWithFourResultExpected() {
         ProductService productService = ProductService.getInstance();
-        ArrayList<Product> products = productService.searchProduct("product",0,999,0,2,new ProductSortByNameDesc());
-        assertEquals(2, products.size());
+        ArrayList<Product> products = productService.searchProduct("product",0,999,new ProductSortByNameDesc());
+        assertEquals(4, products.size());
     }
 
     @Test
     void getProductsSize() {
         ProductService productService = ProductService.getInstance();
         assertEquals(4, productService.getProductsSize());
+    }
+
+    @Test
+    void updateProduct(){
+        ProductService productService = ProductService.getInstance();
+        Product product = new Product("productA", 14.9, "description", 10, new ProductState_Launch(), 1.2);
+        try {
+            productService.updateProduct(0,product);
+            assertEquals("productA", productService.getProduct(0).getName());
+            assertEquals(14.9, productService.getProduct(0).getPrice());
+            assertEquals("description", productService.getProduct(0).getDescription());
+            assertEquals(10, productService.getProduct(0).getInStockQuantity());
+            assertEquals("Launch", productService.getProduct(0).getState().toString());
+            assertEquals(1.2, productService.getProduct(0).getWeight());
+        } catch (ProductNotFoundException e) {
+            fail("Should not throw exception");
+        } catch (ProductIsDeletedException e) {
+            fail("Should not throw exception");
+        }
+    }
+
+    @Test
+    void updateDeletedProduct() throws ExistingProductWithSameNameFoundException, ProductNotFoundException, ProductIsDeletedException {
+        ProductService productService = ProductService.getInstance();
+        Product product = new Product("productD", 14.9, "description", 10, new ProductState_Launch(), 1.2);
+
+        productService.createProduct(product);
+        productService.removeProduct("productD");
+        assertThrows(ProductIsDeletedException.class, () -> productService.updateProduct(1,product));
     }
 }

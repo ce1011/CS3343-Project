@@ -4,27 +4,56 @@ public class ProductController {
     private ProductView view;
     private ProductService productService;
 
+
     public ProductController() {
         this.view = new ProductView(this);
         this.productService = ProductService.getInstance();
     }
 
-    public void displayProduct(String name, double minPrice, double maxPrice, int skip, int limit, ProductSortType sort) {
-        int currentPage = (skip/limit) + 1;
-        int itemPerPage = limit;
+    public void displayAdminProductList(String name, double minPrice, double maxPrice, ProductSortType sort) {
+
+           ArrayList<Product> allProductMatchCriteria = productService.searchProduct(name, minPrice, maxPrice, sort);
+
+           view.displayAdminProductList(allProductMatchCriteria, name, minPrice, maxPrice, sort);
+
+    }
+
+    public void displayCustomerProductList(String name, double minPrice, double maxPrice, ProductSortType sort) {
+
+        ArrayList<Product> allProductMatchCriteria = productService.searchProduct(name, minPrice, maxPrice, sort);
+
+        view.displayCustomerProductList(allProductMatchCriteria, name, minPrice, maxPrice, sort);
+
+    }
+
+    public void addProduct(String name, double price, String description, int inStockQuantity, double weight) throws ExistingProductWithSameNameFoundException {
+        Product product = new Product(name, price, description, inStockQuantity, new ProductState_Launch(), weight);
         try{
-           ArrayList<Product> productList = productService.searchProduct(name, minPrice, maxPrice, skip, limit, sort);
-           ArrayList<Product> allProductMatchCriteria = productService.searchProduct(name, minPrice, maxPrice, 0, 99999999, sort);
-              int totalPage = (allProductMatchCriteria.size()/limit) + 1;
+            productService.createProduct(product);
 
-              view.displayProductList(productList, currentPage, totalPage, itemPerPage, name, minPrice, maxPrice, sort);
-        }catch (IndexOutOfBoundsException e){
-
+        }catch (ExistingProductWithSameNameFoundException exception){
+            throw new ExistingProductWithSameNameFoundException(name);
         }
+    }
+
+    public void updateProduct(int index, Product product) throws ProductNotFoundException, ProductIsDeletedException {
+        productService.updateProduct(index, product);
+    }
+
+    public void addProductView(){
+        view.addProductView();
     }
 
 
     public void addTempProduct() {
         productService.addTempProduct();
     }
+
+    public void filterView(){
+        view.filter();
+    }
+    public void customerFilterView(){
+        view.customerFilter();
+    }
+
 }

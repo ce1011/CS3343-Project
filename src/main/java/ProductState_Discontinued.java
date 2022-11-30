@@ -1,4 +1,4 @@
-public class ProductState_Discontinued extends ProductState {
+public class ProductState_Discontinued implements ProductState {
     @Override
     public String toString() {
         return "Discontinued";

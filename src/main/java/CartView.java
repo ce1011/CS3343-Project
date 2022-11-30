@@ -1,6 +1,7 @@
 
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class CartView {
@@ -12,73 +13,232 @@ public class CartView {
 	
 	public void shoppingView() {
 		System.out.println("Shopping Now");
-		System.out.println("1. Show All Available Products");
+		System.out.println("1. Show Current Cart");
 		System.out.println("2. Select Products");
-		System.out.println("3. Exit");
+		System.out.println("3. Set Product Quantity");
+		System.out.println("4. Delete Product");
+		System.out.println("5. Clear Cart");
+		System.out.println("6. Place Order");
+		System.out.println("7. Exit");
 		System.out.print("Please enter your choice: ");
 		Scanner scanner = new Scanner(System.in);
-		int choice = scanner.nextInt();
-		scanner.close();
+		int choice = -1;
+		try{
+			choice = scanner.nextInt();
+		} catch(InputMismatchException e){
+			invalidInput();
+		}
+		
+		
 		switch(choice) {
-			case 1: //show product
+			case 1: //show cart
+				showCartView();
 				break;
 			case 2: //add product to cart
+				addToCartView();
 				break;
-			case 3: //exit
-				System.exit(0);
+			case 3: //set product quantity
+				setProductQtyView();
+				break;
+			case 4: //delete product from cart
+				deleteProductView();
+				break;
+			case 5: //clear cart
+				clearCartView();
+				break;
+			case 6: //place order
+				placeOrderView();
+				break;
+			case 7: //exit
+				return;
+			default:
+				System.out.println("Invalid choice!");
+				finishLine();
+				shoppingView();
+		}
+		//scanner.close();
+	}
+
+
+	public void setProductQtyView() {
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.print("Please Enter the product name: ");
+		String name = sc.next();
+		System.out.print("Set the Quantity: ");
+		try {
+			int qty = sc.nextInt();
+			controller.setCartItemQty(name, qty);
+		} catch(InputMismatchException e) {
+			invalidInput();
+		}
+		//sc.close();
+	}
+
+	public void deleteProductView(){
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Please Enter the product name to delete from cart: ");
+		String name = sc.next();
+		controller.removeProductFromCart(name);
+		//sc.close();
+	}
+
+	public void clearCartView(){
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Are you sure to clear your cart?");
+		System.out.println("1. Confirm");
+		System.out.println("2. No");
+		System.out.print("Please enter your choice: ");
+		int choice = -1;
+		try{
+			choice = sc.nextInt();
+		} catch(InputMismatchException e){
+			invalidInput();
+		}
+		switch(choice){
+			case 1:
+				controller.clearCart();
+				break;
+			case 2:
+				finishLine();
+				shoppingView();
+				break;
+			default:
+				resultLine();
+				System.out.println("Invalid choice!");
+				finishLine();
+				shoppingView();
+		}
+		//sc.close();
+	}
+
+	public void placeOrderView(){
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Are you sure to place your order?");
+		System.out.println("1. Confirm");
+		System.out.println("2. No");
+		System.out.print("Please enter your choice: ");
+		int choice = -1;
+		try{
+			choice = sc.nextInt();
+		} catch(InputMismatchException e){
+			invalidInput();
+		}
+		switch(choice){
+			case 1:
+				processToOrderView();
+				break;
+			case 2:
+				finishLine();
+				shoppingView();
 				break;
 			default:
 				System.out.println("Invalid choice!");
+				finishLine();
 				shoppingView();
 		}
+		//sc.close();
 	}
-	
-	public void showProductView() {
-		ArrayList<Product> products = new ArrayList<Product>();
-		products = controller.getProducts();
-		Scanner scanner = new Scanner(System.in);
+
+	private void processToOrderView() {
+		try{
+			controller.placeOrder();
+		}catch (Exception e){
+			System.out.println("Place order fail");
+		}
+
+	}
+
+	public void showCartView() {
+		ArrayList<CartItem> items = new ArrayList<CartItem>();
+		items = controller.getCart();
 		
-		int recordPerPage = 5;
-		int currentPage = 1;
-		int totalPages = (int)Math.ceil(products.size() / 5);	
-		int minOfPage = 0;
-		int maxOfPage = 5;
-
-		
-		do {
-
-			System.out.println("Name  |     Desc     |  Price  | Stock |");
-
-			for(int i=minOfPage;i<maxOfPage;i++) {
-				System.out.printf("%s  | %s |  %f  | %d |%n", products.get(i).getName(),products.get(i).getDescription()
-						,products.get(i).getPrice(),products.get(i).getInStockQuantity());
+		resultLine();
+		if(items.size()>0) {
+			System.out.printf("%-10s|%-10s|%-10s|%-10s|%n", "Name","Quantity","Price","Subtotal");
+			for(int i=0;i<items.size();i++) {
+				System.out.printf("%-10s|%-10s|$%-9s|$%-9s|%n", 
+				items.get(i).getProduct().getName(), 
+				Integer.toString(items.get(i).getQuantity()), 
+				Double.toString(items.get(i).getProduct().getPrice()),
+				Double.toString(items.get(i).getSubtotal()));
 			}
-			minOfPage+=5;
-			maxOfPage+=5;
-			currentPage++;
-			if (currentPage == totalPages && products.size() % 5 != 0) {
-				maxOfPage = minOfPage + (products.size() % 5);
-			}
-			System.out.println("Input 1 to next page");
-		}while(scanner.nextInt()==1);
-		
+				
+			System.out.println("Total Price: $" + controller.getTotalPrice());
+			
+		} else {
+			System.out.println("Your cart is empty!");
+		}
+		finishLine();
 		shoppingView();
 	}
 	
 	public void addToCartView() {
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.print("Please Enter the product name: ");
+		String name = sc.next();
+		System.out.print("Please Enter the quantity: ");
+		try {
+			int qty = sc.nextInt();
+			controller.addProductToCart(name, qty);
+		} catch(InputMismatchException e) {
+			invalidInput();
+		}
+		//sc.close();
+	}
+
+	public void resultLine(){
+		String line = new String(new char[48]).replace('\0', '-');
+		System.out.println(line);
+		System.out.println("Result:");
+	}
+
+	public void finishLine(){
+		String line = new String(new char[48]).replace('\0', '-');
+		System.out.println(line);
 		
 	}
+
+	public void success(){
+		resultLine();
+		System.out.println("Success!");
+		finishLine();
+		shoppingView();
+	}
+
+	public void itemNotFound(){
+		resultLine();
+		System.out.println("Cannot find this product in your cart");
+		finishLine();
+		shoppingView();
+	}
+	
+	public void invalidInput() {
+		resultLine();
+		System.out.println("Please input a valid input");
+		finishLine();
+		shoppingView();
+	}
+
+	
 	
 	public void outOfStock() {
+		resultLine();
 		System.out.println("This product is out of stock!");
-		addToCartView();
+		finishLine();
+		shoppingView();
 	}
 	
 	public void productNotFound() {
+		resultLine();
 		System.out.println("Cannot find this product!");
-		addToCartView();
+		finishLine();
+		shoppingView();
 	}
 	
 	
-
 }

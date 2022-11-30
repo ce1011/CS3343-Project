@@ -2,8 +2,8 @@ import java.util.ArrayList;
 
 public class Order {
 	private String transactionID;
-	private Customer customerInfo;
-	private ArrayList<Product> productList;
+	private User user;
+	private ArrayList<CartItem> productList;
 	private Coupon couponUsed;
 	private Delivery deliveryDetails;
 	private double totalPrice;
@@ -12,13 +12,27 @@ public class Order {
 	private String orderDate;
 	private ArrayList<Order> orderList;
 
-	Order(Customer customerInfo, ArrayList<Product> productList, Coupon couponUsed, Delivery deliveryDetails,
-			double totalPrice, String remarks) {
+//	Order(ArrayList<Product> productList, Coupon couponUsed, Delivery deliveryDetails,
+//		  double totalPrice, String remarks) {
+//		this.setUser(Store.getInstance().getCurrentUser());
+//		this.setTransactionID(OrderService.getOrderServiceInstance().assignTransactionID());
+//		this.setProductList(productList);
+//		this.setCouponUsed(couponUsed);
+//		this.setDeliveryDetails(deliveryDetails);
+//		this.setTotalPrice(totalPrice);
+//		this.setStatus(new OrderState_Pending());
+//		this.setRemarks(remarks);
+//		this.setOrderDate(OrderService.getCurrentTimestamp());
+//		orderList = new ArrayList<Order>();
+//		orderList.add(this);
+//	}
+
+	Order(ArrayList<CartItem> productList, Coupon couponUsed,
+		  double totalPrice, String remarks){
+		this.setUser(Store.getInstance().getCurrentUser());
 		this.setTransactionID(OrderService.getOrderServiceInstance().assignTransactionID());
-		this.setCustomerInfo(customerInfo);
 		this.setProductList(productList);
 		this.setCouponUsed(couponUsed);
-		this.setDeliveryDetails(deliveryDetails);
 		this.setTotalPrice(totalPrice);
 		this.setStatus(new OrderState_Pending());
 		this.setRemarks(remarks);
@@ -36,19 +50,19 @@ public class Order {
 		this.transactionID = transactionID;
 	}
 
-	public Customer getCustomerInfo() {
-		return customerInfo;
+	public void setUser(User user){
+		this.user = user;
 	}
 
-	public void setCustomerInfo(Customer customerInfo) {
-		this.customerInfo = customerInfo;
+	public User getUser(){
+		return user;
 	}
 
-	public ArrayList<Product> getProductList() {
+	public ArrayList<CartItem> getProductList() {
 		return productList;
 	}
 
-	public void setProductList(ArrayList<Product> productList) {
+	public void setProductList(ArrayList<CartItem> productList) {
 		this.productList = productList;
 	}
 
@@ -68,8 +82,8 @@ public class Order {
 		this.deliveryDetails = deliveryDetails;
 	}
 
-	public double getTotalPrice() {
-		return totalPrice;
+	public String getTotalPrice() {
+		return Double.toString(totalPrice);
 	}
 
 	public void setTotalPrice(double totalPrice) {
@@ -88,6 +102,10 @@ public class Order {
 		return remarks;
 	}
 
+	public double getTotalPriceDouble(){
+		return totalPrice;
+	}
+
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
@@ -96,15 +114,19 @@ public class Order {
 		return orderDate;
 	}
 
+	public String getOrderDateYYYYMMDD(){
+		return orderDate.substring(0,10);
+	}
+
 	public void setOrderDate(String orderDate) {
 		this.orderDate = orderDate;
 	}
-	
-	public void displayOrder(ArrayList<Order> o, int index) {
-		for(int i = 0; i < o.size(); i++) {
-			System.out.println(o.get(i));
-			System.out.println("----------------------------------------------------------------------------------------------");  
+
+	public String retrieveProductName() {
+		StringBuilder productName = new StringBuilder();
+		for(CartItem p: productList){
+			productName.append(" ").append(p.getProduct().getName());
 		}
-		
+		return productName.toString();
 	}
 }
