@@ -45,12 +45,9 @@ public class DeliveryView {
                 removeDeliveryZoneView();
             break;
             case 8:
-                HomeController hc = new HomeController();
-                hc.showAdminHome();
                 break;
             default:
-                System.out.println("Invalid choice!");
-                entryView();
+                System.out.print("Invalid choice!"+"\n");
         }
     }
 
@@ -66,7 +63,7 @@ public class DeliveryView {
         String address = scanner.next();
         System.out.println("Please input new Weight of Delivery Item: ");
         double weight = scanner.nextDouble();
-        controller.editDeliveryInfo(deliveryID, orderID, zone, address, weight, deliveryID);
+        controller.editDeliveryInfo(deliveryID, orderID, zone, address, weight);
         this.entryView();
     }
     //2
@@ -108,24 +105,24 @@ public class DeliveryView {
     //6
     public void addDeliveryZoneView(){
         System.out.println("Please input the new delivery zone that you want to add: ");
-        String zone = scanner.next();
+        String zone ="";
+        zone= scanner.nextLine();
+        zone+=scanner.nextLine();
         controller.addDeliveryZone(zone);
         this.entryView();
     }
     //7
     public void removeDeliveryZoneView(){
         System.out.println("Please input the new delivery zone that you want to remove: ");
-        String zone = scanner.next();
+        String zone ="";
+        zone= scanner.nextLine();
+        zone+=scanner.nextLine();
         controller.deleteDeliveryZone(zone);
         this.entryView();
     }
 
     public void printSuccess(){
         System.out.print("Success !"+"\n");
-    }
-
-    public void printTypeMismatch(){
-        System.out.print("Type Mismatched !"+"\n");
     }
 
 }

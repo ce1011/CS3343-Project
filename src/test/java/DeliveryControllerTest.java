@@ -14,6 +14,25 @@ import java.util.Scanner;
 public class DeliveryControllerTest {
 	
 	@Test
+	public void entryDeliveryViewTest() {
+	    System.setIn(new ByteArrayInputStream("-1".getBytes()));
+		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(outContent));
+		DeliveryController dc = new DeliveryController();
+		dc.entryDeliveryView();
+	    assertEquals("Delivery Management Page\r\n"
+	    		+ "1. Modify Information of Delivery Items\r\n"
+	    		+ "2. Display Delivery Information by Delivery ID\r\n"
+	    		+ "3. Edit the price of Delivery\r\n"
+	    		+ "4. Delete Delivery Item\r\n"
+	    		+ "5. View All Delivery Items\r\n"
+	    		+ "6. Add Available Delivery Zone\r\n"
+	    		+ "7. Remove Existing Delivery Zone\r\n"
+	    		+ "8. Return\r\n"
+	    		+ "Please enter your choice: Invalid choice!\n", outContent.toString());
+	}
+	
+	@Test
 	public void editDeliveryInfoTest() throws DeliveryZoneNotFoundException {
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outContent));
@@ -99,7 +118,7 @@ public class DeliveryControllerTest {
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outContent));
 	    DeliveryController dc = new DeliveryController();
-	    dc.addDeliveryZone("Sai Kung");
+	    DeliveryService.getInstance().addDeliveryZone("Sai Kung");
 	    dc.deleteDeliveryZone("Sai Kung");
 	    assertEquals("Success !\n", outContent.toString());
 	}
@@ -109,7 +128,6 @@ public class DeliveryControllerTest {
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outContent));
 	    DeliveryController dc = new DeliveryController();
-	    //dc.addDeliveryZone("Sai Kung");
 	    dc.deleteDeliveryZone("Hong Kong1");
 	    assertEquals("DeliveryZoneNotFoundException: Zone: Hong Kong1 is not found.\n", outContent.toString());
 	}

@@ -59,7 +59,7 @@ public class DeliveryServiceTest {
     public void testUpdateDelivery2() throws DeliveryZoneNotFoundException{
     	DeliveryService.getInstance().createDelivery("9999", "New Territories", "#19 G/F Yau Kom Tau Village, Kowloon,Hongkong", 3.4);
     	Exception e = assertThrows(DeliveryZoneNotFoundException.class,() -> {
-        	DeliveryService.getInstance().updateDelivery("10001", "9999", "Greater Bay Area", "Cheung's Ancestral Hall, Tai Om Road", 6.9, "Processing");
+        	DeliveryService.getInstance().updateDelivery("10001", "9999", "Greater Bay Area", "Cheung's Ancestral Hall, Tai Om Road", 6.9);
     	   });
     	assertEquals("Zone: Greater Bay Area is not found.",e.getMessage());
     }
@@ -68,7 +68,7 @@ public class DeliveryServiceTest {
     public void testUpdateDelivery4() throws DeliveryZoneNotFoundException{
     	DeliveryService.getInstance().createDelivery("9999", "New Territories", "#19 G/F Yau Kom Tau Village, Kowloon,Hongkong", 3.4);
     	Exception e = assertThrows(DeliveryItemNotFoundException.class,() -> {
-        	DeliveryService.getInstance().updateDelivery("420", "9999", "New Territories", "Cheung's Ancestral Hall, Tai Om Road", 6.9, "Processing");
+        	DeliveryService.getInstance().updateDelivery("420", "9999", "New Territories", "Cheung's Ancestral Hall, Tai Om Road", 6.9);
     	   });
     	assertEquals("Delivery Item: 420 is not found.",e.getMessage());
     }
