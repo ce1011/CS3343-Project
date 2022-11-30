@@ -74,7 +74,11 @@ public class CouponServiceTest {
     @Test
     public void testUpdateCoupon5() throws ParseException, CouponDateModifyException{
     	Coupon c = (Coupon) CouponService.getInstance().getCouponList().get(0);
+<<<<<<< Updated upstream
     	CouponService.getInstance().updateCoupon(c, 3, "07-11-2022");
+=======
+    	CouponService.getInstance().updateCoupon(c, 3, "30-11-2022");
+>>>>>>> Stashed changes
     }
     
     @Test
