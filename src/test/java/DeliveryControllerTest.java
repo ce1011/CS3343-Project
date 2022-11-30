@@ -20,22 +20,62 @@ public class DeliveryControllerTest {
 		System.setOut(new PrintStream(outContent));
 		DeliveryController dc = new DeliveryController();
 		dc.entryDeliveryView();
-	    assertEquals("Delivery Management Page\r\n"
-	    		+ "1. Modify Information of Delivery Items\r\n"
-	    		+ "2. Display Delivery Information by Delivery ID\r\n"
-	    		+ "3. Edit the price of Delivery\r\n"
-	    		+ "4. Delete Delivery Item\r\n"
-	    		+ "5. View All Delivery Items\r\n"
-	    		+ "6. Add Available Delivery Zone\r\n"
-	    		+ "7. Remove Existing Delivery Zone\r\n"
-	    		+ "8. Return\r\n"
-	    		+ "Please enter your choice: Invalid choice!\n", outContent.toString());
+	    assertEquals("\nDelivery Management Page%n"
+	    		+ "1. Modify Information of Delivery Items%n"
+	    		+ "2. Display Delivery Information by Delivery ID%n"
+	    		+ "3. Edit the price of Delivery%n"
+	    		+ "4. Delete Delivery Item%n"
+	    		+ "5. View All Delivery Items%n"
+	    		+ "6. Add Available Delivery Zone%n"
+	    		+ "7. Remove Existing Delivery Zone%n"
+	    		+ "8. Return%n"
+	    		+ "Please enter your choice: Invalid choice!%n", outContent.toString());
+	}
+	
+	
+	
+	@Test
+	public void entryDeliveryViewTest1() {
+	    System.setIn(new ByteArrayInputStream("1\n10001\n999\nKowloon\nCityU AC2\n6.34\n8".getBytes()));
+		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(outContent));
+		DeliveryController dc = new DeliveryController();
+		dc.entryDeliveryView();
+		String result = outContent.toString();
+		String expect = "Delivery Management Page\n"
+				+ "1. Modify Information of Delivery Items\n"
+				+ "2. Display Delivery Information by Delivery ID\n"
+				+ "3. Edit the price of Delivery\n"
+				+ "4. Delete Delivery Item\n"
+				+ "5. View All Delivery Items\n"
+				+ "6. Add Available Delivery Zone\n"
+				+ "7. Remove Existing Delivery Zone\n"
+				+ "8. Return\n"
+				+ "Please enter your choice: Please input Delivery ID: \n"
+				+ "Please input new Order ID of Delivery Item: \n"
+				+ "Please input new Zone of Delivery Item: \n"
+				+ "Please input new Address of Delivery Item: \n"
+				+ "Please input new Weight of Delivery Item: \n"
+				+ "Success !\n"
+				+ "Delivery Management Page\n"
+				+ "1. Modify Information of Delivery Items\n"
+				+ "2. Display Delivery Information by Delivery ID\n"
+				+ "3. Edit the price of Delivery\n"
+				+ "4. Delete Delivery Item\n"
+				+ "5. View All Delivery Items\n"
+				+ "6. Add Available Delivery Zone\n"
+				+ "7. Remove Existing Delivery Zone\n"
+				+ "8. Return\n"
+				+ "Please enter your choice: ";
+		System.err.print(result);
+		assertTrue(expect==result);
 	}
 	
 	@Test
 	public void editDeliveryInfoTest() throws DeliveryZoneNotFoundException {
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outContent));
+		DeliveryService.getInstance().addDeliveryZone("Kowloon");
 		DeliveryService.getInstance().createDelivery("10001", "Kowloon", "Cityu", 5.2);
 	    DeliveryController dc = new DeliveryController();
 	    dc.editDeliveryInfo("10001", "9999", "Kowloon", "Cityu", 6.9);
@@ -83,7 +123,7 @@ public class DeliveryControllerTest {
 		System.setOut(new PrintStream(outContent));
 		DeliveryService.getInstance().createDelivery("100044", "New Territories", "Cityu", 5.2);
 	    DeliveryController dc = new DeliveryController();
-	    assertEquals(null,dc.findDelivery("10004"));
+	    assertEquals(null,dc.findDelivery("10110"));
 	}
 	
 	@Test

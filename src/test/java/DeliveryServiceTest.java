@@ -56,7 +56,7 @@ public class DeliveryServiceTest {
 
     
     @Test
-    public void testUpdateDelivery2() throws DeliveryZoneNotFoundException{
+    public void testUpdateDelivery() throws DeliveryZoneNotFoundException{
     	DeliveryService.getInstance().createDelivery("9999", "New Territories", "#19 G/F Yau Kom Tau Village, Kowloon,Hongkong", 3.4);
     	Exception e = assertThrows(DeliveryZoneNotFoundException.class,() -> {
         	DeliveryService.getInstance().updateDelivery("10001", "9999", "Greater Bay Area", "Cheung's Ancestral Hall, Tai Om Road", 6.9);
@@ -65,7 +65,7 @@ public class DeliveryServiceTest {
     }
     
     @Test
-    public void testUpdateDelivery4() throws DeliveryZoneNotFoundException{
+    public void testUpdateDelivery2() throws DeliveryZoneNotFoundException{
     	DeliveryService.getInstance().createDelivery("9999", "New Territories", "#19 G/F Yau Kom Tau Village, Kowloon,Hongkong", 3.4);
     	Exception e = assertThrows(DeliveryItemNotFoundException.class,() -> {
         	DeliveryService.getInstance().updateDelivery("420", "9999", "New Territories", "Cheung's Ancestral Hall, Tai Om Road", 6.9);
@@ -74,14 +74,17 @@ public class DeliveryServiceTest {
     }
     
     @Test
-    public void testUpdateDelivery5() throws DeliveryZoneNotFoundException, DeliveryItemNotFoundException{
+    public void testUpdateDelivery3() throws DeliveryZoneNotFoundException, DeliveryItemNotFoundException{
     	DeliveryService.getInstance().createDelivery("9999", "New Territories", "#19 G/F Yau Kom Tau Village, Kowloon,Hongkong", 3.4);
-//    	Exception e = assertThrows(DeliveryItemNotFoundException.class,() -> {
-//        	DeliveryService.getInstance().updateDelivery("10001", "99999", "New Territories", "Cheung's Ancestral Hall, Tai Om Road", 6.9, "Processing");
-//    	   });
     	assertNotNull(DeliveryService.getInstance().getDelivery("10001"));
     }
     
+    @Test
+    public void testUpdateDelivery4() throws DeliveryZoneNotFoundException, DeliveryItemNotFoundException{
+    	DeliveryService.getInstance().createDelivery("9999", "New Territories", "#19 G/F Yau Kom Tau Village, Kowloon,Hongkong", 3.4);
+        DeliveryService.getInstance().updateDelivery("10001", "9999", "Hong Kong", "Cheung's Ancestral Hall, Tai Om Road", 6.9);
+    	assertNotNull(DeliveryService.getInstance().getDelivery("10001"));
+    }
     
     @Test
     public void testDeleteDelivery1() throws DeliveryItemNotFoundException, DeliveryZoneNotFoundException{
@@ -120,19 +123,6 @@ public class DeliveryServiceTest {
     	DeliveryService.getInstance().updateDeliveryPrice(25, 10);
     	assertEquals(95, DeliveryService.getInstance().calculateDeliveryPrice(6.9, "Hong Kong"));
     }
-    
-    @Test void testDeliveryState1() {
-    	assertEquals("Pending", new OrderState_Pending().toString());
-    }
-    
-    @Test void testDeliveryState2() {
-    	assertEquals("Delivered", new OrderState_Delivered().toString());
-    }
-    
-    @Test void testDeliveryState3() {
-    	assertEquals("Dispatching", new OrderState_Dispatching().toString());
-    }
-    
     @Test
     public void testGetDeliveryList() throws DeliveryZoneNotFoundException {
     	DeliveryService.getInstance().createDelivery("9999", "New Territories", "#19 G/F Yau Kom Tau Village, Kowloon,Hongkong", 3.4);

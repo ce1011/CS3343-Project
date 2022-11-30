@@ -82,15 +82,11 @@ public class DeliveryService{
         if(!zoneExist){
             throw new DeliveryZoneNotFoundException(zone);
         }
-        if(getDelivery(deliveryID) != null){
-            getDelivery(deliveryID).setOrderID(orderID);
-            getDelivery(deliveryID).setZone(zone);
-            getDelivery(deliveryID).setAddress(address);
-            getDelivery(deliveryID).setDeliveryFee(calculateDeliveryPrice(weight,zone));
-            //getDelivery(deliveryID).setDeliveryState(deliveryState);
-        }
+        getDelivery(deliveryID).setOrderID(orderID);
+        getDelivery(deliveryID).setZone(zone);
+        getDelivery(deliveryID).setAddress(address);
+        getDelivery(deliveryID).setDeliveryFee(calculateDeliveryPrice(weight,zone));
     }
-    //😂😂😂😂😂😂🥲🥲🫠🖕🏿
     public void deleteDelivery(String deliveryID) throws DeliveryItemNotFoundException{
             deliveryList.remove(getDelivery(deliveryID));
     }
