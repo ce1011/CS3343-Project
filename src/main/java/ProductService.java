@@ -16,21 +16,12 @@ public class ProductService {
         return instance;
     }
 
-
-    public void addTempProduct()  {
-        for(int i = 0; i< 100; i++) {
-            Product product = new Product("Product " + Integer.toString(i),i , "Description " + i, 1000, new ProductState_Deleted(), i);
-            products.add(product);
-        }
-    }
-
     public void createProduct(Product product) throws ExistingProductWithSameNameFoundException {
         try{
             Product founded = this.getProductByName(product.getName());
             throw new ExistingProductWithSameNameFoundException(product.getName());
         }catch (ProductNotFoundException e){
             products.add(product);
-            return;
         }
     }
 
