@@ -57,12 +57,13 @@ public class DeliveryView {
         String deliveryID = scanner.next();
         System.out.println("Please input new Order ID of Delivery Item: ");
         String orderID = scanner.next();
-        System.out.println("Please input new Zone of Delivery Item: ");
-        String zone = scanner.next();
-        System.out.println("Please input new Address of Delivery Item: ");
-        String address = scanner.next();
-        System.out.println("Please input new Weight of Delivery Item: ");
-        double weight = scanner.nextDouble();
+        System.out.print("Please input new Zone of Delivery Item: \n");
+        scanner.nextLine();
+        String zone = scanner.nextLine();
+        System.out.print("Please input new Address of Delivery Item: \n");
+        String address = scanner.nextLine();
+        System.out.print("Please input new Weight of Delivery Item: \n");
+        double weight = Double.parseDouble(scanner.next());
         controller.editDeliveryInfo(deliveryID, orderID, zone, address, weight);
         this.entryView();
     }
@@ -72,7 +73,7 @@ public class DeliveryView {
         String deliveryID = scanner.next();
         System.out.format("%10s|%10s|%20s|%50s|%6s\n", "Delivery ID", "Order ID", "Zone", "Address", "Delivery Fee");
         if(controller.findDelivery(deliveryID) != null){
-            System.out.format("%10s %10s %20s %50s %f\n", controller.findDelivery(deliveryID).getOrderID(), controller.findDelivery(deliveryID).getOrderID(), 
+            System.out.format("%10s %10s %20s %50s %f\n", controller.findDelivery(deliveryID).getDeliveryID(), controller.findDelivery(deliveryID).getOrderID(), 
             controller.findDelivery(deliveryID).getZone(), controller.findDelivery(deliveryID).getAddress(), controller.findDelivery(deliveryID).getDeliveryFee());
         }
         this.entryView();

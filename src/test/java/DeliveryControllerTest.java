@@ -1,15 +1,6 @@
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.jupiter.api.Test;
-import org.junit.rules.TestName;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-
 
 public class DeliveryControllerTest {
 	
@@ -20,19 +11,8 @@ public class DeliveryControllerTest {
 		System.setOut(new PrintStream(outContent));
 		DeliveryController dc = new DeliveryController();
 		dc.entryDeliveryView();
-	    assertEquals("\nDelivery Management Page%n"
-	    		+ "1. Modify Information of Delivery Items%n"
-	    		+ "2. Display Delivery Information by Delivery ID%n"
-	    		+ "3. Edit the price of Delivery%n"
-	    		+ "4. Delete Delivery Item%n"
-	    		+ "5. View All Delivery Items%n"
-	    		+ "6. Add Available Delivery Zone%n"
-	    		+ "7. Remove Existing Delivery Zone%n"
-	    		+ "8. Return%n"
-	    		+ "Please enter your choice: Invalid choice!%n", outContent.toString());
+	    assertTrue(outContent.toString().contains("Invalid choice!"));
 	}
-	
-	
 	
 	@Test
 	public void entryDeliveryViewTest1() {
@@ -42,33 +22,100 @@ public class DeliveryControllerTest {
 		DeliveryController dc = new DeliveryController();
 		dc.entryDeliveryView();
 		String result = outContent.toString();
-		String expect = "Delivery Management Page\n"
-				+ "1. Modify Information of Delivery Items\n"
-				+ "2. Display Delivery Information by Delivery ID\n"
-				+ "3. Edit the price of Delivery\n"
-				+ "4. Delete Delivery Item\n"
-				+ "5. View All Delivery Items\n"
-				+ "6. Add Available Delivery Zone\n"
-				+ "7. Remove Existing Delivery Zone\n"
-				+ "8. Return\n"
-				+ "Please enter your choice: Please input Delivery ID: \n"
-				+ "Please input new Order ID of Delivery Item: \n"
-				+ "Please input new Zone of Delivery Item: \n"
-				+ "Please input new Address of Delivery Item: \n"
-				+ "Please input new Weight of Delivery Item: \n"
-				+ "Success !\n"
-				+ "Delivery Management Page\n"
-				+ "1. Modify Information of Delivery Items\n"
-				+ "2. Display Delivery Information by Delivery ID\n"
-				+ "3. Edit the price of Delivery\n"
-				+ "4. Delete Delivery Item\n"
-				+ "5. View All Delivery Items\n"
-				+ "6. Add Available Delivery Zone\n"
-				+ "7. Remove Existing Delivery Zone\n"
-				+ "8. Return\n"
-				+ "Please enter your choice: ";
-		System.err.print(result);
-		assertTrue(expect==result);
+		String expect = "Please enter your choice:";
+		assertTrue(result.contains(expect));
+	}
+	
+	@Test
+	public void entryDeliveryViewTest2() throws Exception {
+		DeliveryService.getInstance().createDelivery("13213", "Kowloon", "fsdfsdf", 0.3);
+	    System.setIn(new ByteArrayInputStream("2\n10001\n8\n".getBytes()));
+		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(outContent));
+		DeliveryController dc = new DeliveryController();
+		dc.entryDeliveryView();
+		String result = outContent.toString();
+		System.err.print(outContent.toString());
+		String expect = "Please enter your choice:";
+		assertTrue(result.contains(expect));
+	}
+	
+	@Test
+	public void entryDeliveryViewTest3() throws Exception {
+	    System.setIn(new ByteArrayInputStream("2\n10011\n8\n".getBytes()));
+		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(outContent));
+		DeliveryController dc = new DeliveryController();
+		dc.entryDeliveryView();
+		String result = outContent.toString();
+		System.err.print(outContent.toString());
+		String expect = "Please enter your choice:";
+		assertTrue(result.contains(expect));
+	}
+	
+	@Test
+	public void entryDeliveryViewTest4() throws Exception {
+	    System.setIn(new ByteArrayInputStream("3\n11\n9\n8\n".getBytes()));
+		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(outContent));
+		DeliveryController dc = new DeliveryController();
+		dc.entryDeliveryView();
+		String result = outContent.toString();
+		System.err.print(outContent.toString());
+		String expect = "Please enter your choice:";
+		assertTrue(result.contains(expect));
+	}
+	
+	@Test
+	public void entryDeliveryViewTest5() throws Exception {
+	    System.setIn(new ByteArrayInputStream("4\n10003\n8\n".getBytes()));
+		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(outContent));
+		DeliveryController dc = new DeliveryController();
+		dc.entryDeliveryView();
+		String result = outContent.toString();
+		System.err.print(outContent.toString());
+		String expect = "Please enter your choice:";
+		assertTrue(result.contains(expect));
+	}
+	
+	@Test
+	public void entryDeliveryViewTest6() throws Exception {
+	    System.setIn(new ByteArrayInputStream("5\n8\n".getBytes()));
+		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(outContent));
+		DeliveryController dc = new DeliveryController();
+		dc.entryDeliveryView();
+		String result = outContent.toString();
+		System.err.print(outContent.toString());
+		String expect = "Please enter your choice:";
+		assertTrue(result.contains(expect));
+	}
+	
+	@Test
+	public void entryDeliveryViewTest7() throws Exception {
+	    System.setIn(new ByteArrayInputStream("6\nHam Tin\n8\n".getBytes()));
+		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(outContent));
+		DeliveryController dc = new DeliveryController();
+		dc.entryDeliveryView();
+		String result = outContent.toString();
+		System.err.print(outContent.toString());
+		String expect = "Please enter your choice:";
+		assertTrue(result.contains(expect));
+	}
+	
+	@Test
+	public void entryDeliveryViewTest8() throws Exception {
+	    System.setIn(new ByteArrayInputStream("7\nHam Tin\n8\n".getBytes()));
+		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(outContent));
+		DeliveryController dc = new DeliveryController();
+		dc.entryDeliveryView();
+		String result = outContent.toString();
+		System.err.print(outContent.toString());
+		String expect = "Please enter your choice:";
+		assertTrue(result.contains(expect));
 	}
 	
 	@Test
