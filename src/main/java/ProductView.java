@@ -5,6 +5,8 @@ public class ProductView {
     private ProductController controller;
     private CartController cartController;
 
+    private final Scanner sc = new Scanner(System.in);
+
     public ProductView(ProductController controller) {
         this.controller = controller;
         this.cartController = new CartController();
@@ -14,14 +16,13 @@ public class ProductView {
         double minPrice;
         double maxPrice;
         ProductSortType sort;
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Enter product name: ");
-        name = scanner.nextLine();
+        name = sc.nextLine();
         System.out.println("Enter min price: ");
-        minPrice = scanner.nextDouble();
+        minPrice = sc.nextDouble();
         System.out.println("Enter max price: ");
 
-        maxPrice = scanner.nextDouble();
+        maxPrice = sc.nextDouble();
         System.out.println("Enter sort type: ");
         System.out.println("1. Sort by name in ascending");
         System.out.println("2. Sort by name in descending");
@@ -29,7 +30,7 @@ public class ProductView {
         System.out.println("4. Sort by price in descending");
         System.out.println("5. Sort by create date in ascending");
         System.out.println("6. Sort by create date in descending");
-        int choice = scanner.nextInt();
+        int choice = sc.nextInt();
 
         switch (choice){
             case 1:
@@ -72,28 +73,23 @@ public class ProductView {
         System.out.println("(b) Back");
 
         System.out.println("Please enter your choice: ");
-        Scanner scanner = new Scanner(System.in);
-        String choice = scanner.nextLine().trim();
+        String choice = sc.nextLine().trim();
 
         switch (choice) {
-            case "+":
-                controller.addProductView();
-                controller.displayCustomerProductList(name, minPrice, maxPrice, sort);
-                break;
             case "b":
                 break;
             default:
                 if (Integer.parseInt(choice) > 0 && Integer.parseInt(choice) <= productList.size()) {
 
                     System.out.println("How many do you want to buy?");
-                    int quantity = scanner.nextInt();
+                    int quantity = sc.nextInt();
                     cartController.addProductToCart(productList.get(Integer.parseInt(choice) - 1).getName(), quantity);
 
                     controller.displayCustomerProductList(name, minPrice, maxPrice, sort);
 
                 } else {
                     System.out.println("Invalid choice!");
-                    displayAdminProductList(productList, name, minPrice, maxPrice, sort);
+                    displayCustomerProductList(productList, name, minPrice, maxPrice, sort);
                 }
 
         }
@@ -107,14 +103,13 @@ public class ProductView {
         double minPrice;
         double maxPrice;
         ProductSortType sort;
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Enter product name: ");
-        name = scanner.nextLine();
+        name = sc.nextLine();
         System.out.println("Enter min price: ");
-        minPrice = scanner.nextDouble();
+        minPrice = sc.nextDouble();
         System.out.println("Enter max price: ");
 
-        maxPrice = scanner.nextDouble();
+        maxPrice = sc.nextDouble();
         System.out.println("Enter sort type: ");
         System.out.println("1. Sort by name in ascending");
         System.out.println("2. Sort by name in descending");
@@ -122,7 +117,7 @@ public class ProductView {
         System.out.println("4. Sort by price in descending");
         System.out.println("5. Sort by create date in ascending");
         System.out.println("6. Sort by create date in descending");
-        int choice = scanner.nextInt();
+        int choice = sc.nextInt();
 
         switch (choice){
             case 1:
@@ -166,14 +161,12 @@ public class ProductView {
         System.out.println("(b) Back");
 
         System.out.println("Please enter your choice: ");
-        Scanner scanner = new Scanner(System.in);
-        String choice = scanner.nextLine().trim();
+        String choice = sc.nextLine();
 
         switch (choice) {
             case "+":
                 controller.addProductView();
                 controller.displayAdminProductList(name, minPrice, maxPrice, sort);
-                break;
             case "b":
                 break;
             default:
@@ -198,22 +191,21 @@ public class ProductView {
     public void updateProduct(int index, Product product) throws ProductIsDeletedException {
         System.out.println("Update Product");
         System.out.println("Please enter updated product name: ");
-        Scanner scanner = new Scanner(System.in);
-        product.setName(scanner.nextLine().trim());
+        product.setName(sc.nextLine().trim());
         System.out.println("Please enter updated product price: ");
-        product.setPrice(scanner.nextDouble());
-        scanner.nextLine();
+        product.setPrice(sc.nextDouble());
+        sc.nextLine();
         System.out.println("Please enter updated product description: ");
-        product.setDescription(scanner.nextLine().trim());
+        product.setDescription(sc.nextLine().trim());
         System.out.println("Please enter updated product weight: ");
-        product.setWeight(scanner.nextDouble());
+        product.setWeight(sc.nextDouble());
         System.out.println("Please enter updated product quantity: ");
-        product.setInStockQuantity(scanner.nextInt());
+        product.setInStockQuantity(sc.nextInt());
         System.out.println("Please enter updated product status: ");
         System.out.println("1. Launched");
         System.out.println("2. Discontinued");
         System.out.println("3. Delete");
-        int choice = scanner.nextInt();
+        int choice = sc.nextInt();
         switch (choice) {
             case 1:
                 product.setState(new ProductState_Launch());
@@ -230,8 +222,8 @@ public class ProductView {
         }
         try {
             controller.updateProduct(index, product);
-        } catch (ProductNotFoundException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+
         }
 
 
@@ -244,18 +236,17 @@ public class ProductView {
         int inStockQuantity;
         double weight;
 
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Please enter the product name: ");
-          name = scanner.nextLine().trim();
+          name = sc.nextLine().trim();
         System.out.println("Please enter the product price: ");
-        price = scanner.nextDouble();
-        scanner.nextLine();
+        price = sc.nextDouble();
+        sc.nextLine();
         System.out.println("Please enter the product description: ");
-        description = scanner.nextLine();
+        description = sc.nextLine();
         System.out.println("Please enter the product in stock quantity: ");
-        inStockQuantity = scanner.nextInt();
+        inStockQuantity = sc.nextInt();
         System.out.println("Please enter the product weight: ");
-        weight = scanner.nextDouble();
+        weight = sc.nextDouble();
 
         try {
             controller.addProduct(name, price, description, inStockQuantity, weight);
@@ -263,7 +254,6 @@ public class ProductView {
 
         } catch (ExistingProductWithSameNameFoundException e) {
             System.out.println("Product with same name already exists!");
-            addProductView();
         }
 
     }

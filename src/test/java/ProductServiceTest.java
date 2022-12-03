@@ -21,7 +21,6 @@ class ProductServiceTest {
         ProductService.getInstance().createProduct(new Product("productC", 14.9, "description", 10, new ProductState_Launch(), 1.2));
         ProductService.getInstance().createProduct( new Product("productDelete", 14.9, "description", 10, new ProductState_Deleted(), 1.2));
         ProductService.getInstance().createProduct(new Product("productDiscontinued", 14.9, "description", 10, new ProductState_Discontinued(), 1.2));
-
     }
 
     @Test
@@ -91,7 +90,7 @@ class ProductServiceTest {
     @Test
     void getProductIndexOutOfBounds() {
         ProductService productService = ProductService.getInstance();
-        assertThrows(IndexOutOfBoundsException.class, () -> productService.getProduct(4));
+        assertThrows(IndexOutOfBoundsException.class, () -> productService.getProduct(999));
     }
     @Test
     void getProductByName() {
@@ -117,16 +116,16 @@ class ProductServiceTest {
     void getProducts() {
         ProductService productService = ProductService.getInstance();
         ArrayList<Product> products = productService.getProducts();
-        assertEquals(4, products.size());
+        assertEquals(5, products.size());
     }
 
     @Test
     void searchProduct() {
         ProductService productService = ProductService.getInstance();
         ArrayList<Product> products = productService.searchProduct("product",0,999,new ProductSortByNameDesc());
-        assertEquals("productDelete", products.get(0).getName());
-        assertEquals("productC", products.get(1).getName());
-        assertEquals("productB", products.get(2).getName());
+        assertEquals("productDiscontinued", products.get(0).getName());
+        assertEquals("productDelete", products.get(1).getName());
+        assertEquals("productC", products.get(2).getName());
     }
 
     @Test
@@ -140,13 +139,13 @@ class ProductServiceTest {
     void searchProductWithFourResultExpected() {
         ProductService productService = ProductService.getInstance();
         ArrayList<Product> products = productService.searchProduct("product",0,999,new ProductSortByNameDesc());
-        assertEquals(4, products.size());
+        assertEquals(5, products.size());
     }
 
     @Test
     void getProductsSize() {
         ProductService productService = ProductService.getInstance();
-        assertEquals(4, productService.getProductsSize());
+        assertEquals(5, productService.getProductsSize());
     }
 
     @Test
