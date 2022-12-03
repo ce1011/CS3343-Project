@@ -20,6 +20,8 @@ class ProductServiceTest {
         ProductService.getInstance().createProduct(new Product("productB", 13.9, "description", 10, new ProductState_Launch(), 1.2));
         ProductService.getInstance().createProduct(new Product("productC", 14.9, "description", 10, new ProductState_Launch(), 1.2));
         ProductService.getInstance().createProduct( new Product("productDelete", 14.9, "description", 10, new ProductState_Deleted(), 1.2));
+        ProductService.getInstance().createProduct(new Product("productDiscontinued", 14.9, "description", 10, new ProductState_Discontinued(), 1.2));
+
     }
 
     @Test
@@ -102,6 +104,9 @@ class ProductServiceTest {
         }
     }
 
+
+
+
     @Test
     void getProductByNameNotFound() {
         ProductService productService = ProductService.getInstance();
@@ -171,5 +176,16 @@ class ProductServiceTest {
         productService.createProduct(product);
         productService.removeProduct("productD");
         assertThrows(ProductIsDeletedException.class, () -> productService.updateProduct(1,product));
+    }
+
+    @Test
+    void getProductByNameWhichIsDiscontinued() {
+        ProductService productService = ProductService.getInstance();
+        try {
+            Product product = productService.getProductByName("productDiscontinued");
+            assertEquals("productDiscontinued", product.getName());
+        } catch (ProductNotFoundException e) {
+            fail("Should not throw exception");
+        }
     }
 }
