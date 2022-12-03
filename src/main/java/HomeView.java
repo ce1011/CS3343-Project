@@ -41,10 +41,6 @@ public class HomeView {
                 break;
             case 4:
                 return;
-            case 9:
-                this.productController.addTempProduct();
-                this.customerHome();
-                break;
             default:
                 System.out.println("Invalid choice!");
                 this.customerHome();

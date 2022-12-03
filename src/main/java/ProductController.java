@@ -44,11 +44,6 @@ public class ProductController {
         view.addProductView();
     }
 
-
-    public void addTempProduct() {
-        productService.addTempProduct();
-    }
-
     public void filterView(){
         view.filter();
     }
