@@ -109,7 +109,7 @@ public class OrderController {
         view.adminOrderView();
     }
 
-    public void updateOrderStatus(Order targetOrder, String newStatus) {
+    public void updateOrderStatus(String transactionID, String newStatus) {
         OrderState orderState = null;
         switch (newStatus){
             case "Pending":
@@ -121,17 +121,15 @@ public class OrderController {
             case "Delivered":
                 orderState = new OrderState_Delivered();
         }
-        orderService.updateOrderStatus(targetOrder, orderState);
+        orderService.updateOrderStatus(transactionID, orderState);
     }
 
     public Order searchOrder(String transactionID) {
         return orderService.searchOrderByTransactionID(transactionID);
     }
 
-    public boolean deleteOrder(Order result) {
-        boolean deleted;
-        deleted = orderService.deleteOrder(result);
-        return deleted;
+    public void deleteOrder(String transactionID) {
+        orderService.deleteOrder(transactionID);
     }
 
     public void reportView(){

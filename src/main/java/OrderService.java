@@ -43,7 +43,6 @@ public class OrderService {
 
         for (Order o : centralOrderList) {
             result.add(o);
-            ;
         }
 
         result.sort(sort);
@@ -76,13 +75,20 @@ public class OrderService {
         return result;
     }
 
-    public boolean deleteOrder(Order result) {
-        centralOrderList.remove(result);
-        return true;
+    public void deleteOrder(String transactionID) {
+        for(Order o: centralOrderList){
+            if(o.getTransactionID().equals(transactionID)){
+                centralOrderList.remove(o);
+            }
+        }
     }
 
-    public void updateOrderStatus(Order targetOrder, OrderState orderState) {
-        targetOrder.setStatus(orderState);
+    public void updateOrderStatus(String transactionID, OrderState orderState) {
+        for(Order o: centralOrderList){
+            if(o.getTransactionID().equals(transactionID)){
+                o.setStatus(orderState);
+            }
+        }
     }
 
     public Map<String, DoubleSummaryStatistics> getCentralOrderList(){

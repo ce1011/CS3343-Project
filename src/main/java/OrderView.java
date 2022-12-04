@@ -131,43 +131,21 @@ public class OrderView {
             case 2:
                 System.out.println("Which order do you want to update?");
                 System.out.println("Please enter transactionID: ");
+                scanner.next();
                 transactionID = scanner.nextLine();
-                result = null;
-                result = controller.searchOrder(transactionID);
-                if(result==null){
-                    System.out.println("No order found.");
-                    System.out.println("Proceed back to admin home...");
-                    adminOrderView();
-                }
-                System.out.format("%6s|%25s|%20s|%8s|%12s\n", "TransactionID", "Product", "Order Date", "Total Price", "Order status");
-                System.out.format("%25s|%20s|%12s|%8s|%12s\n", result.getTransactionID(), result.retrieveProductName(), result.getOrderDate(), result.getTotalPrice(), result.getStatus());
-                System.out.println("What order status do you want to change to?");
-                System.out.println("Pending | Processing | Dispatching | Delivered");
-                System.out.println("Please enter you choice in full form: ");
-                String newStatus = scanner.nextLine().trim();
-                controller.updateOrderStatus(result, newStatus);
+                System.out.println("State: (Pending / Processing / Dispatching / Delivered)");
+                System.out.println("Please enter the new state");
+                String newStatus = scanner.nextLine();
+                controller.updateOrderStatus(transactionID, newStatus);
+                System.out.println("Update Order Successfully!");
                 break;
             case 3:
                 System.out.println("Which order do you want to delete?");
                 System.out.println("Please enter transactionID: ");
+                scanner.next();
                 transactionID = scanner.nextLine().trim();
-                result = null;
-                boolean deleted;
-                result = controller.searchOrder(transactionID);
-                System.out.format("%6s|%25s|%20s|%8s|%12s\n", "TransactionID", "Product", "Order Date", "Total Price", "Order status");
-                System.out.format("%25s|%20s|%12s|%8s|%12s\n", result.getTransactionID(), result.retrieveProductName(), result.getOrderDate(), result.getTotalPrice(), result.getStatus());
-                System.out.println("Are you sure?(Y/N): ");
-                char option = scanner.next().charAt(0);
-                if(option =='Y'){
-                    if(controller.deleteOrder(result)){
-                        System.out.println("Delete operation: Successful!");
-                    }else{
-                        System.out.println("Delete operation: Unsuccessful!");
-                        adminOrderView();
-                    }
-                }else{
-                    adminOrderView();
-                }
+                controller.deleteOrder(transactionID);
+                System.out.println("Delete Order Successfully!");
                 break;
             case 4:
                 return;
