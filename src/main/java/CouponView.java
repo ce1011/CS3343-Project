@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class CouponView {
     private CouponController cCon;
-    public static Scanner scan = new Scanner(System.in);
+    Scanner scan = new Scanner(System.in);
 
     public CouponView(CouponController cCon){
         this.cCon = cCon;
@@ -34,9 +34,7 @@ public class CouponView {
             case 5:
                 break;
             default:
-                System.out.println("Please input a correct number");
-                entryView();
-
+                System.out.print("Please input a correct number"+"\n");
         }
     }
 
