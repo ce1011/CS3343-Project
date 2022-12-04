@@ -76,11 +76,13 @@ public class OrderService {
     }
 
     public void deleteOrder(String transactionID) {
+        Order result = null;
         for(Order o: centralOrderList){
             if(o.getTransactionID().equals(transactionID)){
-                centralOrderList.remove(o);
+                result = o;
             }
         }
+        centralOrderList.remove(result);
     }
 
     public void updateOrderStatus(String transactionID, OrderState orderState) {

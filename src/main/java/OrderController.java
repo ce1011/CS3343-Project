@@ -124,10 +124,6 @@ public class OrderController {
         orderService.updateOrderStatus(transactionID, orderState);
     }
 
-    public Order searchOrder(String transactionID) {
-        return orderService.searchOrderByTransactionID(transactionID);
-    }
-
     public void deleteOrder(String transactionID) {
         orderService.deleteOrder(transactionID);
     }
