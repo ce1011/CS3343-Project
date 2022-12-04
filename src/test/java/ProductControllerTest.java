@@ -443,7 +443,7 @@ System.setIn(new ByteArrayInputStream("\n0\n999\n6\n".getBytes()));
 
     @Test
     void customerFilterViewWithSortSelect1() {
-        System.setIn(new ByteArrayInputStream("\n0\n999\n1\n".getBytes()));
+        System.setIn(new ByteArrayInputStream("\n0\n999\n1\nb\n".getBytes()));
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
         ProductController productController = new ProductController();
@@ -477,7 +477,7 @@ System.setIn(new ByteArrayInputStream("\n0\n999\n6\n".getBytes()));
 
     @Test
     void customerFilterViewWithSortSelect2() {
-        System.setIn(new ByteArrayInputStream("\n0\n999\n2\n".getBytes()));
+        System.setIn(new ByteArrayInputStream("\n0\n999\n2\nb\n".getBytes()));
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
         ProductController productController = new ProductController();
@@ -511,7 +511,7 @@ System.setIn(new ByteArrayInputStream("\n0\n999\n6\n".getBytes()));
 
     @Test
     void customerFilterViewWithSortSelect3() {
-        System.setIn(new ByteArrayInputStream("\n0\n999\n3\n".getBytes()));
+        System.setIn(new ByteArrayInputStream("\n0\n999\n3\nb\n".getBytes()));
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
         ProductController productController = new ProductController();
@@ -545,7 +545,7 @@ System.setIn(new ByteArrayInputStream("\n0\n999\n6\n".getBytes()));
 
     @Test
     void customerFilterViewWithSortSelect4() {
-        System.setIn(new ByteArrayInputStream("\n0\n999\n4\n".getBytes()));
+        System.setIn(new ByteArrayInputStream("\n0\n999\n4\nb\n".getBytes()));
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
         ProductController productController = new ProductController();
@@ -579,7 +579,7 @@ System.setIn(new ByteArrayInputStream("\n0\n999\n6\n".getBytes()));
 
     @Test
     void customerFilterViewWithSortSelect5() {
-        System.setIn(new ByteArrayInputStream("\n0\n999\n5\n".getBytes()));
+        System.setIn(new ByteArrayInputStream("\n0\n999\n5\nb\n".getBytes()));
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
         ProductController productController = new ProductController();
@@ -613,7 +613,7 @@ System.setIn(new ByteArrayInputStream("\n0\n999\n6\n".getBytes()));
 
     @Test
     void customerFilterViewWithSortSelect6() {
-        System.setIn(new ByteArrayInputStream("\n0\n999\n6\n".getBytes()));
+        System.setIn(new ByteArrayInputStream("\n0\n999\n6\nb\n".getBytes()));
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
         ProductController productController = new ProductController();
@@ -645,7 +645,7 @@ System.setIn(new ByteArrayInputStream("\n0\n999\n6\n".getBytes()));
 
     @Test
     void customerFilterViewWithSortSelect7() {
-        System.setIn(new ByteArrayInputStream("\n0\n999\n7\n".getBytes()));
+        System.setIn(new ByteArrayInputStream("\n0\n999\n7\nb\n".getBytes()));
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
         ProductController productController = new ProductController();
@@ -679,7 +679,7 @@ System.setIn(new ByteArrayInputStream("\n0\n999\n6\n".getBytes()));
 
     @Test
     void customerFilterViewWithSortSelect8() {
-        System.setIn(new ByteArrayInputStream("\n0\n999\n8\n".getBytes()));
+        System.setIn(new ByteArrayInputStream("\n0\n999\n8\nb\n".getBytes()));
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
         ProductController productController = new ProductController();
