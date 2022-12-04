@@ -342,30 +342,9 @@ System.setIn(new ByteArrayInputStream("\n0\n999\n6\n".getBytes()));
         }catch (Exception e){
 
         }
-        System.err.print(outContent.toString());
-        String expect = "Enter product name: \r\n"
-        		+ "Enter min price: \r\n"
-        		+ "Enter max price: \r\n"
-        		+ "Enter sort type: \r\n"
-        		+ "1. Sort by name in ascending\r\n"
-        		+ "2. Sort by name in descending\r\n"
-        		+ "3. Sort by price in ascending\r\n"
-        		+ "4. Sort by price in descending\r\n"
-        		+ "5. Sort by create date in ascending\r\n"
-        		+ "6. Sort by create date in descending\r\n"
-        		+ " No.|           Name|   Price|                             Description|    Status\r\n"
-        		+ "   2|productDiscontinued|    14.9|                             description|Discontinued\r\n"
-        		+ "   4|           test|     1.0|                                       1|Discontinued\r\n"
-        		+ "   5|           test|     1.0|                                       1|    Launch\r\n"
-        		+ "   6|       productC|    14.9|                             description|    Launch\r\n"
-        		+ "(No) Edit Product\r\n"
-        		+ "(+) Add Product\r\n"
-        		+ "(b) Back\r\n"
-        		+ "Please enter your choice: \r\n"
-        		+ "";
-        assertTrue(expect.replace("\n","").replace("\s", "").replace("\r", "").replace(" ", "").equals(outContent.toString().replace("\n","").replace("\s", "").replace("\r", "").replace(" ", "")));
-
+assertEquals("Enterproductname:Enterminprice:Entermaxprice:Entersorttype:1.Sortbynameinascending2.Sortbynameindescending3.Sortbypriceinascending4.Sortbypriceindescending5.Sortbycreatedateinascending6.SortbycreatedateindescendingNo.|Name|Price|Description|Status2|test|1.0|1|Discontinued3|test|1.0|1|Launch4|productC|14.9|description|Launch6|productDiscontinued|14.9|description|Discontinued(No)EditProduct(+)AddProduct(b)BackPleaseenteryourchoice:", outContent.toString().replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""));
     }
+
 
     @Test
     void filterViewWithSortSelect7() {
@@ -622,25 +601,29 @@ System.setIn(new ByteArrayInputStream("\n0\n999\n6\n".getBytes()));
         }catch (Exception e){
 
         }
-        String expect = "Enter product name: \r\n"
-        		+ "Enter min price: \r\n"
-        		+ "Enter max price: \r\n"
-        		+ "Enter sort type: \r\n"
-        		+ "1. Sort by name in ascending\r\n"
-        		+ "2. Sort by name in descending\r\n"
-        		+ "3. Sort by price in ascending\r\n"
-        		+ "4. Sort by price in descending\r\n"
-        		+ "5. Sort by create date in ascending\r\n"
-        		+ "6. Sort by create date in descending\r\n"
-        		+ " No.|           Name|   Price|                             Description|    Status\r\n"
-        		+ "   2|productDiscontinued|    14.9|                             description|Discontinued\r\n"
-        		+ "   4|           test|     1.0|                                       1|Discontinued\r\n"
-        		+ "   5|           test|     1.0|                                       1|    Launch\r\n"
-        		+ "   6|       productC|    14.9|                             description|    Launch\r\n"
-        		+ "(No) Add To Cart\r\n"
-        		+ "(b) Back\r\n"
-        		+ "Please enter your choice:";
-        assertTrue(outContent.toString().replace("\n","").replace("\s", "").replace("\r", "").replace(" ", "").equals(expect.replace("\n","").replace("\s", "").replace("\r", "").replace(" ", "")));
+        String expect = """
+                Enter product name:\s
+                Enter min price:\s
+                Enter max price:\s
+                Enter sort type:\s
+                1. Sort by name in ascending
+                2. Sort by name in descending
+                3. Sort by price in ascending
+                4. Sort by price in descending
+                5. Sort by create date in ascending
+                6. Sort by create date in descending
+                 No.|           Name|   Price|                             Description|    Status
+                   2|           test|     1.0|                                       1|Discontinued
+                   3|           test|     1.0|                                       1|    Launch
+                   4|       productC|    14.9|                             description|    Launch
+                   6|productDiscontinued|    14.9|                             description|Discontinued
+                (No) Add To Cart
+                (b) Back
+                Please enter your choice:\s
+                """;
+
+        //.replace("\n","").replace("\s", "").replace("\r", "").replace(" ", "")
+        assertEquals(expect.replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""), outContent.toString().replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""));
     }
 
     @Test
