@@ -1,3 +1,4 @@
+import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.ByteArrayInputStream;
@@ -116,7 +117,7 @@ class CartControllerTest {
 	
 	@Test
 	public void addToCartViewTest() {
-	    System.setIn(new ByteArrayInputStream("2\nconverse\n1".getBytes()));
+	    System.setIn(new ByteArrayInputStream("2\nconverse\n1\n7".getBytes()));
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outContent));
 		CartController cc = new CartController();
@@ -127,7 +128,7 @@ class CartControllerTest {
 	
 	@Test
 	public void serviceAddExistingProductTest() {
-	    System.setIn(new ByteArrayInputStream("2\nnike\n1".getBytes()));
+	    System.setIn(new ByteArrayInputStream("2\nnike\n1\n7".getBytes()));
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outContent));
 		CartController cc = new CartController();
@@ -138,7 +139,7 @@ class CartControllerTest {
 	
 	@Test
 	public void addNotFoundProductViewTest() {
-	    System.setIn(new ByteArrayInputStream("2\nvood\n1".getBytes()));
+	    System.setIn(new ByteArrayInputStream("2\nvood\n1\n7".getBytes()));
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outContent));
 		CartController cc = new CartController();
@@ -149,7 +150,7 @@ class CartControllerTest {
 	
 	@Test
 	public void addOutOfStockProductViewTest() {
-	    System.setIn(new ByteArrayInputStream("2\nnike\n10".getBytes()));
+	    System.setIn(new ByteArrayInputStream("2\nnike\n10\n7".getBytes()));
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outContent));
 		CartController cc = new CartController();

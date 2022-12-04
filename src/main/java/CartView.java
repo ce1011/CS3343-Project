@@ -30,15 +30,18 @@ public class CartView {
 		switch(choice) {
 			case 1: //show cart
 				showCartView();
+				
 				break;
 			case 2: //add product to cart
 				addToCartView();
+				shoppingView();
 				break;
 			case 3: //set product quantity
 				setProductQtyView();
 				break;
 			case 4: //delete product from cart
 				deleteProductView();
+				
 				break;
 			case 5: //clear cart
 				clearCartView();

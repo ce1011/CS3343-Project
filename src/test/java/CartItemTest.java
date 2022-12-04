@@ -42,13 +42,5 @@ class CartItemTest {
 		assertEquals(4,item.getQuantity());
 	}
 	
-	@Test
-	void setProductTest() {
-		Product product = new Product("product", 10.0, "description", 10, new ProductState_Launch(), 0.5);
-		CartItem item = new CartItem(product,2);
-		Product newProduct = new Product("product2", 12.0, "description2", 10, new ProductState_Launch(), 0.5);
-		item.setProduct(newProduct);
-		assertEquals("product2",item.getProduct().getName());
-	}
 
 }

@@ -25,9 +25,6 @@ public class CartItem {
 		this.quantity = qty;
 	}
 	
-	public void setProduct(Product product) {
-		this.product = product;
-	}
 	
 	
 	

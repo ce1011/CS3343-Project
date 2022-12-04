@@ -52,7 +52,8 @@ class CartServiceTest {
 	void setNotExistCartItemQtyTest() throws ProductNotFoundException, OutOfStockException, CartItemNotFoundException{
 		CartService cartService = CartService.getInstance();
 		
-		assertThrows(CartItemNotFoundException.class, () -> cartService.setCartItemQty("good product", 2));
+		Throwable exception = assertThrows(CartItemNotFoundException.class, () -> cartService.setCartItemQty("good product", 2));
+		assertEquals("Product good product not found from cart",exception.getMessage());
 	}
 	
 	
@@ -60,7 +61,8 @@ class CartServiceTest {
 	void removeNoProductByNameTest() throws CartItemNotFoundException {
 		CartService cartService = CartService.getInstance();
 		
-		assertThrows(CartItemNotFoundException.class, () -> cartService.removeProductFromCartByName("good"));
+		Throwable exception = assertThrows(CartItemNotFoundException.class, () -> cartService.removeProductFromCartByName("good"));
+		assertEquals("Product good not found from cart",exception.getMessage());
 	}
 	
 	@Test
@@ -74,7 +76,8 @@ class CartServiceTest {
 		CartService cartService = CartService.getInstance();
 		Product newProduct = new Product("product2", 5.0, "desc", 1, new ProductState_Launch(), 0.5);
 		ProductService.getInstance().createProduct(newProduct);
-		assertThrows(OutOfStockException.class, () -> cartService.addProduct("product2", 2));
+		Throwable exception = assertThrows(OutOfStockException.class, () -> cartService.addProduct("product2", 2));
+		assertEquals("product2 out of stock",exception.getMessage());
 	}
 
 	@Test

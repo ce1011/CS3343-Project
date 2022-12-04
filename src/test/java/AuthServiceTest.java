@@ -33,9 +33,11 @@ class AuthServiceTest {
 		assertEquals("user1",user.getUsername());
 	}
 	
+	
 	@Test
-	void test_RegisterWithSameName() throws ExistedUserFoundException{
-		assertThrows(ExistedUserFoundException.class, ()-> AuthService.getInstance().register("customer", "customer", "Customer"));
+	void test_RegisterWithSameName() {
+		Throwable exception = assertThrows(ExistedUserFoundException.class, ()-> AuthService.getInstance().register("customer", "customer", "Customer"));
+		assertEquals("Username: customer already exists",exception.getMessage());
 	}
 	
 	@Test
@@ -45,15 +47,24 @@ class AuthServiceTest {
 	}
 	
 	@Test
+	void test_AdminRegister() throws ExistedUserFoundException, WrongPasswordException, UserNotFoundException{
+		User result = AuthService.getInstance().register("newAdmin", "newAdmin", "Admin");
+		assertEquals("Admin",result.getRole().getRoleName());
+	}
+	
+	
+	
+	@Test
 	void test_LoginUserNotFound() throws ExistedUserFoundException, WrongPasswordException, UserNotFoundException{
 		
-		assertThrows(UserNotFoundException.class, ()-> AuthService.getInstance().login("custome", "customer"));
+		assertEquals("Username: custome not found",assertThrows(UserNotFoundException.class, ()-> AuthService.getInstance().login("custome", "customer")).getMessage());
+		
 	}
 	
 	@Test
 	void test_LoginWrongPassword() throws ExistedUserFoundException, WrongPasswordException, UserNotFoundException{
 		
-		assertThrows(WrongPasswordException.class, ()-> AuthService.getInstance().login("customer", "custome"));
+		assertEquals("The password is not valid",assertThrows(WrongPasswordException.class, ()-> AuthService.getInstance().login("customer", "custome")).getMessage());
 	}
 	
 	@Test
