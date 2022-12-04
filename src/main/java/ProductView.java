@@ -84,6 +84,7 @@ public class ProductView {
 
                     System.out.println("How many do you want to buy?");
                     int quantity = sc.nextInt();
+                    sc.nextLine();
                     cartController.addProductToCart(productList.get(Integer.parseInt(choice) - 1).getName(), quantity);
 
                     controller.displayCustomerProductList(name, minPrice, maxPrice, sort);
@@ -248,7 +249,7 @@ sc.nextLine();
         inStockQuantity = sc.nextInt();
         System.out.println("Please enter the product weight: ");
         weight = sc.nextDouble();
-
+sc.nextLine();
         try {
             controller.addProduct(name, price, description, inStockQuantity, weight);
             System.out.println("Product added successfully!");
