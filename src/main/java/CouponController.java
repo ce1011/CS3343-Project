@@ -52,8 +52,6 @@ public class CouponController {
             System.out.println(e.toString());
         }catch (ParseException e) {
             System.out.println(e.toString());
-        }catch (CouponDateEarlyException e) {
-            System.out.println(e.toString());
         }catch (CouponDateLateException e) {
             System.out.println(e.toString());
         }

@@ -15,7 +15,7 @@ public class CouponService {
         return instance;
     }
 
-    public void createCoupon(Coupon c) throws CouponAlreadyExistException, CouponDateEarlyException, CouponDateLateException{
+    public void createCoupon(Coupon c) throws CouponAlreadyExistException,CouponDateLateException{
         try{
             Date now = new Date();
             for(Coupon coupon : couponList) {

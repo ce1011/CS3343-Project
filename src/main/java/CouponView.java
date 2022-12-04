@@ -32,7 +32,7 @@ public class CouponView {
                 deleteCouponView();
                 break;
             case 5:
-                return;
+                break;
             default:
                 System.out.println("Please input a correct number");
                 entryView();
