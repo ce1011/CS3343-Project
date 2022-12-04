@@ -59,14 +59,13 @@ class ProductControllerTest {
         System.setOut(new PrintStream(outContent));
         ProductController productController = new ProductController();
         productController.displayCustomerProductList("product", 0, 100, new ProductSortByNameDesc());
-        assertEquals("""
-                 No.|           Name|   Price|                             Description|    Status
-                   1|productDiscontinued|    14.9|                             description|Discontinued
-                   2|       productC|    14.9|                             description|    Launch
-                (No) Add To Cart
-                (b) Back
-                Please enter your choice:\s
-                                                """, outContent.toString());
+        String expect = "                 No.|           Name|   Price|                             Description|    Status\r\n"
+        		+ "                   1|productDiscontinued|    14.9|                             description|Discontinued\r\n"
+        		+ "                   2|       productC|    14.9|                             description|    Launch\r\n"
+        		+ "                (No) Add To Cart\r\n"
+        		+ "                (b) Back\r\n"
+        		+ "                Please enter your choice:";
+        assertEquals(expect.replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""), outContent.toString().replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""));
     }
 
     @Test
@@ -334,7 +333,7 @@ class ProductControllerTest {
 
     @Test
     void filterViewWithSortSelect6() {
-        System.setIn(new ByteArrayInputStream("\n0\n999\n6\n".getBytes()));
+System.setIn(new ByteArrayInputStream("\n0\n999\n6\n".getBytes()));
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
         ProductController productController = new ProductController();
@@ -343,28 +342,28 @@ class ProductControllerTest {
         }catch (Exception e){
 
         }
-
-        assertEquals("""
-                Enter product name:\s
-                Enter min price:\s
-                Enter max price:\s
-                Enter sort type:\s
-                1. Sort by name in ascending
-                2. Sort by name in descending
-                3. Sort by price in ascending
-                4. Sort by price in descending
-                5. Sort by create date in ascending
-                6. Sort by create date in descending
-                 No.|           Name|   Price|                             Description|    Status
-                   2|           test|     1.0|                                       1|Discontinued
-                   3|           test|     1.0|                                       1|    Launch
-                   4|       productC|    14.9|                             description|    Launch
-                   6|productDiscontinued|    14.9|                             description|Discontinued
-                (No) Edit Product
-                (+) Add Product
-                (b) Back
-                Please enter your choice:\s
-                                                                                """.replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""), outContent.toString().replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""));
+        System.err.print(outContent.toString());
+        String expect = "Enter product name: \r\n"
+        		+ "Enter min price: \r\n"
+        		+ "Enter max price: \r\n"
+        		+ "Enter sort type: \r\n"
+        		+ "1. Sort by name in ascending\r\n"
+        		+ "2. Sort by name in descending\r\n"
+        		+ "3. Sort by price in ascending\r\n"
+        		+ "4. Sort by price in descending\r\n"
+        		+ "5. Sort by create date in ascending\r\n"
+        		+ "6. Sort by create date in descending\r\n"
+        		+ " No.|           Name|   Price|                             Description|    Status\r\n"
+        		+ "   2|productDiscontinued|    14.9|                             description|Discontinued\r\n"
+        		+ "   4|           test|     1.0|                                       1|Discontinued\r\n"
+        		+ "   5|           test|     1.0|                                       1|    Launch\r\n"
+        		+ "   6|       productC|    14.9|                             description|    Launch\r\n"
+        		+ "(No) Edit Product\r\n"
+        		+ "(+) Add Product\r\n"
+        		+ "(b) Back\r\n"
+        		+ "Please enter your choice: \r\n"
+        		+ "";
+        assertTrue(expect.replace("\n","").replace("\s", "").replace("\r", "").replace(" ", "").equals(outContent.toString().replace("\n","").replace("\s", "").replace("\r", "").replace(" ", "")));
 
     }
 
@@ -575,7 +574,7 @@ class ProductControllerTest {
                 (No) Add To Cart
                 (b) Back
                 Please enter your choice:\s
-                                """, outContent.toString());
+                                """.replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""), outContent.toString().replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""));
     }
 
     @Test
@@ -623,27 +622,25 @@ class ProductControllerTest {
         }catch (Exception e){
 
         }
-
-        assertEquals("""
-                Enter product name:\s
-                Enter min price:\s
-                Enter max price:\s
-                Enter sort type:\s
-                1. Sort by name in ascending
-                2. Sort by name in descending
-                3. Sort by price in ascending
-                4. Sort by price in descending
-                5. Sort by create date in ascending
-                6. Sort by create date in descending
-                 No.|           Name|   Price|                             Description|    Status
-                   2|           test|     1.0|                                       1|Discontinued
-                   3|           test|     1.0|                                       1|    Launch
-                   4|       productC|    14.9|                             description|    Launch
-                   6|productDiscontinued|    14.9|                             description|Discontinued
-                (No) Add To Cart
-                (b) Back
-                Please enter your choice:\s
-                                                                                                                                """.replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""), outContent.toString().replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""));
+        String expect = "Enter product name: \r\n"
+        		+ "Enter min price: \r\n"
+        		+ "Enter max price: \r\n"
+        		+ "Enter sort type: \r\n"
+        		+ "1. Sort by name in ascending\r\n"
+        		+ "2. Sort by name in descending\r\n"
+        		+ "3. Sort by price in ascending\r\n"
+        		+ "4. Sort by price in descending\r\n"
+        		+ "5. Sort by create date in ascending\r\n"
+        		+ "6. Sort by create date in descending\r\n"
+        		+ " No.|           Name|   Price|                             Description|    Status\r\n"
+        		+ "   2|productDiscontinued|    14.9|                             description|Discontinued\r\n"
+        		+ "   4|           test|     1.0|                                       1|Discontinued\r\n"
+        		+ "   5|           test|     1.0|                                       1|    Launch\r\n"
+        		+ "   6|       productC|    14.9|                             description|    Launch\r\n"
+        		+ "(No) Add To Cart\r\n"
+        		+ "(b) Back\r\n"
+        		+ "Please enter your choice:";
+        assertTrue(outContent.toString().replace("\n","").replace("\s", "").replace("\r", "").replace(" ", "").equals(expect.replace("\n","").replace("\s", "").replace("\r", "").replace(" ", "")));
     }
 
     @Test
