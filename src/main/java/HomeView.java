@@ -44,7 +44,6 @@ public class HomeView {
             case 4:
                 return;
             case 9:
-                this.productController.addTempProduct();
                 this.customerHome();
                 break;
             default:
