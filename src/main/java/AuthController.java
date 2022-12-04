@@ -10,9 +10,6 @@ public class AuthController {
     }
 
 
-    public void enterLoginPage(){
-        view.loginView();
-    }
 
     public void entry(){
         view.entryView();
@@ -21,18 +18,12 @@ public class AuthController {
     public void login(String username, String password){
         try{
             User user = model.login(username, password);
-            switch (user.getRole().getRoleName()){
-                case "Customer":
-                    homeController.showCustomerHome();
-                    break;
-                case "Admin":
-                    homeController.showAdminHome(user);
-                    break;
-                default:
-                    homeController.showCustomerHome();
-            }
-
-            entry();
+            
+            if (user.getRole().getRoleName().equals("Customer"))
+            	homeController.showCustomerHome();
+            else if (user.getRole().getRoleName().equals("Admin"))
+            	homeController.showAdminHome(user);
+            
 
         } catch (WrongPasswordException e){
             view.wrongPassword();

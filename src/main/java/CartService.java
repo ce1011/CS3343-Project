@@ -14,7 +14,7 @@ public class CartService {
 		}
 		return instance;
 	}
-	
+		
 	public void addProduct(String name, int qty) throws ProductNotFoundException, OutOfStockException {
 		Product selected = productService.getProductByName(name);
 		CartItem existItem = searchCartItem(name);
