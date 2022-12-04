@@ -40,7 +40,7 @@ class ProductControllerTest {
         System.setOut(new PrintStream(outContent));
         ProductController productController = new ProductController();
         productController.displayAdminProductList("product", 0, 100, new ProductSortByNameDesc());
-assertTrue(outContent.toString().contains("""
+        assertEquals("""
                  No.|           Name|   Price|                             Description|    Status
                    1|productDiscontinued|    14.9|                             description|Discontinued
                    2|       productC|    14.9|                             description|    Launch
@@ -48,7 +48,7 @@ assertTrue(outContent.toString().contains("""
                 (+) Add Product
                 (b) Back
                 Please enter your choice:\s
-                                                """));
+                                                """.replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""), outContent.toString().replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""));
 
     }
 
@@ -82,7 +82,7 @@ assertTrue(outContent.toString().contains("""
 
         }
 
-        assertTrue(outContent.toString().contains("""
+        assertEquals("""
                  No.|           Name|   Price|                             Description|    Status
                 (No) Edit Product
                 (+) Add Product
@@ -100,7 +100,7 @@ assertTrue(outContent.toString().contains("""
                 (+) Add Product
                 (b) Back
                 Please enter your choice:\s
-                                """));
+                                """.replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""), outContent.toString().replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""));
     }
 
 
@@ -141,20 +141,19 @@ assertTrue(outContent.toString().contains("""
         productController.addProductView();
 
 
-        assertTrue(outContent.toString().contains("""
+        assertEquals("""
                 Please enter the product name:\s
                 Please enter the product price:\s
                 Please enter the product description:\s
                 Please enter the product in stock quantity:\s
                 Please enter the product weight:\s
                 Product with same name already exists!
-                                """)
-        );
+                                """.replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""), outContent.toString().replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""));
     }
 
     @Test
     void filterViewWithSortSelect1() {
-System.setIn(new ByteArrayInputStream("\n0\n999\n1\n".getBytes()));
+        System.setIn(new ByteArrayInputStream("\n0\n999\n1\n".getBytes()));
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
         ProductController productController = new ProductController();
@@ -164,7 +163,7 @@ System.setIn(new ByteArrayInputStream("\n0\n999\n1\n".getBytes()));
 
         }
 
-      assertTrue(outContent.toString().contains("""
+        assertEquals("""
                 Enter product name:\s
                 Enter min price:\s
                 Enter max price:\s
@@ -184,13 +183,13 @@ System.setIn(new ByteArrayInputStream("\n0\n999\n1\n".getBytes()));
                 (+) Add Product
                 (b) Back
                 Please enter your choice:\s
-                                                                """));
+                                                                """.replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""), outContent.toString().replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""));
 
     }
 
     @Test
     void filterViewWithSortSelect2() {
-System.setIn(new ByteArrayInputStream("\n0\n999\n2\n".getBytes()));
+        System.setIn(new ByteArrayInputStream("\n0\n999\n2\n".getBytes()));
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
         ProductController productController = new ProductController();
@@ -200,7 +199,7 @@ System.setIn(new ByteArrayInputStream("\n0\n999\n2\n".getBytes()));
 
         }
 
-        assertTrue(outContent.toString().contains("""
+        assertEquals("""
                 Enter product name:\s
                 Enter min price:\s
                 Enter max price:\s
@@ -220,13 +219,13 @@ System.setIn(new ByteArrayInputStream("\n0\n999\n2\n".getBytes()));
                 (+) Add Product
                 (b) Back
                 Please enter your choice:\s
-                                                                                """));
+                                                                                """.replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""), outContent.toString().replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""));
 
     }
 
     @Test
     void filterViewWithSortSelect3() {
-System.setIn(new ByteArrayInputStream("\n0\n999\n3\n".getBytes()));
+        System.setIn(new ByteArrayInputStream("\n0\n999\n3\n".getBytes()));
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
         ProductController productController = new ProductController();
@@ -236,7 +235,7 @@ System.setIn(new ByteArrayInputStream("\n0\n999\n3\n".getBytes()));
 
         }
 
-        assertTrue(outContent.toString().contains("""
+        assertEquals("""
                 Enter product name:\s
                 Enter min price:\s
                 Enter max price:\s
@@ -256,12 +255,13 @@ System.setIn(new ByteArrayInputStream("\n0\n999\n3\n".getBytes()));
                 (+) Add Product
                 (b) Back
                 Please enter your choice:\s
-                                                                                """));
+                                                                                """.replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""), outContent.toString().replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""));
+
     }
 
     @Test
     void filterViewWithSortSelect4() {
-System.setIn(new ByteArrayInputStream("\n0\n999\n4\n".getBytes()));
+        System.setIn(new ByteArrayInputStream("\n0\n999\n4\n".getBytes()));
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
         ProductController productController = new ProductController();
@@ -270,7 +270,8 @@ System.setIn(new ByteArrayInputStream("\n0\n999\n4\n".getBytes()));
         }catch (Exception e){
 
         }
-assertTrue(outContent.toString().contains("""
+
+        assertEquals("""
                 Enter product name:\s
                 Enter min price:\s
                 Enter max price:\s
@@ -290,13 +291,13 @@ assertTrue(outContent.toString().contains("""
                 (+) Add Product
                 (b) Back
                 Please enter your choice:\s
-                                                                                """));
-    }
+                                                                                """.replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""), outContent.toString().replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""));
 
+    }
 
     @Test
     void filterViewWithSortSelect5() {
-System.setIn(new ByteArrayInputStream("\n0\n999\n5\n".getBytes()));
+        System.setIn(new ByteArrayInputStream("\n0\n999\n5\n".getBytes()));
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
         ProductController productController = new ProductController();
@@ -306,7 +307,7 @@ System.setIn(new ByteArrayInputStream("\n0\n999\n5\n".getBytes()));
 
         }
 
-assertTrue(outContent.toString().contains("""
+        assertEquals("""
                 Enter product name:\s
                 Enter min price:\s
                 Enter max price:\s
@@ -326,13 +327,14 @@ assertTrue(outContent.toString().contains("""
                 (+) Add Product
                 (b) Back
                 Please enter your choice:\s
-                                                                                """));
+                                                                                """.replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""), outContent.toString().replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""));
+
 
     }
 
     @Test
     void filterViewWithSortSelect6() {
-System.setIn(new ByteArrayInputStream("\n0\n999\n6\n".getBytes()));
+        System.setIn(new ByteArrayInputStream("\n0\n999\n6\n".getBytes()));
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
         ProductController productController = new ProductController();
@@ -342,7 +344,7 @@ System.setIn(new ByteArrayInputStream("\n0\n999\n6\n".getBytes()));
 
         }
 
-        assertTrue(outContent.toString().contains("""
+        assertEquals("""
                 Enter product name:\s
                 Enter min price:\s
                 Enter max price:\s
@@ -362,13 +364,13 @@ System.setIn(new ByteArrayInputStream("\n0\n999\n6\n".getBytes()));
                 (+) Add Product
                 (b) Back
                 Please enter your choice:\s
-                """));
+                                                                                """.replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""), outContent.toString().replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""));
 
     }
 
     @Test
     void filterViewWithSortSelect7() {
-System.setIn(new ByteArrayInputStream("\n0\n999\n7\n".getBytes()));
+        System.setIn(new ByteArrayInputStream("\n0\n999\n7\n".getBytes()));
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
         ProductController productController = new ProductController();
@@ -378,7 +380,7 @@ System.setIn(new ByteArrayInputStream("\n0\n999\n7\n".getBytes()));
 
         }
 
-        assertTrue(outContent.toString().contains("""
+        assertEquals("""
                 Enter product name:\s
                 Enter min price:\s
                 Enter max price:\s
@@ -398,12 +400,13 @@ System.setIn(new ByteArrayInputStream("\n0\n999\n7\n".getBytes()));
                 (+) Add Product
                 (b) Back
                 Please enter your choice:\s
-                                                                                """));
+                                                                                """.replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""), outContent.toString().replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""));
+
     }
 
     @Test
     void filterViewWithSortSelect8() {
-System.setIn(new ByteArrayInputStream("\n0\n999\n8\n".getBytes()));
+        System.setIn(new ByteArrayInputStream("\n0\n999\n8\n".getBytes()));
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
         ProductController productController = new ProductController();
@@ -413,7 +416,7 @@ System.setIn(new ByteArrayInputStream("\n0\n999\n8\n".getBytes()));
 
         }
 
-assertTrue(outContent.toString().contains("""
+        assertEquals("""
                 Enter product name:\s
                 Enter min price:\s
                 Enter max price:\s
@@ -433,7 +436,7 @@ assertTrue(outContent.toString().contains("""
                 (+) Add Product
                 (b) Back
                 Please enter your choice:\s
-                                                                                """));
+                                                                                """.replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""), outContent.toString().replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""));
 
     }
 
@@ -451,7 +454,7 @@ assertTrue(outContent.toString().contains("""
 
         }
 
-        assertTrue(outContent.toString().contains("""
+        assertEquals("""
                 Enter product name:\s
                 Enter min price:\s
                 Enter max price:\s
@@ -470,7 +473,7 @@ assertTrue(outContent.toString().contains("""
                 (No) Add To Cart
                 (b) Back
                 Please enter your choice:\s
-                                                                                """));
+                                                                                """.replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""), outContent.toString().replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""));
     }
 
     @Test
@@ -484,7 +487,8 @@ assertTrue(outContent.toString().contains("""
         }catch (Exception e){
 
         }
-        assertTrue(outContent.toString().contains("""
+
+        assertEquals("""
                 Enter product name:\s
                 Enter min price:\s
                 Enter max price:\s
@@ -503,7 +507,7 @@ assertTrue(outContent.toString().contains("""
                 (No) Add To Cart
                 (b) Back
                 Please enter your choice:\s
-                                                                                """));
+                                                                                                """.replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""), outContent.toString().replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""));
     }
 
     @Test
@@ -518,7 +522,7 @@ assertTrue(outContent.toString().contains("""
 
         }
 
-        assertTrue(outContent.toString().contains("""
+        assertEquals("""
                 Enter product name:\s
                 Enter min price:\s
                 Enter max price:\s
@@ -537,7 +541,7 @@ assertTrue(outContent.toString().contains("""
                 (No) Add To Cart
                 (b) Back
                 Please enter your choice:\s
-                                                                                                                """));
+                                                                                                                """.replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""), outContent.toString().replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""));
     }
 
     @Test
@@ -552,7 +556,7 @@ assertTrue(outContent.toString().contains("""
 
         }
 
-        assertTrue(outContent.toString().contains("""
+        assertEquals("""
                 Enter product name:\s
                 Enter min price:\s
                 Enter max price:\s
@@ -571,7 +575,7 @@ assertTrue(outContent.toString().contains("""
                 (No) Add To Cart
                 (b) Back
                 Please enter your choice:\s
-                                                                                """));
+                                """, outContent.toString());
     }
 
     @Test
@@ -586,7 +590,7 @@ assertTrue(outContent.toString().contains("""
 
         }
 
-        assertTrue(outContent.toString().contains("""
+        assertEquals("""
                 Enter product name:\s
                 Enter min price:\s
                 Enter max price:\s
@@ -605,7 +609,7 @@ assertTrue(outContent.toString().contains("""
                 (No) Add To Cart
                 (b) Back
                 Please enter your choice:\s
-                                                                                                                                """));
+                                                                                                                                """.replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""), outContent.toString().replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""));
     }
 
     @Test
@@ -620,8 +624,7 @@ assertTrue(outContent.toString().contains("""
 
         }
 
-
-        assertTrue(outContent.toString().contains("""
+        assertEquals("""
                 Enter product name:\s
                 Enter min price:\s
                 Enter max price:\s
@@ -640,7 +643,7 @@ assertTrue(outContent.toString().contains("""
                 (No) Add To Cart
                 (b) Back
                 Please enter your choice:\s
-                """));
+                                                                                                                                """.replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""), outContent.toString().replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""));
     }
 
     @Test
@@ -655,7 +658,7 @@ assertTrue(outContent.toString().contains("""
 
         }
 
-        assertTrue(outContent.toString().contains("""
+        assertEquals("""
                 Enter product name:\s
                 Enter min price:\s
                 Enter max price:\s
@@ -674,7 +677,7 @@ assertTrue(outContent.toString().contains("""
                 (No) Add To Cart
                 (b) Back
                 Please enter your choice:\s
-                                                                                                                                """));
+                                                                                                                                """.replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""), outContent.toString().replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""));
     }
 
     @Test
@@ -689,7 +692,7 @@ assertTrue(outContent.toString().contains("""
 
         }
 
-        assertTrue(outContent.toString().contains("""
+        assertEquals("""
                 Enter product name:\s
                 Enter min price:\s
                 Enter max price:\s
@@ -708,7 +711,7 @@ assertTrue(outContent.toString().contains("""
                 (No) Add To Cart
                 (b) Back
                 Please enter your choice:\s
-                                                                                                                                """));
+                                                                                                                                """.replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""), outContent.toString().replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""));
     }
 
     @Test
@@ -724,7 +727,14 @@ assertTrue(outContent.toString().contains("""
 
         }
 
-        assertTrue(outContent.toString().contains("""
+        assertEquals("""
+                 No.|           Name|   Price|                             Description|    Status
+                   1|test updateProduct()|    12.9|                             description|    Launch
+                   3|           test|    12.9|                             description|    Launch
+                (No) Edit Product
+                (+) Add Product
+                (b) Back
+                Please enter your choice:\s
                 Update Product
                 Please enter updated product name:\s
                 Please enter updated product price:\s
@@ -743,7 +753,7 @@ assertTrue(outContent.toString().contains("""
                 (+) Add Product
                 (b) Back
                 Please enter your choice:\s
-                                                                                                                                """));
+                                                                                """.replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""), outContent.toString().replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""));
     }
 
     @Test
@@ -759,8 +769,7 @@ assertTrue(outContent.toString().contains("""
 
         }
 
-
-        assertTrue(outContent.toString().contains("""
+        assertEquals("""
                  No.|           Name|   Price|                             Description|    Status
                    1|           test|     1.0|                                       1|    Launch
                    2|           test|     1.0|                                       1|    Launch
@@ -785,7 +794,7 @@ assertTrue(outContent.toString().contains("""
                 (+) Add Product
                 (b) Back
                 Please enter your choice:\s
-                                """));
+                                                                                                """.replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""), outContent.toString().replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""));
     }
 
     @Test
@@ -801,7 +810,15 @@ assertTrue(outContent.toString().contains("""
 
         }
 
-        assertTrue(outContent.toString().contains("""
+        assertEquals("""
+                 No.|           Name|   Price|                             Description|    Status
+                   1|           test|     1.0|                                       1|    Launch
+                   2|           test|     1.0|                                       1|    Launch
+                   3|           test|    12.9|                             description|    Launch
+                (No) Edit Product
+                (+) Add Product
+                (b) Back
+                Please enter your choice:\s
                 Update Product
                 Please enter updated product name:\s
                 Please enter updated product price:\s
@@ -819,7 +836,7 @@ assertTrue(outContent.toString().contains("""
                 (+) Add Product
                 (b) Back
                 Please enter your choice:\s
-                                                                                                                                """));
+                                                                                                                """.replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""), outContent.toString().replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""));
     }
 
     @Test
@@ -835,8 +852,7 @@ assertTrue(outContent.toString().contains("""
 
         }
 
-
-        assertTrue(outContent.toString().contains("""
+        assertEquals("""
                  No.|           Name|   Price|                             Description|    Status
                    1|           test|     1.0|                                       1|    Launch
                    2|           test|     1.0|                                       1|    Launch
@@ -859,7 +875,7 @@ assertTrue(outContent.toString().contains("""
                 Update Product
                 Please enter updated product name:\s
                 Please enter updated product price:\s
-                """));
+                                                                                                                """.replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""), outContent.toString().replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""));
     }
 
     @Test
@@ -875,7 +891,7 @@ assertTrue(outContent.toString().contains("""
 
         }
 
-        assertTrue(outContent.toString().contains("""
+        assertEquals("""
                  No.|           Name|   Price|                             Description|    Status
                 (No) Edit Product
                 (+) Add Product
@@ -887,7 +903,7 @@ assertTrue(outContent.toString().contains("""
                 (+) Add Product
                 (b) Back
                 Please enter your choice:\s
-                """));
+                                """.replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""), outContent.toString().replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""));
     }
 
 
@@ -903,7 +919,8 @@ assertTrue(outContent.toString().contains("""
         }catch (Exception e){
 
         }
-        assertTrue(outContent.toString().contains("""
+
+        assertEquals("""
                  No.|           Name|   Price|                             Description|    Status
                    1|productDiscontinued|    14.9|                             description|Discontinued
                    3|       productC|    14.9|                             description|    Launch
@@ -923,8 +940,7 @@ assertTrue(outContent.toString().contains("""
                 2. Discontinued
                 3. Delete
                 Product is deleted
-                """));
-
+                                                                                                """.replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""), outContent.toString().replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""));
     }
 
     @Test
@@ -940,7 +956,7 @@ assertTrue(outContent.toString().contains("""
 
         }
 
-        assertTrue(outContent.toString().contains("""
+        assertEquals("""
                  No.|           Name|   Price|                             Description|    Status
                    1|productDiscontinued|    14.9|                             description|Discontinued
                    2|       productC|    14.9|                             description|    Launch
@@ -956,7 +972,7 @@ assertTrue(outContent.toString().contains("""
                 (+) Add Product
                 (b) Back
                 Please enter your choice:\s
-                """));
+                                                                                                """.replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""), outContent.toString().replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""));
     }
 
     @Test
@@ -971,8 +987,7 @@ assertTrue(outContent.toString().contains("""
         }catch (Exception e){
 
         }
-
-        assertTrue(outContent.toString().contains("""
+        assertEquals("""
                  No.|           Name|   Price|                             Description|    Status
                    1|           test|     1.0|                                       1|    Launch
                    2|           test|     1.0|                                       1|    Launch
@@ -996,7 +1011,7 @@ assertTrue(outContent.toString().contains("""
                 (No) Add To Cart
                 (b) Back
                 Please enter your choice:\s
-                """));
+                                                                                """.replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""), outContent.toString().replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""));
     }
 
     @Test
@@ -1011,28 +1026,27 @@ assertTrue(outContent.toString().contains("""
         }catch (Exception e){
 
         }
-
-assertTrue(outContent.toString().contains("""
-         No.|           Name|   Price|                             Description|    Status
-           1|test updateProduct()|    12.9|                             description|    Launch
-           2|           test|    12.9|                             description|    Launch
-           3|productDiscontinued|    14.9|                             description|Discontinued
-           5|       productC|    14.9|                             description|    Launch
-           6|       productA|    12.9|                             description|    Launch
-        (No) Add To Cart
-        (b) Back
-        Please enter your choice:\s
-        Invalid choice!
-         No.|           Name|   Price|                             Description|    Status
-           1|test updateProduct()|    12.9|                             description|    Launch
-           2|           test|    12.9|                             description|    Launch
-           3|productDiscontinued|    14.9|                             description|Discontinued
-           5|       productC|    14.9|                             description|    Launch
-           6|       productA|    12.9|                             description|    Launch
-        (No) Add To Cart
-        (b) Back
-        Please enter your choice:\s
-        """));
+        assertEquals("""
+                 No.|           Name|   Price|                             Description|    Status
+                   1|test updateProduct()|    12.9|                             description|    Launch
+                   2|           test|    12.9|                             description|    Launch
+                   3|productDiscontinued|    14.9|                             description|Discontinued
+                   5|       productC|    14.9|                             description|    Launch
+                   6|       productA|    12.9|                             description|    Launch
+                (No) Add To Cart
+                (b) Back
+                Please enter your choice:\s
+                Invalid choice!
+                 No.|           Name|   Price|                             Description|    Status
+                   1|test updateProduct()|    12.9|                             description|    Launch
+                   2|           test|    12.9|                             description|    Launch
+                   3|productDiscontinued|    14.9|                             description|Discontinued
+                   5|       productC|    14.9|                             description|    Launch
+                   6|       productA|    12.9|                             description|    Launch
+                (No) Add To Cart
+                (b) Back
+                Please enter your choice:\s
+                                                                                """.replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""), outContent.toString().replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""));
     }
 
     @Test
@@ -1047,7 +1061,7 @@ assertTrue(outContent.toString().contains("""
         }catch (Exception e){
 
         }
-        assertTrue(outContent.toString().contains("""
+        assertEquals("""
                  No.|           Name|   Price|                             Description|    Status
                    1|           test|     1.0|                                       1|Discontinued
                    2|           test|     1.0|                                       1|    Launch
@@ -1069,7 +1083,7 @@ assertTrue(outContent.toString().contains("""
                 (No) Add To Cart
                 (b) Back
                 Please enter your choice:\s
-                """));
+                                                                                """.replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""), outContent.toString().replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""));
     }
 
 
@@ -1085,17 +1099,16 @@ assertTrue(outContent.toString().contains("""
         }catch (Exception e){
 
         }
-
-assertTrue(outContent.toString().contains("""
-         No.|           Name|   Price|                             Description|    Status
-           1|           test|     1.0|                                       1|    Launch
-           2|           test|     1.0|                                       1|    Launch
-           4|productDiscontinued|    14.9|                             description|Discontinued
-           5|       productC|    14.9|                             description|    Launch
-        (No) Add To Cart
-        (b) Back
-        Please enter your choice:\s
-        How many do you want to buy?
-                """));
+        assertEquals("""
+                 No.|           Name|   Price|                             Description|    Status
+                   1|           test|     1.0|                                       1|    Launch
+                   2|           test|     1.0|                                       1|    Launch
+                   4|productDiscontinued|    14.9|                             description|Discontinued
+                   5|       productC|    14.9|                             description|    Launch
+                (No) Add To Cart
+                (b) Back
+                Please enter your choice:\s
+                How many do you want to buy?
+                                                                                                """.replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""), outContent.toString().replace("\n","").replace("\s", "").replace("\r", "").replace(" ", ""));
     }
 }
