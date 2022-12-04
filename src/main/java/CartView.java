@@ -5,6 +5,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class CartView {
+	Scanner sc = new Scanner(System.in);
 	private CartController controller;
 	
 	public CartView(CartController controller) {
@@ -21,13 +22,9 @@ public class CartView {
 		System.out.println("6. Place Order");
 		System.out.println("7. Exit");
 		System.out.print("Please enter your choice: ");
-		Scanner scanner = new Scanner(System.in);
+		
 		int choice = -1;
-		try{
-			choice = scanner.nextInt();
-		} catch(InputMismatchException e){
-			invalidInput();
-		}
+		choice = sc.nextInt();
 		
 		
 		switch(choice) {
@@ -50,7 +47,7 @@ public class CartView {
 				placeOrderView();
 				break;
 			case 7: //exit
-				return;
+				break;
 			default:
 				System.out.println("Invalid choice!");
 				finishLine();
@@ -61,22 +58,16 @@ public class CartView {
 
 
 	public void setProductQtyView() {
-		Scanner sc = new Scanner(System.in);
 		
 		System.out.print("Please Enter the product name: ");
 		String name = sc.next();
 		System.out.print("Set the Quantity: ");
-		try {
-			int qty = sc.nextInt();
-			controller.setCartItemQty(name, qty);
-		} catch(InputMismatchException e) {
-			invalidInput();
-		}
+		int qty = sc.nextInt();
+		controller.setCartItemQty(name, qty);
 		//sc.close();
 	}
 
 	public void deleteProductView(){
-		Scanner sc = new Scanner(System.in);
 		
 		System.out.println("Please Enter the product name to delete from cart: ");
 		String name = sc.next();
@@ -85,18 +76,13 @@ public class CartView {
 	}
 
 	public void clearCartView(){
-		Scanner sc = new Scanner(System.in);
 		
 		System.out.println("Are you sure to clear your cart?");
 		System.out.println("1. Confirm");
 		System.out.println("2. No");
 		System.out.print("Please enter your choice: ");
 		int choice = -1;
-		try{
-			choice = sc.nextInt();
-		} catch(InputMismatchException e){
-			invalidInput();
-		}
+		choice = sc.nextInt();
 		switch(choice){
 			case 1:
 				controller.clearCart();
@@ -115,18 +101,13 @@ public class CartView {
 	}
 
 	public void placeOrderView(){
-		Scanner sc = new Scanner(System.in);
 		
 		System.out.println("Are you sure to place your order?");
 		System.out.println("1. Confirm");
 		System.out.println("2. No");
 		System.out.print("Please enter your choice: ");
 		int choice = -1;
-		try{
-			choice = sc.nextInt();
-		} catch(InputMismatchException e){
-			invalidInput();
-		}
+		choice = sc.nextInt();
 		switch(choice){
 			case 1:
 				processToOrderView();
@@ -177,18 +158,13 @@ public class CartView {
 	}
 	
 	public void addToCartView() {
-		Scanner sc = new Scanner(System.in);
 		
 		System.out.print("Please Enter the product name: ");
 		String name = sc.next();
 		System.out.print("Please Enter the quantity: ");
-		try {
-			int qty = sc.nextInt();
-			controller.addProductToCart(name, qty);
-		} catch(InputMismatchException e) {
-			invalidInput();
-		}
-		//sc.close();
+		int qty = sc.nextInt();
+		controller.addProductToCart(name, qty);
+		
 	}
 
 	public void resultLine(){
@@ -216,12 +192,6 @@ public class CartView {
 		shoppingView();
 	}
 	
-	public void invalidInput() {
-		resultLine();
-		System.out.println("Please input a valid input");
-		finishLine();
-		shoppingView();
-	}
 
 	
 	

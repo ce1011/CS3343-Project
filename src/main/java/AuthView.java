@@ -2,8 +2,9 @@ import java.util.Scanner;
 
 public class AuthView {
     private AuthController controller;
-
+    Scanner sc = new Scanner(System.in);
     public AuthView(AuthController controller){
+    	
         this.controller = controller;
     }
 
@@ -13,8 +14,8 @@ public class AuthView {
         System.out.println("2. Register");
         System.out.println("3. Exit");
         System.out.print("Please enter your choice: ");
-        Scanner scanner = new Scanner(System.in);
-        int choice = scanner.nextInt();
+        int choice = sc.nextInt();
+        
         switch (choice){
             case 1:
                 loginView();
@@ -23,36 +24,33 @@ public class AuthView {
                 registerView();
                 break;
             case 3:
-                System.exit(0);
+            	System.out.println("GoodBye");
                 break;
+            case 4:
+            	break;
             default:
                 System.out.println("Invalid choice!");
-                entryView();
+                this.entryView();
         }
     }
     public void loginView(){
         String username, password;
         System.out.println("Login To Shop");
         System.out.println("Username: ");
-
-        Scanner sc = new Scanner(System.in);
-        username = sc.nextLine();
+        username = sc.next();
         System.out.println("Password: ");
-        password = sc.nextLine();
+        password = sc.next();
 
         controller.login(username, password);
-        //sc.close();
     }
 
     public void registerView(){
         String username, password;
         System.out.println("Register To Shop");
         System.out.println("Username: ");
-
-        Scanner sc = new Scanner(System.in);
-        username = sc.nextLine();
+        username = sc.next();
         System.out.println("Password: ");
-        password = sc.nextLine();
+        password = sc.next();
 
         controller.register(username, password);
         //sc.close();

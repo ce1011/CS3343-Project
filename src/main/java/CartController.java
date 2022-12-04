@@ -14,6 +14,11 @@ public class CartController {
 		orderController = new OrderController();
 	}
 	
+
+	public void entryCartView() {
+		view.shoppingView();
+	}
+	
 	
 	public ArrayList<CartItem> getCart(){
 		return cartModel.getCartItems();
