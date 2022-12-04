@@ -26,15 +26,19 @@ public class CouponService {
             /* 
             if(now.compareTo(c.getStartDate()) < 0){
                 throw new CouponDateEarlyException();
-            }else if(now.compareTo(c.getEndDate()) > 0){
+            }
+             */
+            if(c.getStartDate().compareTo(c.getEndDate()) > 0){
                 throw new CouponDateLateException();
-            }else{
-            */
+            }
+
             couponList.add(c);
             System.out.println("Coupon Successfully Created.");
             
         }catch(CouponAlreadyExistException e){
             throw new CouponAlreadyExistException();
+        }catch(CouponDateLateException e){
+            throw new CouponDateLateException();
         }
        
     }
