@@ -19,10 +19,14 @@ public class AuthController {
         try{
             User user = model.login(username, password);
             
-            if (user.getRole().getRoleName().equals("Customer"))
-            	homeController.showCustomerHome();
-            else if (user.getRole().getRoleName().equals("Admin"))
-            	homeController.showAdminHome(user);
+            if (user.getRole().getRoleName().equals("Customer")){
+                homeController.showCustomerHome();
+                view.entryView();
+            } else if (user.getRole().getRoleName().equals("Admin")){
+                homeController.showAdminHome(user);
+                view.entryView();
+            }
+
             
 
         } catch (WrongPasswordException e){
