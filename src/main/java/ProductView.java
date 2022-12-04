@@ -31,6 +31,7 @@ public class ProductView {
         System.out.println("5. Sort by create date in ascending");
         System.out.println("6. Sort by create date in descending");
         int choice = sc.nextInt();
+        sc.nextLine();
 
         switch (choice){
             case 1:
@@ -73,7 +74,7 @@ public class ProductView {
         System.out.println("(b) Back");
 
         System.out.println("Please enter your choice: ");
-        String choice = sc.nextLine().trim();
+        String choice = sc.nextLine();
 
         switch (choice) {
             case "b":
@@ -118,7 +119,7 @@ public class ProductView {
         System.out.println("5. Sort by create date in ascending");
         System.out.println("6. Sort by create date in descending");
         int choice = sc.nextInt();
-
+sc.nextLine();
         switch (choice){
             case 1:
                 sort = new ProductSortByNameAsc();
@@ -161,7 +162,7 @@ public class ProductView {
         System.out.println("(b) Back");
 
         System.out.println("Please enter your choice: ");
-        String choice = sc.nextLine();
+        String choice = sc.nextLine().trim();
 
         switch (choice) {
             case "+":
