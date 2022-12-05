@@ -7,7 +7,7 @@ public class OrderController {
     private OrderView view;
 
     private OrderService orderService;
-
+    Scanner scanner = new Scanner(System.in);
 
     public OrderController(){
         this.view = new OrderView(this);
@@ -37,16 +37,9 @@ public class OrderController {
                 System.out.println("Not enough inventory");
                 return;
             }
-
-
         }
-
         System.out.format("Total: $%6f\n", total);
-
         System.out.println("Please enter coupon name if not apply coupon type NA\n");
-
-        Scanner scanner = new Scanner(System.in);
-
         String name = scanner.next();
 
         Coupon coupon;
@@ -96,10 +89,6 @@ public class OrderController {
         OrderService.getOrderServiceInstance().placeOrder(order);
 
         System.out.println("Place order successfully!");
-
-
-
-
     }
     public void customerOrderView(User user) {
         view.customerOrderView(user);
