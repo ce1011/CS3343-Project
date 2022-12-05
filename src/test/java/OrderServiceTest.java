@@ -35,7 +35,7 @@ public class OrderServiceTest {
         Store.getInstance().setCurrentUser(user);
         OrderService orderService = OrderService.getOrderServiceInstance();
         orderService.placeOrder(order);
-        orderService.searchOrder(user, new OrderSortByCreateDate_ASC());
+        orderService.searchOrder(Store.getInstance().getCurrentUser(), new OrderSortByCreateDate_ASC());
         assertEquals("", outContent.toString());
 
     }
@@ -60,7 +60,8 @@ public class OrderServiceTest {
         Order order = new Order(null, null, 0.0, null);
         OrderService orderService = OrderService.getOrderServiceInstance();
         orderService.placeOrder(order);
-        Order result = orderService.searchOrderByTransactionID("100001");
+        order.setTransactionID("100006");
+        Order result = orderService.searchOrderByTransactionID("100006");
         assertEquals(result.toString(), order.toString());
     }
 
@@ -71,7 +72,8 @@ public class OrderServiceTest {
         Order order = new Order(null, null, 10, null);
         OrderService orderService = OrderService.getOrderServiceInstance();
         orderService.placeOrder(order);
-        orderService.deleteOrder("100001");
+        order.setTransactionID("200001");
+        orderService.deleteOrder("200001");
         assertEquals("", outContent.toString());
     }
     @Test
@@ -81,7 +83,8 @@ public class OrderServiceTest {
         Order order = new Order(null, null, 10, null);
         OrderService orderService = OrderService.getOrderServiceInstance();
         orderService.placeOrder(order);
-        orderService.updateOrderStatus("100001", new OrderState_Processing());
+        order.setTransactionID("300001");
+        orderService.updateOrderStatus("300001", new OrderState_Processing());
         assertEquals("", outContent.toString());
     }
 
@@ -89,7 +92,7 @@ public class OrderServiceTest {
     public void getCentralOrderListTest(){
         OrderService orderService = OrderService.getOrderServiceInstance();
         Map<String, DoubleSummaryStatistics> result = orderService.getCentralOrderList();
-        assertEquals(result, orderService.getCentralOrderList());
+        assertEquals(result.toString(), orderService.getCentralOrderList().toString());
     }
 
 }

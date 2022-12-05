@@ -67,24 +67,24 @@ public class OrderControllerTest {
         assertEquals("", outContent.toString());
     }
 
-//    @Test
-//    public void customerOrderViewTest() throws ExistingProductWithSameNameFoundException{
-//        System.setIn(new ByteArrayInputStream("6 \nb ".getBytes()));
-//        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-//        System.setOut(new PrintStream(outContent));
-//        Product tempData = new Product("test addProduct()", 12.9, "description", 10, new ProductState_Discontinued(), 2.4);
-//        ArrayList<CartItem> list = new ArrayList<CartItem>();
-//        CartItem item = new CartItem(tempData, 11);
-//        list.add(item);
-//        Order order = new Order(list, null, 100, null);
-//        User user = new User("123", "123", Customer.getInstance());
-//        order.setUser(user);
-//        Store.getInstance().setCurrentUser(user);
-//        OrderService orderService = OrderService.getOrderServiceInstance();
-//        orderService.placeOrder(order);
-//        OrderController orderController = new OrderController();
-//        orderController.customerOrderView(user);
-//        assertEquals("", outContent.toString());
-//    }
+    @Test
+    public void customerOrderViewTest() throws ExistingProductWithSameNameFoundException{
+        System.setIn(new ByteArrayInputStream("6\n".getBytes()));
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        Product tempData = new Product("test addProduct()", 12.9, "description", 10, new ProductState_Discontinued(), 2.4);
+        ArrayList<CartItem> list = new ArrayList<CartItem>();
+        CartItem item = new CartItem(tempData, 11);
+        list.add(item);
+        Order order = new Order(list, null, 100, null);
+        User user = new User("123", "123", Customer.getInstance());
+        order.setUser(user);
+        Store.getInstance().setCurrentUser(user);
+        OrderService orderService = OrderService.getOrderServiceInstance();
+        orderService.placeOrder(order);
+        OrderController orderController = new OrderController();
+        orderController.customerOrderView(user);
+        assertEquals("", outContent.toString());
+    }
 
 }
