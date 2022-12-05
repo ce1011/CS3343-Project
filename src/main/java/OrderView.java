@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class OrderView {
-
+    Scanner scanner = new Scanner(System.in);
     private OrderController controller;
 
     public OrderView(OrderController controller){
@@ -13,7 +13,6 @@ public class OrderView {
 
     public void customerOrderView(User user) {
         OrderSortType sort = null;
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Welcome to Order list panel");
         System.out.println("Sort order list by");
         System.out.println("1. By create date in Ascending order");
@@ -46,7 +45,7 @@ public class OrderView {
                 sort = new OrderSortByTransactionID_DESC();
                 break;
             case 7:
-                return;
+                break;
             default:
                 System.out.println("Invalid choice!");
         }
@@ -65,7 +64,7 @@ public class OrderView {
 
         System.out.println("(b) Back");
         System.out.println("Please enter your choice: ");
-        Scanner scanner = new Scanner(System.in);
+        //Scanner scanner = new Scanner(System.in);
         String choice = scanner.nextLine().trim();
 
         switch(choice) {
@@ -82,7 +81,7 @@ public class OrderView {
         int choice;
         Order result = null;
         System.out.println("Welcome to Admin Order Management panel");
-        Scanner scanner = new Scanner(System.in);
+        //Scanner scanner = new Scanner(System.in);
         System.out.println("1. View order list");
         System.out.println("2. Update order status");
         System.out.println("3. Delete order");
@@ -166,7 +165,7 @@ public class OrderView {
 
         System.out.println("(b) Back");
         System.out.println("Please enter your choice: ");
-        Scanner scanner = new Scanner(System.in);
+        //Scanner scanner = new Scanner(System.in);
         String choice = scanner.nextLine().trim();
 
         switch(choice) {
