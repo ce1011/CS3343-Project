@@ -61,7 +61,7 @@ public class OrderServiceTest {
         OrderService orderService = OrderService.getOrderServiceInstance();
         orderService.placeOrder(order);
         Order result = orderService.searchOrderByTransactionID("100001");
-        assertEquals(result, order);
+        assertEquals(result.toString(), order.toString());
     }
 
     @Test
